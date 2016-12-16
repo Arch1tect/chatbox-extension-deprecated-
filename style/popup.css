@@ -1,0 +1,65 @@
+#msg {
+	display:none;
+	float: right;
+}
+#qtime-add-entry {
+	display: none;
+}
+.qtime-login-info {
+	display: none;
+}
+#qtime-title {
+	font-size: 25px;
+	text-decoration: none;
+	color: black;
+	margin-bottom: 30px;
+}
+.qtime-input {
+	margin: 5px;
+}
+
+
+
+
+a {
+	text-decoration: none;
+}
+a:focus{
+    outline: none;
+}
+
+body {
+	min-width: 330px;
+	padding: 15px;
+	min-height: 100px;
+	font-size: 14px;
+	font-weight: 300;
+	font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
+}
+
+input {
+	min-width: 250px;
+	display: inline;
+	float: right;
+}
+
+
+
+button {
+    border: none;
+    font-family: inherit;
+    color: inherit;
+    border-radius: 3px;
+    background: none;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 300;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+button:hover, button:active {
+    color: white;
+    background: black;
+}
