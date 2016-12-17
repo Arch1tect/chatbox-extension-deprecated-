@@ -18,11 +18,11 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    var port = 4321;
+    var port = 443;
     var hostname = location.hostname;
     chatbox.domain = location.protocol + "//" + hostname + ":" + port;
     console.log('chatbox.domain: ' + chatbox.domain);
-    chatbox.domain = "http://localhost:4321";
+    chatbox.domain = "https://localhost:443";
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
     // And this uuid should always be passed on login, it's used to identify/combine user,

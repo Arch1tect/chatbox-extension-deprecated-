@@ -35,9 +35,11 @@
 		});
 
 
-		ui.$cross.click(function() {
-			ui.$chatBox.hide();
+		ui.$cross.click(function(e) {
+			// ui.$chatBox.hide();
 			utils.updateIframeSize('close'); 
+			e.preventDefault();
+			e.stopPropagation();
 
 		});
 
