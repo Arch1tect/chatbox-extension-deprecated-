@@ -62,6 +62,7 @@ function getStatus() {
 				$('#qtime-link').text('链接');
 				$('#qtime-note').text('描述');
 				$('#qtime-add-btn').text('加入我的清单');
+				$('#open-chatbox').text('打开聊天盒');
 			}
 
 		},

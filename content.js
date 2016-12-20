@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 		if (!chatboxCreated) {
 			chatboxIFrame  = document.createElement ("iframe");
-			chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html");
+			chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html?"+location.href);
 			chatboxIFrame.id="chatbox-iframe";
 			chatboxIFrame.allowtransparency = true;
 			document.body.insertBefore(chatboxIFrame, document.body.firstChild);
@@ -37,8 +37,12 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 
 function resizeIFrameToFitContent(e) {
+	if (!e || !e.data )
+		return;
 
 	var msg = JSON.parse(e.data);
+	if (!msg.state)
+		return;
 	if (msg.state ==='full size') {
 		chatboxIFrame.style.width  = "100%";
 		chatboxIFrame.style.height = "100%";

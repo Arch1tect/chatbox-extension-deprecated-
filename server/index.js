@@ -79,7 +79,7 @@ io.on('connection', function (socket) {
 
         var newUser = false;
 
-        newUser = socketHandler.socketJoin(socket, data.url, data.referrer, data.uuid, data.username);
+        newUser = socketHandler.socketJoin(socket, data.url, data.referrer, data.uuid, data.username, data.roomID);
             
         var roomID = roomHandler.socketJoin(socket, data.roomID);
 

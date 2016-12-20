@@ -100,7 +100,7 @@ socketHandler.socketDisconnected = function(socket) {
     return lastConnectionOfUser; 
 };
 
-socketHandler.socketJoin = function(socket, url, referrer, uid, username) {
+socketHandler.socketJoin = function(socket, url, referrer, uid, username, roomID) {
 
 
 	var firstSocketOfNewUser = false;
@@ -116,7 +116,7 @@ socketHandler.socketJoin = function(socket, url, referrer, uid, username) {
     var action = {};
 
 
-    if (uid in userDict) {
+    if (uid in userDict && roomID == userDict[uid].roomID) {
     	// existing user
         action.type = 'Join';
 

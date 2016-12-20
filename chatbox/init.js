@@ -78,9 +78,9 @@
         ui.show();
         console.log('open chatbox');
 
-        if (typeof(chatbox.roomID) == 'undefined') 
-            chatbox.roomID = '01cfcd4f6b8770febfb40cb906715822';
-        
+        // if (typeof(chatbox.roomID) == 'undefined') 
+        chatbox.roomID = location.search;
+        console.log('room ' + chatbox.roomID);
 
         // now make your connection with server!
         chatbox.socket = io(chatbox.domain);
