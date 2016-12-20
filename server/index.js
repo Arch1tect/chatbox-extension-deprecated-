@@ -3,18 +3,22 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 
+// Use below settings if need to run https locally
+// var options = {
+//   key: fs.readFileSync('./file.pem'),
+//   cert: fs.readFileSync('./file.crt')
+// };
+// var server = require('https').createServer(options, app);
+// set which port this app runs on
+// var port = 443;
 
-var options = {
-  key: fs.readFileSync('./file.pem'),
-  cert: fs.readFileSync('./file.crt')
-};
 
-var server = require('https').createServer(options, app);
+var server = require('http').createServer(app);
+var port = 8080;
+
 
 
 var io = require('socket.io')(server);
-
-
 
 var roomHandler = require('./handlers/roomHandler.js');
 var socketHandler = require('./handlers/socketHandler.js');
@@ -26,8 +30,7 @@ var usernameHandler = require('./handlers/usernameHandler.js');
 //set timeout, default is 1 min
 //io.set("heartbeat timeout", 3*60*1000);
 
-//set which port this app runs on
-var port = 443;
+
 
 server.listen(port, function () {
     console.log('Server listening at port %d', port);
