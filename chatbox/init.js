@@ -18,7 +18,7 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    chatbox.domain = "https://quotime.me/chatbox";
+    chatbox.domain = "https://quotime.me";
 
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
@@ -80,7 +80,7 @@
         console.log('room ' + chatbox.roomID);
 
         // now make your connection with server!
-        chatbox.socket = io(chatbox.domain);
+        chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
         chatbox.socket.joined = false;
         socketEvent.register();
     };

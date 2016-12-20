@@ -1,5 +1,5 @@
 
-var url = "http://quotime.me";
+var url = "https://quotime.me";
 var lang = 'en'
 
 function parseTabContent(responseObj) {
