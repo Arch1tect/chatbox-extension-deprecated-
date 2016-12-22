@@ -30,12 +30,6 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 	}
 });
 
-
-
-
-
-
-
 function resizeIFrameToFitContent(e) {
 	if (!e || !e.data )
 		return;
@@ -63,3 +57,43 @@ function resizeIFrameToFitContent(e) {
 }
 
 window.addEventListener("message", resizeIFrameToFitContent, false);
+
+
+
+
+var httpRequest;
+
+function makeRequest(url) {
+	httpRequest = new XMLHttpRequest();
+
+	if (!httpRequest) {
+		console.log('Giving up :( Cannot create an XMLHTTP instance');
+		return false;
+	}
+	httpRequest.onreadystatechange = ajaxResultHandler;
+	httpRequest.open('GET', url);
+	httpRequest.send();
+}
+
+function ajaxResultHandler() {
+	if (httpRequest.readyState === XMLHttpRequest.DONE) {
+	  if (httpRequest.status === 200) {
+		console.log('success: '+httpRequest.responseText);
+	  } else {
+		console.log('not 200 response: '+httpRequest.responseText);
+	  }
+	}
+}
+
+makeRequest('https://quotime.me/api/stats');
+// makeRequest('http://localhost:9000/api/stats');
+
+
+
+
+
+
+
+
+
+
