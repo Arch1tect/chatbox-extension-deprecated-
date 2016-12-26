@@ -64,6 +64,10 @@ window.addEventListener("message", resizeIFrameToFitContent, false);
 var httpRequest;
 
 function makeRequest(url) {
+
+	if (location.href==="https://quotime.me/")
+		return;
+
 	httpRequest = new XMLHttpRequest();
 
 	if (!httpRequest) {
@@ -71,8 +75,12 @@ function makeRequest(url) {
 		return false;
 	}
 	httpRequest.onreadystatechange = ajaxResultHandler;
-	httpRequest.open('GET', url);
-	httpRequest.send();
+	// httpRequest.open('GET', url);
+	httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.send('url=' + encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title));
+
+	// httpRequest.send();
 }
 
 function ajaxResultHandler() {
@@ -85,8 +93,8 @@ function ajaxResultHandler() {
 	}
 }
 
-makeRequest('https://quotime.me/api/stats');
-// makeRequest('http://localhost:9000/api/stats');
+// makeRequest('https://quotime.me/api/stats');
+makeRequest('http://localhost:9000/api/stats');
 
 
 
