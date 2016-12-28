@@ -11,6 +11,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 		responseObj.link = document.location.href;
 		console.log(responseObj);
 		sendResponse(responseObj);
+		makeRequest('https://quotime.me/api/stats');
+		// makeRequest('http://localhost:9000/api/stats');
 
 
 	}
@@ -93,8 +95,6 @@ function ajaxResultHandler() {
 	}
 }
 
-// makeRequest('https://quotime.me/api/stats');
-makeRequest('http://localhost:9000/api/stats');
 
 
 
