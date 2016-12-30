@@ -50,12 +50,12 @@ function getStatus() {
 		url: url+'/api/status',
 		success: function (data, textStatus, jqXHR) {
 
-
 			$('#qtime-add-entry').show();
 			$('.qtime-login-info').show();
 			$('#qtime-username').text(data.username);
 			$('#qtime-not-login').hide();
-			if (data.lang==='cn') {
+
+			if (data.lang === 'cn') {
 				$('#qtime-name').text('名称');
 				$('#qtime-time').text('时长');
 				$('#qtime-category').text('类别');

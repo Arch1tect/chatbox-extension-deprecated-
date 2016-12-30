@@ -125,7 +125,7 @@ body {
   text-decoration: none;
 }
 #socketchatbox-top {
-  min-width: 200px;
+  min-width: 150px;
   cursor: pointer;
   height: 30px;
   background: black;

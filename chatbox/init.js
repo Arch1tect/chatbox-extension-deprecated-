@@ -72,7 +72,7 @@
             ui.hide();
         }
             
-        ui.show();
+        // ui.show();
         console.log('open chatbox');
 
         // if (typeof(chatbox.roomID) == 'undefined') 

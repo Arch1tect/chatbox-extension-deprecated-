@@ -109,7 +109,7 @@
 
 	function hide() {
 		ui.$showHideChatbox.text("↑");
-		ui.$username.html("<a href='http://arch1tect.github.io/Chatbox/' target='_blank'>" + chatbox.NAME + '</a>');
+		ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
 		ui.$chatBody.hide();
 		//hide resize cursor
 		ui.$chatboxResize.css('z-index', -999);
@@ -120,6 +120,10 @@
 	ui.hide = hide;
 
 	ui.updateOnlineUserCount = function (num) {ui.$onlineUserNum.text(num);};
+    window.addEventListener("message", function(e) {
+    	console.log(e);
+    	show();
+    }, false);
 
 
 

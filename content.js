@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 		responseObj = {};
 		responseObj.name = document.title;
 		responseObj.link = document.location.href;
-		console.log(responseObj);
+		// console.log(responseObj);
 		sendResponse(responseObj);
 		makeRequest('https://quotime.me/api/stats');
 		// makeRequest('http://localhost:9000/api/stats');
@@ -17,20 +17,28 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 	}
 	else if (msg.text === 'open_chatbox') {
-
-		if (!chatboxCreated) {
-			chatboxIFrame  = document.createElement ("iframe");
-			chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html?"+location.href);
-			chatboxIFrame.id="chatbox-iframe";
-			chatboxIFrame.allowtransparency = true;
-			document.body.insertBefore(chatboxIFrame, document.body.firstChild);
-			chatboxCreated = true;
-		}
-		else{
-			chatboxIFrame.style.display  = "block";
-		}
+		openChatbox();
 	}
 });
+
+function openChatbox() {
+
+	if (!chatboxCreated) {
+
+		chatboxIFrame  = document.createElement ("iframe");
+		chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html?"+location.href);
+		chatboxIFrame.id="chatbox-iframe";
+		chatboxIFrame.allowtransparency = true;
+		document.body.insertBefore(chatboxIFrame, document.body.firstChild);
+		chatboxCreated = true;
+	
+	} else {
+		chatboxIFrame.style.display  = "block";
+
+		chatboxIFrame.contentWindow.postMessage('open_chatbox',
+              "*");
+	}
+}
 
 function resizeIFrameToFitContent(e) {
 	if (!e || !e.data )
@@ -44,7 +52,7 @@ function resizeIFrameToFitContent(e) {
 		chatboxIFrame.style.height = "100%";
 	}
 	else if (msg.state === 'minimize') {
-		chatboxIFrame.style.width  = "200px";
+		chatboxIFrame.style.width  = "150px";
 		chatboxIFrame.style.height = "30px";
 	}
 	else if (msg.state === 'close') {	//only hide but still running?
@@ -77,12 +85,11 @@ function makeRequest(url) {
 		return false;
 	}
 	httpRequest.onreadystatechange = ajaxResultHandler;
-	// httpRequest.open('GET', url);
+
 	httpRequest.open('POST', url);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     httpRequest.send('url=' + encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title));
 
-	// httpRequest.send();
 }
 
 function ajaxResultHandler() {
@@ -95,8 +102,7 @@ function ajaxResultHandler() {
 	}
 }
 
-
-
+openChatbox();
 
 
 
