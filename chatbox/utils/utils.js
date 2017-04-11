@@ -8,6 +8,19 @@
     function updateIframeSize(state) {
         var resizeMsg = {};
         resizeMsg.state = state;
+
+
+        if (state == "full size") {
+            // This weird show/hide hack is to ease the 
+            // problem when iframe got full sized, the 
+            // chatbox UI is resized for 1/10 sec
+            chatbox.ui.$chatBox.hide();
+            setTimeout(function(){ 
+                chatbox.ui.$chatBox.show();
+            }, 100);
+        }
+
+
         resizeMsg.size = { height: $('.socketchatbox-page').height(), width: $('#socketchatbox-body').width()};
         window.parent.postMessage(JSON.stringify(resizeMsg),
               "*");
