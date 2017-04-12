@@ -2,7 +2,7 @@
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	z-index: 9999999;
+	z-index: 2147483647;
 	height: 30px;
 	width: 150px;	
 /*	height: 415px;

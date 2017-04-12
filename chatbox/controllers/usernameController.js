@@ -67,10 +67,12 @@
         var name = $('#socketchatbox-txt_fullname').val();
         name = utils.cleanInput(name);
         name = $.trim(name);
-        if (name === chatbox.username || name === "")  {
-            ui.$username.text(chatbox.username);
-            return;
-        }
+        // if (name === chatbox.username || name === "")  {
+        //     ui.$username.text(chatbox.username);
+        //     return;
+        // }
+        // console.log('changing chatbox username');
+        chrome.storage.sync.set({ chatbox_username: name });
 
         //if (!sendingFile) {
             askServerToChangeName(name);

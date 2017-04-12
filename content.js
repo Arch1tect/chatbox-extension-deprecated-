@@ -43,8 +43,14 @@ function openChatbox() {
 function resizeIFrameToFitContent(e) {
 	if (!e || !e.data )
 		return;
-
-	var msg = JSON.parse(e.data);
+	var msg = ''
+	try {
+		msg = JSON.parse(e.data);
+	}
+	catch (err) {
+		// not event sent from our app
+		return;
+	}
 	if (!msg.state)
 		return;
 	if (msg.state ==='full size') {
