@@ -125,10 +125,7 @@
 	ui.hide = hide;
 
 	ui.updateOnlineUserCount = function (num) {ui.$onlineUserNum.text(num);};
-    window.addEventListener("message", function(e) {
-    	console.log(e);
-    	show();
-    }, false);
+
 
 
 

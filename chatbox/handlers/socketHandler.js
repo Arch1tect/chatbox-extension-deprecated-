@@ -29,6 +29,7 @@
 
         // This is a new user
         socket.on('welcome new user', function (data) {
+            console.log('welcome new user');
             socket.joined = true;
             ui.changeLocalUsername(data.username);
 
@@ -52,6 +53,7 @@
         // This is just a new connection of an existing online user
         socket.on('welcome new connection', function (data) {
             socket.joined = true;
+            console.log('welcome old user');
 
             // sync username
             ui.changeLocalUsername(data.username);

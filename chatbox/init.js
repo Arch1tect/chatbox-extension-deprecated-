@@ -44,18 +44,8 @@
             ui.init[i]();
         }
 
-        // Read old uuid from cookie if exist
-        if(utils.getCookie('chatuuid')!=='') {
 
-            chatbox.uuid = utils.getCookie('chatuuid');
 
-        }else {
-
-            chatbox.uuid = utils.guid();
-            utils.addCookie('chatuuid', chatbox.uuid);
-        }
-
-        historyHandler.load();
 
 
         // Show/hide chatbox base on chrome storage value
@@ -74,10 +64,32 @@
         // TODO: ignore # part in url
         console.log('room ' + chatbox.roomID);
 
-        // now make your connection with server!
-        chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
-        chatbox.socket.joined = false;
-        socketEvent.register();
+
+        chrome.storage.sync.get('chatbox_uuid', function(data) {
+
+            if (data.chatbox_uuid) {
+                console.log("Found uuid " + data.chatbox_uuid)
+                chatbox.uuid = data.chatbox_uuid;
+            } else {
+                chatbox.uuid = utils.guid();
+                chrome.storage.sync.set({ chatbox_uuid: chatbox.uuid });
+
+                console.log("Creating new uuid " + chatbox.uuid);
+            }
+
+            historyHandler.load();
+            // now make your connection with server!
+            chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
+            chatbox.socket.joined = false;
+            socketEvent.register();
+
+        });
+
+
+
+
+
+
     };
 
 
