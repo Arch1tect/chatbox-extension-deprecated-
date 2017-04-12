@@ -60,6 +60,7 @@ function resizeIFrameToFitContent(e) {
 	else if (msg.state === 'minimize') {
 		chatboxIFrame.style.width  = "150px";
 		chatboxIFrame.style.height = "30px";
+		chatboxIFrame.style.minHeight = "30px";
 	}
 	else if (msg.state === 'close') {	//only hide but still running?
 		chatboxIFrame.style.display  = "none";

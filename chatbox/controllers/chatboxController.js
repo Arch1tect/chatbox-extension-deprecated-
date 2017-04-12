@@ -21,17 +21,20 @@
 
 		ui.$topbar.click(function() {
 
+
 			if(ui.$chatBody.is(":visible")){
 
 				hide();
-				utils.addCookie('chatboxOpen',0);
 
 			}else {
 			
 				show();
 				ui.scrollToBottom();
-				utils.addCookie('chatboxOpen',1);
 			}
+
+			chrome.storage.sync.set({ chatbox_show: chatbox.showing });
+
+
 		});
 
 
@@ -103,18 +106,20 @@
 		ui.$messages[0].scrollTop = ui.$messages[0].scrollHeight;
 		
 		utils.updateIframeSize('show');
+		chatbox.showing = true;
 	}
 
 	ui.show = show;
 
 	function hide() {
 		ui.$showHideChatbox.text("↑");
-		ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
+		// ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
+		ui.$username.html(chatbox.NAME);
 		ui.$chatBody.hide();
 		//hide resize cursor
 		ui.$chatboxResize.css('z-index', -999);
 		utils.updateIframeSize('minimize');
-
+		chatbox.showing = false;
 	}
 
 	ui.hide = hide;

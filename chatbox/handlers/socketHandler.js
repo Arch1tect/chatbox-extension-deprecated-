@@ -118,6 +118,7 @@
         // Receive order to change name locally
         socket.on('change username', function (data) {
             ui.changeLocalUsername(data.username);
+            console.log("server agrees to change name to " + data.username);
         });
 
         // Whenever the server emits 'user joined', log it in the chat body

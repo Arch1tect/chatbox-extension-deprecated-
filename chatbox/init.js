@@ -55,33 +55,23 @@
             utils.addCookie('chatuuid', chatbox.uuid);
         }
 
-        // Read old username from cookie if exist
-        // if(utils.getCookie('chatname')!=='') {
-
-        //     chatbox.username = utils.getCookie('chatname');
-
-        // }else {
-
-        //     utils.addCookie('chatname', chatbox.username);
-        // }
-
         historyHandler.load();
 
-        // Show/hide chatbox base on cookie value
-        if(utils.getCookie('chatboxOpen')==='1') {
 
-            ui.show();
+        // Show/hide chatbox base on chrome storage value
 
-        }else{
+        chrome.storage.sync.get('chatbox_show', function(data) {
 
-            ui.hide();
-        }
-            
-        // ui.show();
-        console.log('open chatbox');
+            if (data.chatbox_show) {
+                ui.show();
+            } else {
+                ui.hide();
+            }
+        });
 
-        // if (typeof(chatbox.roomID) == 'undefined') 
+
         chatbox.roomID = location.search;
+        // TODO: ignore # part in url
         console.log('room ' + chatbox.roomID);
 
         // now make your connection with server!
@@ -96,5 +86,3 @@
 $( document ).ready(function() {
     chatbox.init();
 });
-
-

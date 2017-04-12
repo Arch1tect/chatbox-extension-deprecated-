@@ -8,11 +8,15 @@
 
         // user edit username
         ui.$username.click(function(e) {
-            e.stopPropagation(); //don't propagate event to topbar
 
-            if(utils.getCookie('chatboxOpen')!=='1') {
+
+
+            if(!chatbox.showing) {
                 return;
             }
+
+            e.stopPropagation(); //don't propagate event to topbar
+
             //if(sendingFile) return; //add it back later
 
             if($('#socketchatbox-txt_fullname').length > 0) return;
@@ -49,8 +53,7 @@
             // When the client hits ESC on their keyboard
             if (event.which === 27) {
                 if ($('#socketchatbox-txt_fullname').is(":focus")) {
-                    ui.$username.text(chatbox.username);
-                    ui.$inputMessage.focus();
+                    cancelNameEdit();
                     return;
                 }
             }
@@ -59,7 +62,10 @@
 
     });
 
-
+    function cancelNameEdit() {
+        ui.$username.text(chatbox.username);
+        ui.$inputMessage.focus();
+    }
 
     // When user change his username by editing though GUI, go through server to get permission
     // since we may have rules about what names are forbidden in the future
@@ -72,11 +78,18 @@
         //     return;
         // }
         // console.log('changing chatbox username');
+
+        if (name === chatbox.username) {
+            cancelNameEdit();
+            return;
+        }
+
         chrome.storage.sync.set({ chatbox_username: name });
 
         //if (!sendingFile) {
-            askServerToChangeName(name);
-        //}
+
+        askServerToChangeName(name);
+        
     }
     ui.changeNameByEdit = changeNameByEdit;
 
@@ -85,9 +98,10 @@
     function changeLocalUsername(name) {
         if(name) {
             chatbox.username = name;
-            utils.addCookie('chatname', name);
-            if(utils.getCookie('chatboxOpen')==='1')
-                ui.$username.text(chatbox.username);
+            // utils.addCookie('chatname', name);
+            // if(utils.getCookie('chatboxOpen')==='1')
+            //     ui.$username.text(chatbox.username);
+            ui.$username.text(chatbox.username);
         }
     }
 
@@ -97,7 +111,7 @@
     // Tell server that user want to change username
     function askServerToChangeName (newName) {
         chatbox.socket.emit('user edits name', {newName: newName});
-        if(utils.getCookie('chatboxOpen')==='1')
+        if (chatbox.showing)
             ui.$username.text('Changing your name...');
     }
 
