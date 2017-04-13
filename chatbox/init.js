@@ -28,7 +28,7 @@
     chatbox.NAME = 'Chatbox';
 
     var d = new Date();
-    var username = 'visitor#'+ d.getMinutes()+ d.getSeconds();
+    var username = 'visitor#'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
     chatbox.username = username;
     chrome.storage.sync.get('chatbox_username', function(data) {
         console.log("username from storage: " + data.chatbox_username);
@@ -39,12 +39,12 @@
 
     chatbox.init = function() {
 
+        console.log('Chatbox Init');
+
         // load jquery objects and register events
         for (var i = 0; i < ui.init.length; i++) {
             ui.init[i]();
         }
-
-
 
 
 

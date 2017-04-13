@@ -16,15 +16,23 @@
            data.username = "empty name";
 
         var d = new Date();
-        var posttime = '';
-        if (!options.loadFromCookie) {
-            posttime += "<span class='socketchatbox-messagetime'>";
-            posttime += ' ('+('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2)+')';
-            posttime += "</span>";
+        var msg_post_time_html = "<span class='socketchatbox-messagetime'>";
+        var cur_time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+        var cur_month_date = d.getMonth() + '/' + d.getDate();
+                    
+
+        if (options.history) {
+
+            msg_post_time_html += ' ('+ data.time +')';
+
+        } else {
+
+            msg_post_time_html += ' ('+('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2)+')';
         }
+        
+        msg_post_time_html += "</span>";
 
-        var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username)+posttime);
-
+        var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username) + msg_post_time_html);
 
         $usernameDiv.addClass('socketchatbox-username');
         var $messageBodyDiv = $('<span class="socketchatbox-messageBody">');
@@ -69,7 +77,7 @@
 
         // receiving new message
         if (!options.history && !options.typing) {
-            historyHandler.save(data.username, messageToSaveIntoHistory);
+            historyHandler.save(data.username, messageToSaveIntoHistory, cur_month_date+' '+cur_time);
         }
 
 

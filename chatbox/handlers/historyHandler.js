@@ -43,7 +43,7 @@
     };
 
 
-    historyHandler.save = function(username, msg) {
+    historyHandler.save = function(username, msg, time) {
 
         // TO CHECK: possible duplicate save when user open multiple tabs?
         chrome.storage.sync.get('chatbox_history', function(data) {
@@ -53,8 +53,8 @@
             if (data.chatbox_history) {
                 chatHistory = data.chatbox_history;
             }
-            var new_history_entry = {username: username, message: msg}
-            chatHistory.push(new_history_entry)
+            var new_history_entry = {username: username, message: msg, time: time};
+            chatHistory.push(new_history_entry);
             chrome.storage.sync.set({ chatbox_history: chatHistory });
 
 
