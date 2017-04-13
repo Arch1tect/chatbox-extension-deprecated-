@@ -16,14 +16,11 @@
            data.username = "empty name";
 
         var d = new Date();
-        var msg_post_time_html = "<span class='socketchatbox-messagetime'>";
-        var cur_time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
-        var cur_month_date = d.getMonth() + '/' + d.getDate();
-                    
+        var msg_post_time_html = "<span class='socketchatbox-messagetime'>";                    
 
         if (options.history) {
 
-            msg_post_time_html += ' ('+ data.time +')';
+            msg_post_time_html += ' ('+ data.post_time +')';
 
         } else {
 
@@ -41,10 +38,9 @@
         } else {
             $messageBodyDiv.addClass('socketchatbox-messageBody-others');
         }
-        var messageToSaveIntoHistory = "";
 
-        // receiving image file in base64
-        if (options.file) {
+        // received image file in base64
+        if (data.file) {
             var mediaType = "img";
             if (data.file.substring(0,10)==='data:video')
                 mediaType = "video controls";
@@ -56,15 +52,12 @@
                 $messageBodyDiv.html("<a target='_blank' download='" + data.fileName +"' href='"+data.file+"'>"+data.fileName+"</a>");
             }
 
-            messageToSaveIntoHistory = data.fileName+" (File)";
             if(data.username === chatbox.username){
                 ui.receivedFileSentByMyself();
             }
 
 
         }else{
-
-            messageToSaveIntoHistory = data.message;
 
             if (utils.checkImageUrl(data.message)) { // may cause secure issue?
                 //receiving image url
@@ -77,7 +70,7 @@
 
         // receiving new message
         if (!options.history && !options.typing) {
-            historyHandler.save(data.username, messageToSaveIntoHistory, cur_month_date+' '+cur_time);
+            historyHandler.save(data);
         }
 
 

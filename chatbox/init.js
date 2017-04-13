@@ -30,7 +30,7 @@
     var d = new Date();
     var username = 'visitor#'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
     chatbox.username = username;
-    chrome.storage.sync.get('chatbox_username', function(data) {
+    chrome.storage.local.get('chatbox_username', function(data) {
         console.log("username from storage: " + data.chatbox_username);
         if (data.chatbox_username) {
             chatbox.username = data.chatbox_username; 
@@ -50,7 +50,7 @@
 
         // Show/hide chatbox base on chrome storage value
 
-        chrome.storage.sync.get('chatbox_show', function(data) {
+        chrome.storage.local.get('chatbox_show', function(data) {
 
             if (data.chatbox_show) {
                 ui.show();
@@ -65,14 +65,14 @@
         console.log('room ' + chatbox.roomID);
 
 
-        chrome.storage.sync.get('chatbox_uuid', function(data) {
+        chrome.storage.local.get('chatbox_uuid', function(data) {
 
             if (data.chatbox_uuid) {
                 console.log("Found uuid " + data.chatbox_uuid)
                 chatbox.uuid = data.chatbox_uuid;
             } else {
                 chatbox.uuid = utils.guid();
-                chrome.storage.sync.set({ chatbox_uuid: chatbox.uuid });
+                chrome.storage.local.set({ chatbox_uuid: chatbox.uuid });
 
                 console.log("Creating new uuid " + chatbox.uuid);
             }

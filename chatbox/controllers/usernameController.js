@@ -84,7 +84,7 @@
             return;
         }
 
-        chrome.storage.sync.set({ chatbox_username: name });
+        chrome.storage.local.set({ chatbox_username: name });
 
         //if (!sendingFile) {
 

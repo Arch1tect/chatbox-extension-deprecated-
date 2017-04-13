@@ -32,7 +32,7 @@
 				ui.scrollToBottom();
 			}
 
-			chrome.storage.sync.set({ chatbox_show: chatbox.showing });
+			chrome.storage.local.set({ chatbox_show: chatbox.showing });
 
 
 		});

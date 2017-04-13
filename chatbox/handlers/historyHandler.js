@@ -14,7 +14,7 @@
         chat_history_in_cur_room_key = 'chatbox_history'+chatbox.roomID;
 
 
-        chrome.storage.sync.get(chat_history_in_cur_room_key, function(data) {
+        chrome.storage.local.get(chat_history_in_cur_room_key, function(data) {
 
             if (data[chat_history_in_cur_room_key]) {
 
@@ -45,23 +45,28 @@
 
     };
 
-
-    historyHandler.save = function(username, msg, time) {
+    historyHandler.save = function(data_to_save) {
 
         // TO CHECK: possible duplicate save when user open multiple tabs?
-        chrome.storage.sync.get(chat_history_in_cur_room_key, function(data) {
+        chrome.storage.local.get(chat_history_in_cur_room_key, function(data) {
 
             var chatHistory = [];
 
             if (data[chat_history_in_cur_room_key]) {
                 chatHistory = data[chat_history_in_cur_room_key];
             }
-            var new_history_entry = {username: username, message: msg, time: time};
-            chatHistory.push(new_history_entry);
+                
+            var d = new Date();
+            var cur_time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+            var cur_month_date = (d.getMonth()+1) + '/' + d.getDate();
+            var post_time = cur_month_date+' '+cur_time;
+            data_to_save.post_time = post_time;
+
+            chatHistory.push(data_to_save);
 
             var history_obj = {};
             history_obj[chat_history_in_cur_room_key] = chatHistory
-            chrome.storage.sync.set(history_obj);
+            chrome.storage.local.set(history_obj);
 
 
         });
