@@ -11,59 +11,55 @@
     historyHandler.load = function() {
         console.log("Load chat history");
 
-        var chatHistory = [];
 
-        try {
 
-            chatHistory = JSON.parse(utils.getCookie('chathistory'));
+        chrome.storage.sync.get('chatbox_history', function(data) {
 
-        }catch(e) {
+            if (data.chatbox_history) {
 
-        }
 
-        if(chatHistory.length) {
+                var chatHistory = data.chatbox_history;
 
-            ui.addLog("----Chat History----");
+                if(chatHistory.length) {
 
-            var options = {};
-            options.history = true;
+                    ui.addLog("----Chat History----");
 
-            for(var i=0; i<chatHistory.length; i++) {
+                    var options = {};
+                    options.history = true;
 
-                var data = chatHistory[i];
-                msgHandler.processChatMessage(data, options);
+                    for(var i=0; i<chatHistory.length; i++) {
+
+                        var data = chatHistory[i];
+                        msgHandler.processChatMessage(data, options);
+                    }
+
+                    ui.addLog('-----End of History-----');
+                }
+
             }
+        });
 
-            ui.addLog('-----End of History-----');
-        }
+
     };
 
 
     historyHandler.save = function(username, msg) {
 
-        var chatHistory = [];
+        // TO CHECK: possible duplicate save when user open multiple tabs?
+        chrome.storage.sync.get('chatbox_history', function(data) {
 
-        try{
+            var chatHistory = [];
 
-            chatHistory = JSON.parse(utils.getCookie('chathistory'));
+            if (data.chatbox_history) {
+                chatHistory = data.chatbox_history;
+            }
+            var new_history_entry = {username: username, message: msg}
+            chatHistory.push(new_history_entry)
+            chrome.storage.sync.set({ chatbox_history: chatHistory });
 
-        }catch(e) {
 
-        }
+        });
 
-        if (chatHistory.length===0||
-            // avoid same message being saved when user open multiple tabs
-            chatHistory[chatHistory.length-1].username!==username||
-            chatHistory[chatHistory.length-1].message!==msg){
-
-            var dataToSaveIntoCookie = {};
-            dataToSaveIntoCookie.username = username;
-            dataToSaveIntoCookie.message = msg;
-            chatHistory.push(dataToSaveIntoCookie);
-            // keep most recent 20 messages only
-            chatHistory = chatHistory.slice(Math.max(chatHistory.length - 20, 0));
-            utils.addCookie('chathistory',JSON.stringify(chatHistory));
-        }
     };
 
 

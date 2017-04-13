@@ -111,10 +111,3 @@ function ajaxResultHandler() {
 
 openChatbox();
 
-
-
-
-
-
-
-

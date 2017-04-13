@@ -33,7 +33,7 @@
         } else {
             $messageBodyDiv.addClass('socketchatbox-messageBody-others');
         }
-        var messageToSaveIntoCookie = "";
+        var messageToSaveIntoHistory = "";
 
         // receiving image file in base64
         if (options.file) {
@@ -48,7 +48,7 @@
                 $messageBodyDiv.html("<a target='_blank' download='" + data.fileName +"' href='"+data.file+"'>"+data.fileName+"</a>");
             }
 
-            messageToSaveIntoCookie = data.fileName+" (File)";
+            messageToSaveIntoHistory = data.fileName+" (File)";
             if(data.username === chatbox.username){
                 ui.receivedFileSentByMyself();
             }
@@ -56,7 +56,7 @@
 
         }else{
 
-            messageToSaveIntoCookie = data.message;
+            messageToSaveIntoHistory = data.message;
 
             if (utils.checkImageUrl(data.message)) { // may cause secure issue?
                 //receiving image url
@@ -69,8 +69,7 @@
 
         // receiving new message
         if (!options.history && !options.typing) {
-
-            historyHandler.save(data.username, messageToSaveIntoCookie);
+            historyHandler.save(data.username, messageToSaveIntoHistory);
         }
 
 
