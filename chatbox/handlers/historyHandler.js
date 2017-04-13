@@ -23,7 +23,7 @@
 
                 if(chatHistory.length) {
 
-                    ui.addLog("----Chat History----");
+                    ui.addLog("====== Chat History ======");
 
                     var options = {};
                     options.history = true;
@@ -34,7 +34,9 @@
                         msgHandler.processChatMessage(data, options);
                     }
 
-                    ui.addLog('-----End of History-----');
+                    ui.addLog('====== End of History ======');
+                    ui.addLog('.');
+                    ui.addLog('.');
                 }
 
             }

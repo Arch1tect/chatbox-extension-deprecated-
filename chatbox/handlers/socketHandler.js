@@ -125,7 +125,9 @@
 
         // Whenever the server emits 'user joined', log it in the chat body
         socket.on('user joined', function (data) {
-            ui.addLog(data.username + ' joined');
+            if (chatbox.username != data.username){
+                ui.addLog(data.username + ' joined');
+            }
             ui.updateOnlineUserCount(data.numUsers);
             userListHandler.userJoin(data.username);
 
