@@ -32,8 +32,7 @@
 				ui.scrollToBottom();
 			}
 
-			chrome.storage.local.set({ chatbox_show: chatbox.showing });
-
+			// chrome.storage.local.set({ chatbox_show: chatbox.showing });
 
 		});
 
@@ -70,7 +69,6 @@
 			var dx = e.screenX - prev_x;
 			var dy = e.screenY - prev_y;
 
-
 			//Check directions
 			if (dir.indexOf('n') > -1)  boxH -= dy;
 			if (dir.indexOf('w') > -1)  boxW -= dx;
@@ -98,6 +96,7 @@
 		utils.updateIframeSize('close'); 
 	}
 	ui.close = close;
+
 	function show() {
 		ui.$showHideChatbox.text("↓");
 		ui.$username.text(chatbox.username);
@@ -109,7 +108,6 @@
 		utils.updateIframeSize('fit');
 		chatbox.showing = true;
 	}
-
 	ui.show = show;
 
 	function minimize() {

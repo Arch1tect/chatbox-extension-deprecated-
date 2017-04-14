@@ -30,12 +30,7 @@
     var d = new Date();
     var username = 'visitor#'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
     chatbox.username = username;
-    chrome.storage.local.get('chatbox_username', function(data) {
-        console.log("username from storage: " + data.chatbox_username);
-        if (data.chatbox_username) {
-            chatbox.username = data.chatbox_username; 
-        }
-    });
+
 
     chatbox.init = function() {
 
@@ -45,7 +40,6 @@
         for (var i = 0; i < ui.init.length; i++) {
             ui.init[i]();
         }
-
 
 
         // Show/hide chatbox base on chrome storage value
@@ -91,12 +85,19 @@
             socketEvent.register();
 
         });
-
     };
 
 
 })();
 
 $( document ).ready(function() {
-    chatbox.init();
+
+    chrome.storage.local.get('chatbox_username', function(data) {
+        console.log("username from storage: " + data.chatbox_username);
+        if (data.chatbox_username) {
+            chatbox.username = data.chatbox_username; 
+        }
+        chatbox.init();
+
+    });
 });
