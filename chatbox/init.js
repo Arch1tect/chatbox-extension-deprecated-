@@ -55,7 +55,7 @@
             if (data.chatbox_show) {
                 ui.show();
             } else {
-                ui.hide();
+                ui.minimize();
             }
         });
 
@@ -84,11 +84,6 @@
             socketEvent.register();
 
         });
-
-
-
-
-
 
     };
 

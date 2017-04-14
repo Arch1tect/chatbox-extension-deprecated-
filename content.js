@@ -1,27 +1,8 @@
 var chatboxCreated = false;
 var chatboxIFrame;
-// Listen for messages
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-	// If the received message has the expected format...
-	if (msg.text === 'report_back') {
-		// Call the specified callback, passing
-		// the web-page's DOM content as argument
-		responseObj = {};
-		responseObj.name = document.title;
-		responseObj.link = document.location.href;
-		// console.log(responseObj);
-		sendResponse(responseObj);
-		makeRequest('https://quotime.me/api/stats');
-		// makeRequest('http://localhost:9000/api/stats');
 
 
-	}
-	else if (msg.text === 'open_chatbox') {
-		openChatbox();
-	}
-});
-
-function openChatbox() {
+function createChatbox() {
 
 	if (!chatboxCreated) {
 
@@ -31,83 +12,94 @@ function openChatbox() {
 		chatboxIFrame.allowtransparency = true;
 		document.body.insertBefore(chatboxIFrame, document.body.firstChild);
 		chatboxCreated = true;
-	
-	} else {
-		chatboxIFrame.style.display  = "block";
-
-		chatboxIFrame.contentWindow.postMessage('open_chatbox',
-              "*");
 	}
 }
 
+function openChatbox() {
+
+	if (!chatboxCreated) {
+
+		createChatbox();
+	}
+
+	chatboxIFrame.style.display  = "block";
+	// chatboxIFrame.contentWindow.postMessage('open_chatbox', "*");
+}
+
 function resizeIFrameToFitContent(e) {
+	// console.log('resizeIFrameToFitContent(e)');
+	console.log(e);
 	if (!e || !e.data )
 		return;
-	var msg = ''
-	try {
-		msg = JSON.parse(e.data);
-	}
-	catch (err) {
-		// not event sent from our app
-		return;
-	}
+	var msg = e.data;
+
 	if (!msg.state)
 		return;
+	
+	// chatboxIFrame.style.background = 'transparent';
+
 	if (msg.state ==='full size') {
 		chatboxIFrame.style.width  = "100%";
 		chatboxIFrame.style.height = "100%";
+		chatboxIFrame.style.display  = "block";
 	}
 	else if (msg.state === 'minimize') {
 		chatboxIFrame.style.width  = "150px";
 		chatboxIFrame.style.height = "30px";
 		chatboxIFrame.style.minHeight = "30px";
+		chatboxIFrame.style.display  = "block";
+
 	}
-	else if (msg.state === 'close') {	//only hide but still running?
+	else if (msg.state === 'close') {	//only hide but still running
 		chatboxIFrame.style.display  = "none";
 	}
-	else {
+	else { // fit - make page same size as chatbox
 		var size = msg.size;
+		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = size.width + "px";
 		chatboxIFrame.style.height = size.height + "px";
-		chatboxIFrame.style.background = 'transparent';
 	}
 }
 
+// NOTE: window.addEventListener("message" ...) only receive msg from tab,
+// can't receive msg from extension directly, to receive msg from extension,
+// use chrome.runtime.onMessage.addListener
 window.addEventListener("message", resizeIFrameToFitContent, false);
 
+createChatbox();
 
 
 
-var httpRequest;
 
-function makeRequest(url) {
+// var httpRequest;
 
-	if (location.href==="https://quotime.me/")
-		return;
+// function makeRequest(url) {
 
-	httpRequest = new XMLHttpRequest();
+// 	if (location.href==="https://quotime.me/")
+// 		return;
 
-	if (!httpRequest) {
-		console.log('Giving up :( Cannot create an XMLHTTP instance');
-		return false;
-	}
-	httpRequest.onreadystatechange = ajaxResultHandler;
+// 	httpRequest = new XMLHttpRequest();
 
-	httpRequest.open('POST', url);
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    httpRequest.send('url=' + encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title));
+// 	if (!httpRequest) {
+// 		console.log('Giving up :( Cannot create an XMLHTTP instance');
+// 		return false;
+// 	}
+// 	httpRequest.onreadystatechange = ajaxResultHandler;
 
-}
+// 	httpRequest.open('POST', url);
+//     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     httpRequest.send('url=' + encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title));
 
-function ajaxResultHandler() {
-	if (httpRequest.readyState === XMLHttpRequest.DONE) {
-	  if (httpRequest.status === 200) {
-		console.log('success: '+httpRequest.responseText);
-	  } else {
-		console.log('not 200 response: '+httpRequest.responseText);
-	  }
-	}
-}
+// }
 
-openChatbox();
+// function ajaxResultHandler() {
+// 	if (httpRequest.readyState === XMLHttpRequest.DONE) {
+// 	  if (httpRequest.status === 200) {
+// 		console.log('success: '+httpRequest.responseText);
+// 	  } else {
+// 		console.log('not 200 response: '+httpRequest.responseText);
+// 	  }
+// 	}
+// }
 
+// always create the chatbox and make connections, if user don't want it, he can disable the extension

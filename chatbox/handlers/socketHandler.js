@@ -173,8 +173,6 @@
 
 
     // The functions below are complained by jshint for not used, they are used by eval, don't delete them! 
-    var show = ui.show;
-    var hide = ui.hide;
 
     function say(str) {
 

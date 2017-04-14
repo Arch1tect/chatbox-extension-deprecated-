@@ -57,6 +57,7 @@ body {
 .socketchatbox-inputMessage {
   width: 80%;
   padding: 0px;
+  padding-left: 10px;
   height: 35px;
   border: 0px;
   margin: 0px;

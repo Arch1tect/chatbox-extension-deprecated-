@@ -72,7 +72,7 @@
         // if(utils.getCookie('chatboxOpen')==='1') {
         //     ui.show();
         // }else{
-        //     ui.hide();
+        //     ui.minimize();
         // }
     });
 

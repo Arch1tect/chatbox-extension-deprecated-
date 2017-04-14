@@ -24,7 +24,7 @@
 
 			if(ui.$chatBody.is(":visible")){
 
-				hide();
+				minimize();
 
 			}else {
 			
@@ -39,7 +39,6 @@
 
 
 		ui.$cross.click(function(e) {
-			// ui.$chatBox.hide();
 			utils.updateIframeSize('close'); 
 			e.preventDefault();
 			e.stopPropagation();
@@ -91,7 +90,7 @@
 			prev_x = -1;
 			prev_y = -1;
 			// update iframe size after mouse up
-			utils.updateIframeSize('mouse up');
+			utils.updateIframeSize('fit');
 		});
 	});
 
@@ -111,7 +110,7 @@
 
 	ui.show = show;
 
-	function hide() {
+	function minimize() {
 		ui.$showHideChatbox.text("↑");
 		// ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
 		ui.$username.html(chatbox.NAME);
@@ -122,10 +121,30 @@
 		chatbox.showing = false;
 	}
 
-	ui.hide = hide;
+	ui.minimize = minimize;
 
 	ui.updateOnlineUserCount = function (num) {ui.$onlineUserNum.text(num);};
 
+	// Receive message sent from extension
+	chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+
+		if (request.msg == "open_chatbox"){
+			show();
+			utils.updateIframeSize('fit');
+			sendResponse({msg: "shown"});
+
+		} 
+
+		if (request.msg == "close_chatbox"){ 
+			utils.updateIframeSize('close'); 
+			sendResponse({msg: "closed"}); // updateIframeSize is async so this response is wrong 
+		}
+
+		if (request.msg == "is_chatbox_open") {
+			sendResponse({is_chatbox_open: chatbox.showing});
+		}
+
+	});
 
 
 
