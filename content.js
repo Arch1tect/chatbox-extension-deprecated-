@@ -11,20 +11,11 @@ function createChatbox() {
 		chatboxIFrame.id="chatbox-iframe";
 		chatboxIFrame.allowtransparency = true;
 		document.body.insertBefore(chatboxIFrame, document.body.firstChild);
+		chatboxIFrame.style.display = 'none';
 		chatboxCreated = true;
 	}
 }
 
-function openChatbox() {
-
-	if (!chatboxCreated) {
-
-		createChatbox();
-	}
-
-	chatboxIFrame.style.display  = "block";
-	// chatboxIFrame.contentWindow.postMessage('open_chatbox', "*");
-}
 
 function resizeIFrameToFitContent(e) {
 	// console.log('resizeIFrameToFitContent(e)');
@@ -39,16 +30,15 @@ function resizeIFrameToFitContent(e) {
 	// chatboxIFrame.style.background = 'transparent';
 
 	if (msg.state ==='full size') {
+		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = "100%";
 		chatboxIFrame.style.height = "100%";
-		chatboxIFrame.style.display  = "block";
 	}
 	else if (msg.state === 'minimize') {
+		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = "150px";
 		chatboxIFrame.style.height = "30px";
 		chatboxIFrame.style.minHeight = "30px";
-		chatboxIFrame.style.display  = "block";
-
 	}
 	else if (msg.state === 'close') {	//only hide but still running
 		chatboxIFrame.style.display  = "none";

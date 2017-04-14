@@ -50,13 +50,20 @@
 
         // Show/hide chatbox base on chrome storage value
 
-        chrome.storage.local.get('chatbox_show', function(data) {
+        chrome.storage.local.get('open_chatbox_when', function(data) {
 
-            if (data.chatbox_show) {
+            if (!data.open_chatbox_when) {
                 ui.show();
-            } else {
+            } 
+
+            if (data.open_chatbox_when == "full_size") {
+                ui.show();
+            } 
+            else if (data.open_chatbox_when == "minimized") {
                 ui.minimize();
             }
+
+
         });
 
 

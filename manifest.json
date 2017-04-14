@@ -1,6 +1,6 @@
 {
   "name": "Qtime Extension",
-  "description": "Save content to Qtime",
+  "description": "Chatbox",
   "version": "0.80",
   "permissions": ["activeTab", "storage", "unlimitedStorage"],
   "content_scripts": [{
@@ -9,7 +9,7 @@
     "css": ["style/content.css"]
   }],
   "browser_action": {
-      "default_title": "Save content to Qtime.",
+      "default_title": "Chatbox.",
       "default_icon": "icon.png",
       "default_popup": "popup.html"
   },

@@ -39,7 +39,7 @@
 
 
 		ui.$cross.click(function(e) {
-			utils.updateIframeSize('close'); 
+			close();
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -94,8 +94,10 @@
 		});
 	});
 
-
-
+	function close() {
+		utils.updateIframeSize('close'); 
+	}
+	ui.close = close;
 	function show() {
 		ui.$showHideChatbox.text("↓");
 		ui.$username.text(chatbox.username);
@@ -104,7 +106,7 @@
 		ui.$chatboxResize.css('z-index', 99999);
 		ui.$messages[0].scrollTop = ui.$messages[0].scrollHeight;
 		
-		utils.updateIframeSize('show');
+		utils.updateIframeSize('fit');
 		chatbox.showing = true;
 	}
 

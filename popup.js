@@ -35,6 +35,24 @@ document.addEventListener('DOMContentLoaded', function () {
 		return false;
 	});
 
+    chrome.storage.local.get('open_chatbox_when', function(data) {
+
+        if (data.open_chatbox_when) {
+        	console.log("saved option: "+data.open_chatbox_when)
+        	var checkbox = "input[name=open_chatbox_when][value="+data.open_chatbox_when+"]";
+			$(checkbox).prop("checked",true);
+        }
+
+    });
+
+	$('input:radio[name="open_chatbox_when"]').change(function() {
+
+		console.log('open_chatbox_when ' + $(this).val());
+		chrome.storage.local.set({ open_chatbox_when: $(this).val() });
+
+	});
+
+
 	chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
 
 		// since only one tab should be active and in the current window at once

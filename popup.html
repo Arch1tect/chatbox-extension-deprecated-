@@ -13,20 +13,20 @@
 			<button id='open-chatbox'>Open Chatbox</button>
 		</div>
 		<center id='qtime-title'>Settings</center>
-		When to open chatbox?<br>
+		When should Chatbox open itself?<br>
 		<form>
 			<br>
 			<label>
-		  		<input type="radio" name="open_chatbox" value="male" checked> Always<br>
+		  		<input type="radio" name="open_chatbox_when" value="full_size"> Always open on page load<br>
 		  	</label>
 		  	<label>
-		  		<input type="radio" name="open_chatbox" value="other"> Always open but minimized<br>
+		  		<input type="radio" name="open_chatbox_when" value="minimized"> Always open but minimized<br>
 		  	</label>
 			<label>
-		  		<input type="radio" name="open_chatbox" value="female"> When there's new message<br>
+		  		<input type="radio" name="open_chatbox_when" value="when_msg"> Open when there's new message (Recommended)<br>
 			</label>
 			<label>
-		  		<input type="radio" name="open_chatbox" value="other"> Never
+		  		<input type="radio" name="open_chatbox_when" value="never"> Never
 			</label>
 
 		</form>
