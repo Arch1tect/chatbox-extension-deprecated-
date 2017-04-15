@@ -98,9 +98,7 @@
     function changeLocalUsername(name) {
         if(name) {
             chatbox.username = name;
-            // utils.addCookie('chatname', name);
-            // if(utils.getCookie('chatboxOpen')==='1')
-            //     ui.$username.text(chatbox.username);
+            console.log("Server says username should be " + name);
             ui.$username.text(chatbox.username);
         }
     }

@@ -43,7 +43,6 @@
 
 
         // Show/hide chatbox base on chrome storage value
-
         chrome.storage.local.get('open_chatbox_when', function(data) {
 
             if (!data.open_chatbox_when) {
@@ -61,7 +60,7 @@
         });
 
 
-        chatbox.roomID = location.search;
+        chatbox.roomID = location.search.substring(1);
         // TODO: ignore # part in url
         console.log('room ' + chatbox.roomID);
 

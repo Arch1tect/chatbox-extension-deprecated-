@@ -32,6 +32,7 @@
             console.log('welcome new user');
             socket.joined = true;
             ui.changeLocalUsername(data.username);
+            ui.addLog("Room URL: " + chatbox.roomID);
 
             // Display the welcome message
             var message = "Welcome, "+ chatbox.username; //TODO: this username might be allow to be used, always get username from server
@@ -57,6 +58,7 @@
 
             // sync username
             ui.changeLocalUsername(data.username);
+            ui.addLog("Room URL: " + chatbox.roomID);
 
             // Display the welcome message
             var message = "Hey, "+ chatbox.username;
