@@ -63,7 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		// TBD: activeTab.url and activeTab.title are available, no need
 		// to call .sendMessage if those are only info need from tab
 
+		// Ask chatbox whether it's open or not
+		// And how many users online at current page
 		chrome.tabs.sendMessage(activeTabId, {msg: 'is_chatbox_open'}, function(resp){
+			
+			
+			$('#user-count').text(resp.userCount);
 			if (resp.is_chatbox_open) { 
 				$('#open-chatbox').text('Close Chatbox');
 			}

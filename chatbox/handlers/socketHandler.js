@@ -44,7 +44,8 @@
                 userCount++;
                 userListHandler.userJoin(onlineUsername);
             }
-
+            // chatbox.onlineUserInRoom = userCount;
+            // TODO: save userCount in chatbox object
             ui.updateOnlineUserCount(userCount);
             ui.addParticipantsMessage(userCount);
 
@@ -70,7 +71,7 @@
                 userCount++;
                 userListHandler.userJoin(onlineUsername);
             }
-
+            // chatbox.onlineUserInRoom = userCount;
             ui.updateOnlineUserCount(userCount);
             ui.addParticipantsMessage(userCount);
 
@@ -132,6 +133,7 @@
             }
             ui.updateOnlineUserCount(data.numUsers);
             userListHandler.userJoin(data.username);
+            chatbox.onlineUserInRoom++;
 
             //addParticipantsMessage(data.numUsers);
             //beep();
@@ -142,6 +144,7 @@
             ui.addLog(data.username + ' left');
             ui.updateOnlineUserCount(data.numUsers);
             userListHandler.userLeft(data.username);
+            chatbox.onlineUserInRoom--;
 
             if(data.numUsers === 1)
                 ui.addParticipantsMessage(data.numUsers);

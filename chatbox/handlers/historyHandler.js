@@ -47,7 +47,11 @@
 
     historyHandler.save = function(data_to_save) {
 
+
+        console.log("Save msg to Chrome storage.");
         // TO CHECK: possible duplicate save when user open multiple tabs?
+        // Testing shows no duplicate msg saved, probably because get/set is 
+        // called almost same time. Still, it's potential issue
         chrome.storage.local.get(chat_history_in_cur_room_key, function(data) {
 
             var chatHistory = [];

@@ -141,7 +141,13 @@
 		}
 
 		if (request.msg == "is_chatbox_open") {
-			sendResponse({is_chatbox_open: chatbox.showing});
+			sendResponse(
+				{
+					is_chatbox_open: chatbox.showing,
+            		userCount: ui.$onlineUserNum.text()
+
+				}
+			);
 		}
 
 	});
