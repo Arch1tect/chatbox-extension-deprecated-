@@ -18,9 +18,9 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    // chatbox.domain = "https://quotime.me";
+    chatbox.domain = "https://quotime.me";
     // chatbox.domain = "https://localhost";
-    chatbox.domain = "http://localhost:8088";
+    // chatbox.domain = "http://localhost:8088";
 
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
@@ -46,10 +46,6 @@
 
         // Show/hide chatbox base on chrome storage value
         chrome.storage.local.get('open_chatbox_when', function(data) {
-
-            if (!data.open_chatbox_when) {
-                ui.show();
-            } 
 
             if (data.open_chatbox_when == "full_size") {
                 ui.show();
