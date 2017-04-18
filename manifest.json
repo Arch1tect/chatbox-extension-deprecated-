@@ -1,7 +1,7 @@
 {
-  "name": "Qtime Extension",
-  "description": "Chatbox",
-  "version": "0.80",
+  "name": "Chat Anywhere",
+  "description": "Chat with people who are browsing the same web page!",
+  "version": "0.90",
   "permissions": ["activeTab", "storage", "unlimitedStorage"],
   "content_scripts": [{
     "matches": ["<all_urls>"],

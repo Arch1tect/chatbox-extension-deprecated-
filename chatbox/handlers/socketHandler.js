@@ -8,6 +8,40 @@
     var userListHandler = chatbox.userListHandler;
     var socketEvent = chatbox.socketEvent;
 
+
+    function socketConnected(isFirstSocket, socket, data) {
+
+        socket.joined = true;
+        ui.changeLocalUsername(data.username);
+
+        var userCount = 0;
+        // TODO: wrap this in a function in userListHandler
+        for (var onlineUsername in data.onlineUsers){
+            userCount++;
+            userListHandler.userJoin(onlineUsername);
+        }
+        ui.updateOnlineUserCount(userCount);
+
+        if (!ui.welcomeMsgShown) {
+            // Display the welcome message
+            var welcomeMsg = '';
+            if (isFirstSocket)
+                welcomeMsg = "Welcome, " + chatbox.username;
+            else
+                welcomeMsg = "Hey, " + chatbox.username;
+            
+            console.log(welcomeMsg);
+
+            ui.addLog(welcomeMsg);
+            ui.addLog("Room URL: " + chatbox.roomID);
+            ui.addParticipantsMessage(userCount);
+            ui.welcomeMsgShown = true;
+        }
+        console.log('Connected with server');
+
+    }
+
+
     socketEvent.register = function() {
         // Socket events
         var socket = chatbox.socket;
@@ -29,54 +63,16 @@
 
         // This is a new user
         socket.on('welcome new user', function (data) {
-            console.log('welcome new user');
-            socket.joined = true;
-            ui.changeLocalUsername(data.username);
-            ui.addLog("Room URL: " + chatbox.roomID);
 
-            // Display the welcome message
-            var message = "Welcome, "+ chatbox.username; //TODO: this username might be allow to be used, always get username from server
-            ui.addLog(message);
-
-            var userCount = 0;
-
-            for (var onlineUsername in data.onlineUsers){
-                userCount++;
-                userListHandler.userJoin(onlineUsername);
-            }
-            // chatbox.onlineUserInRoom = userCount;
-            // TODO: save userCount in chatbox object
-            ui.updateOnlineUserCount(userCount);
-            ui.addParticipantsMessage(userCount);
-
+            socketConnected(true, socket, data);
 
         });
 
         // This is just a new connection of an existing online user
         socket.on('welcome new connection', function (data) {
-            socket.joined = true;
-            console.log('welcome old user');
 
-            // sync username
-            ui.changeLocalUsername(data.username);
-            ui.addLog("Room URL: " + chatbox.roomID);
+            socketConnected(false, socket, data);
 
-            // Display the welcome message
-            var message = "Hey, "+ chatbox.username;
-            ui.addLog(message);
-
-            var userCount = 0;
-            
-            for (var onlineUsername in data.onlineUsers){
-                userCount++;
-                userListHandler.userJoin(onlineUsername);
-            }
-            // chatbox.onlineUserInRoom = userCount;
-            ui.updateOnlineUserCount(userCount);
-            ui.addParticipantsMessage(userCount);
-
-            
-            socket.emit('reset2origintitle', {});
         });
 
         // Whenever the server emits 'new message', update the chat body

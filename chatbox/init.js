@@ -63,7 +63,6 @@
 
 
         chatbox.roomID = location.search.substring(1);
-        // TODO: ignore # part in url
         console.log('room ' + chatbox.roomID);
 
 
@@ -94,8 +93,9 @@
 $( document ).ready(function() {
 
     chrome.storage.local.get('chatbox_username', function(data) {
-        console.log("username from storage: " + data.chatbox_username);
         if (data.chatbox_username) {
+            console.log("username from storage: " + data.chatbox_username);
+
             chatbox.username = data.chatbox_username; 
         }
         chatbox.init();
