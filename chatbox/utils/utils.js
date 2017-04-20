@@ -14,14 +14,31 @@
             // This weird show/hide hack is to ease the 
             // problem when iframe got full sized, the 
             // chatbox UI is resized for 1/10 sec
+            $("body").css({
+                transition : 'background-color 0.5s ease-in-out',
+                "background-color": "rgba(255, 255, 255, 0.75)"
+            });
+
             chatbox.ui.$chatBox.hide();
+
             setTimeout(function(){ 
-                chatbox.ui.$chatBox.show();
+                chatbox.ui.$chatBox.fadeIn('fast');
             }, 100);
         }
 
         if (state == "close") 
             chatbox.showing = false;
+
+        if (state == "fit") {
+            $("body").css({
+                transition : 'background-color 0.5s ease-in-out',
+                "background-color": "transparent"
+            });
+            chatbox.ui.$chatBox.hide();
+            setTimeout(function(){ 
+                chatbox.ui.$chatBox.fadeIn('fast');
+            }, 100);
+        }
 
         resizeMsg.size = { height: $('.socketchatbox-page').height(), width: $('#socketchatbox-body').width()};
         window.parent.postMessage(resizeMsg, "*");

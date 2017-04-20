@@ -85,10 +85,12 @@
 		});
 
 		$(document).mouseup(function(){
-			prev_x = -1;
-			prev_y = -1;
-			// update iframe size after mouse up
-			utils.updateIframeSize('fit');
+			if (prev_x !== -1) {
+				prev_x = -1;
+				prev_y = -1;
+				// update iframe size after mouse up
+				utils.updateIframeSize('fit');
+			}
 		});
 	});
 

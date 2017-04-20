@@ -13,7 +13,7 @@ ul {
   word-wrap: break-word;
 }
 body {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 /*::-webkit-scrollbar { 
