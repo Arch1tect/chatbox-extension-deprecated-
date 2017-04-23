@@ -74,11 +74,16 @@
 
             // If it's a new message, unless option set to never auto open
             // chatbox, we'll show chatbox.
-            if (!chatbox.showing) {
-                chrome.storage.local.get('open_chatbox_when', function(data) {
-                    if (data.open_chatbox_when != "never") {
+            if (!chatbox.showing || chatbox.ui.displayMode == 'min') {
+                chrome.storage.local.get('chatbox_config', function(data) {
+                    // TODO: update the entire config object when user
+                    // updated extension option
+                    if (data.chatbox_config && data.chatbox_config.open_chatbox_when == "never"){
+                        console.log('Received new msg, but not allowed to open chatbox.') 
+                    }else {
                         ui.maximize();
-                    } 
+
+                    }
                 });
             }
 

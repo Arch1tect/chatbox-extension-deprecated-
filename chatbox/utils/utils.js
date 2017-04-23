@@ -76,7 +76,6 @@
             }, 100);
         }
 
-        // resizeMsg.size = { height: chatbox.ui.height, width: chatbox.ui.width};
         resizeMsg.size = { height: chatbox.ui.$chatBody.outerHeight()+chatbox.ui.$inputMessage.outerHeight()+chatbox.ui.$topbar.outerHeight(), width: chatbox.ui.$chatBody.outerWidth()};
         window.parent.postMessage(resizeMsg, "*");
 

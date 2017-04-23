@@ -44,24 +44,22 @@
         }
 
 
-        if (chatbox.config) {
-            var config = chatbox.config;
-            console.log('config.open_chatbox_when: ' + config.open_chatbox_when);
+        var config = chatbox.config;
+        console.log('config.open_chatbox_when: ' + config.open_chatbox_when);
 
-            // Show/hide chatbox base on chrome storage value
-            if (config.open_chatbox_when == "full_size") {
-                ui.maximize();
-            } 
-            else if (config.open_chatbox_when == "minimized") {
-                ui.minimize();
-            }
-
-
-            chatbox.roomID = location.search.substring(1);
-            console.log('room ' + chatbox.roomID);
-
-
+        // Show/hide chatbox base on chrome storage value
+        if (config.open_chatbox_when == "full_size") {
+            ui.maximize();
+        } 
+        else if (config.open_chatbox_when == "minimized") {
+            ui.minimize();
         }
+
+
+        chatbox.roomID = location.search.substring(1);
+        console.log('room ' + chatbox.roomID);
+
+
 
         historyHandler.load();
         // now make your connection with server!
@@ -79,37 +77,30 @@ $( document ).ready(function() {
 
     chrome.storage.local.get('chatbox_config', function(data) {
 
-        if (data.chatbox_config) {
+        chatbox.config = data.chatbox_config || {};
 
-            var config = data.chatbox_config;
-            chatbox.config = config;
-
-            if (config.chatbox_username) {
-                console.log("username from local storage: " + config.chatbox_username);
-                chatbox.username = config.chatbox_username; 
-            }else {
-                console.log("no username in local storage");
-            }
+        var config = chatbox.config;
 
 
-            if (config.uuid) {
-                console.log("Found user id " + config.uuid);
-                chatbox.uuid = config.uuid;
-
-            } else {
-
-                chatbox.uuid = chatbox.utils.guid();
-                config.uuid =  chatbox.uuid;
-                chrome.storage.local.set({ chatbox_config: config });
-
-                console.log("Creating new user id " + chatbox.uuid);
-            }
+        if (config.chatbox_username) {
+            console.log("username from local storage: " + config.chatbox_username);
+            chatbox.username = config.chatbox_username; 
+        }else {
+            console.log("no username in local storage");
+        }
 
 
+        if (config.uuid) {
+            console.log("Found user id " + config.uuid);
+            chatbox.uuid = config.uuid;
 
         } else {
 
-            console.log("no chatbox local config");
+            chatbox.uuid = chatbox.utils.guid();
+            config.uuid =  chatbox.uuid;
+            chrome.storage.local.set({ chatbox_config: config });
+
+            console.log("Creating new user id " + chatbox.uuid);
         }
 
         chatbox.init();

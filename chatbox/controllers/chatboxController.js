@@ -30,11 +30,9 @@
 
 
 		var config = chatbox.config;
-		if (config && config.width) {
-			ui.width = config.width; // note this is not size of whole window
-			ui.height = config.height; // it's size of the chat area
-			ui.$chatBody.css({ "width":ui.width+"px", "height":ui.height+"px"});
-			console.log('loaded config width: ' + ui.width + ' height: ' + ui.height);
+		if (config.width) {
+			ui.$chatBody.css({ "width":config.width+"px", "height":config.height+"px"});
+			console.log('loaded config width: ' + config.width + ' height: ' + config.height);
 		}
 
 		ui.$topbar.click(function() {
@@ -93,11 +91,9 @@
 			if(boxH<70)     boxH = 70;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
-			ui.height = boxH;
-			ui.width = boxW;
 			console.log('chatBody width: ' + boxW + ' height: ' + boxH);
-			chatbox.config.width = ui.width;
-			chatbox.config.height = ui.height;
+			chatbox.config.width = boxW;
+			chatbox.config.height = boxH;
 			prev_x = e.screenX;
 			prev_y = e.screenY;
 
