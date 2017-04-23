@@ -84,7 +84,11 @@
             return;
         }
 
-        chrome.storage.local.set({ chatbox_username: name });
+        var config = chatbox.config;
+        config.chatbox_username = name;
+        chrome.storage.local.set({ chatbox_config: config });
+
+
 
         //if (!sendingFile) {
 

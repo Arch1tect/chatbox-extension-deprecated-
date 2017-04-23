@@ -81,7 +81,7 @@
             // play new msg sound and change chatbox color to notify users
             if (data.username !== chatbox.username) {
                 //newMsgBeep();
-                notification.receivedNewMsg();
+                // notification.receivedNewMsg();
             }
 
         });
@@ -156,7 +156,7 @@
 
         // For New Message Notification
         socket.on('reset2origintitle', function (data) {
-            notification.changeTitle.reset();
+            // notification.changeTitle.reset();
         });
 
         // Whenever the server emits 'typing', show the typing message
@@ -196,7 +196,7 @@
 
     function type(str) {
 
-        ui.show();
+        ui.maximize();
         var oldVal = ui.$inputMessage.val();
         ui.$inputMessage.focus().val(oldVal+str.charAt(0));
         if(str.length>1){

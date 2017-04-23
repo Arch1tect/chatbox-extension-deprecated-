@@ -34,20 +34,7 @@
 
     });
 
-    $(document).on('click', '.chatbox-image', function(e) {
 
-        e.preventDefault();
-        utils.updateIframeSize('full size');
-
-        $('#socketchatbox-imagepopup-src').attr('src', $(this).attr('src')); 
-        $('#socketchatbox-imagepopup-modal').modal('show'); 
-
-
-    });
-
-    $('#socketchatbox-imagepopup-modal').on("hidden.bs.modal", function () {
-        utils.updateIframeSize('resize');
-    });
 
     // Send a message
     function sendMessage() {

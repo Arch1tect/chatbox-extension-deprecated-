@@ -6,15 +6,13 @@
 	var utils = chatbox.utils;
 	ui.init.push(function() {
 
-		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
-		ui.$onlineUsers = $('.socketchatbox-onlineusers');
-
 		ui.$onlineUserNum.click(function(e) {
 
 			if (ui.$chatBody.is(":visible")){
 
-				ui.$onlineUsers.slideToggle(0,function(){
-					utils.updateIframeSize('resize');
+				ui.$onlineUsers.slideToggle(300,function(){
+					// ui.height = $('.socketchatbox-page').height();
+					// utils.updateIframeSize('fit');
 
 				});
 

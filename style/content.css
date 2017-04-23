@@ -2,12 +2,13 @@
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	z-index: 2147483647;
-	height: 30px;
-	width: 150px;	
-/*	height: 415px;
-	width: 350px;*/
+	z-index: 2147483640;
+/*	height: 30px;
+	width: 150px;*/	
+	height: 415px;
+	width: 350px;
 	/*border:1px solid black;*/
 	border:none;
+	display: none;
 	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.31);
 }

@@ -51,11 +51,13 @@ body {
 
 
 button {
-    border: none;
+    border: 1px solid;
     font-family: inherit;
     color: inherit;
     border-radius: 3px;
-    background: none;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
     cursor: pointer;
     display: inline-block;
     font-weight: 300;
@@ -65,6 +67,7 @@ button {
     transition: all 0.3s;
 }
 button:hover, button:active {
-    color: white;
-    background: black;
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
 }

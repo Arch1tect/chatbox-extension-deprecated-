@@ -5,42 +5,79 @@
     var utils = {};
     chatbox.utils = utils;
     
+
+    $(document).on('click', '.chatbox-image', function(e) {
+
+        e.preventDefault();
+        utils.updateIframeSize('full size');
+
+        $('#socketchatbox-imagepopup-src').attr('src', $(this).attr('src')); 
+        $('#socketchatbox-imagepopup-modal').modal('show'); 
+
+
+    });
+
+    $('#socketchatbox-imagepopup-modal').on("hidden.bs.modal", function () {
+
+        chatbox.ui.refreshSize();
+        
+    });
+
+
+    chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+        // Receive message sent from extension
+
+        if (request.msg == "open_chatbox"){
+            chatbox.ui.maximize();
+            sendResponse({msg: "shown"});
+
+        } 
+
+        if (request.msg == "close_chatbox"){ 
+            utils.updateIframeSize('close'); 
+            sendResponse({msg: "closed"}); // updateIframeSize is async so this response is wrong 
+        }
+
+        if (request.msg == "is_chatbox_open") {
+            sendResponse(
+                {
+                    is_chatbox_open: chatbox.ui.displayMode == 'max' && chatbox.showing,
+                    userCount: chatbox.ui.$onlineUserNum.text()
+                }
+            );
+        }
+
+    });
+
+
     function updateIframeSize(state) {
+        // send chat box size to content.js
         var resizeMsg = {};
         resizeMsg.state = state;
-
-
-        if (state == "full size") {
-            // This weird show/hide hack is to ease the 
-            // problem when iframe got full sized, the 
-            // chatbox UI is resized for 1/10 sec
-            $("body").css({
-                transition : 'background-color 0.5s ease-in-out',
-                "background-color": "rgba(255, 255, 255, 0.75)"
-            });
-
-            chatbox.ui.$chatBox.hide();
-
-            setTimeout(function(){ 
-                chatbox.ui.$chatBox.fadeIn('fast');
-            }, 100);
-        }
 
         if (state == "close") 
             chatbox.showing = false;
 
+        else
+            chatbox.showing = true;
+
+        // hide chatbox for a sec just because 
+        // the second iframe goes full window
+        // chatbox would jump to the top of the window
+        // then come back down
+
         if (state == "fit") {
-            $("body").css({
-                transition : 'background-color 0.5s ease-in-out',
-                "background-color": "transparent"
-            });
+        }
+
+        if (state == "full size") {
             chatbox.ui.$chatBox.hide();
-            setTimeout(function(){ 
-                chatbox.ui.$chatBox.fadeIn('fast');
+            setTimeout(function() {
+                chatbox.ui.$chatBox.show();
             }, 100);
         }
 
-        resizeMsg.size = { height: $('.socketchatbox-page').height(), width: $('#socketchatbox-body').width()};
+        // resizeMsg.size = { height: chatbox.ui.height, width: chatbox.ui.width};
+        resizeMsg.size = { height: chatbox.ui.$chatBody.outerHeight()+chatbox.ui.$inputMessage.outerHeight()+chatbox.ui.$topbar.outerHeight(), width: chatbox.ui.$chatBody.outerWidth()};
         window.parent.postMessage(resizeMsg, "*");
 
     }

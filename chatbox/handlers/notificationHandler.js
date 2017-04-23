@@ -60,20 +60,20 @@
 
     function clearNewMessageNotification() {
         changeTitle.reset();
-        chatbox.socket.emit('reset2origintitle', {});
+        // chatbox.socket.emit('reset2origintitle', {});
     }
 
 
-    document.addEventListener('visibilitychange', function() {
-        if(!document.hidden) 
-            clearNewMessageNotification();
+    // document.addEventListener('visibilitychange', function() {
+    //     if(!document.hidden) 
+    //         clearNewMessageNotification();
 
-        // even if we want this feature, it should not be in this file
-        // if(utils.getCookie('chatboxOpen')==='1') {
-        //     ui.show();
-        // }else{
-        //     ui.minimize();
-        // }
-    });
+    //     // even if we want this feature, it should not be in this file
+    //     // if(utils.getCookie('chatboxOpen')==='1') {
+    //     //     ui.show();
+    //     // }else{
+    //     //     ui.minimize();
+    //     // }
+    // });
 
 })();

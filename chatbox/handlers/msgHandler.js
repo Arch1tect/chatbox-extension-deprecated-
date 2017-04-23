@@ -73,11 +73,11 @@
             historyHandler.save(data);
 
             // If it's a new message, unless option set to never auto open
-            // chatbox, we'll open chatbox.
+            // chatbox, we'll show chatbox.
             if (!chatbox.showing) {
                 chrome.storage.local.get('open_chatbox_when', function(data) {
                     if (data.open_chatbox_when != "never") {
-                        ui.show();
+                        ui.maximize();
                     } 
                 });
             }

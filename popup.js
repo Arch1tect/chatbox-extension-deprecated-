@@ -1,3 +1,4 @@
+var config = {};
 
 function showHideChatbox() {
 	var msg = 'open_chatbox';
@@ -12,12 +13,13 @@ function showHideChatbox() {
 		var activeTabId = activeTab.id; // or do whatever you need
 
 
-		// This message is listened by chatbox, but not content.js. chatbox pass msg to content.js
+		// This message is listened by chatbox, but not content.js. 
+		// then chatbox pass msg to content.js
 		chrome.tabs.sendMessage(activeTabId, {msg: msg}, function(resp){
 			if (resp && resp.msg == "shown") { 
 				$('#open-chatbox').text('Close Chatbox');
 			}
-			if (resp.msg == "closed") { 
+			if (resp && resp.msg == "closed") { 
 				$('#open-chatbox').text('Open Chatbox');
 			}
 
@@ -35,20 +37,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		return false;
 	});
 
-    chrome.storage.local.get('open_chatbox_when', function(data) {
+    chrome.storage.local.get('chatbox_config', function(data) {
 
-        if (data.open_chatbox_when) {
-        	console.log("saved option: "+data.open_chatbox_when)
-        	var checkbox = "input[name=open_chatbox_when][value="+data.open_chatbox_when+"]";
-			$(checkbox).prop("checked",true);
-        }
+    	if (data.chatbox_config) {
+	    	config = data.chatbox_config;
+	        if (config && config.open_chatbox_when) {
+	        	console.log("saved option: "+config.open_chatbox_when)
+	        	var checkbox = "input[name=open_chatbox_when][value="+config.open_chatbox_when+"]";
+				$(checkbox).prop("checked",true);
+	        }
+    	}
 
     });
 
 	$('input:radio[name="open_chatbox_when"]').change(function() {
 
 		console.log('open_chatbox_when ' + $(this).val());
-		chrome.storage.local.set({ open_chatbox_when: $(this).val() });
+		config.open_chatbox_when = $(this).val();
+
+		chrome.storage.local.set({ chatbox_config: config });
 
 	});
 

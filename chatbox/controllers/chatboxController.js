@@ -2,8 +2,14 @@
 
 	"use strict";
 
-	var ui = chatbox.ui;
 	var utils = chatbox.utils;
+
+	var ui = chatbox.ui;
+	// ui.CHATBOX_MIN_WIDTH = 100;
+	// ui.CHATBOX_MIN_HEIGHT = 30;
+	// ui.CHATBOX_DEFAULT_WIDTH = 350;
+	// ui.CHATBOX_DEFAULT_HEIGHT = 415;
+
 
 	ui.init.push(function() {
 
@@ -18,21 +24,30 @@
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
 		ui.$chatArea = $(".socketchatbox-chatArea");
+		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
+		ui.$onlineUsers = $('.socketchatbox-onlineusers');
+		ui.displayMode = 'min'; // default css sytle
+
+
+		var config = chatbox.config;
+		if (config && config.width) {
+			ui.width = config.width; // note this is not size of whole window
+			ui.height = config.height; // it's size of the chat area
+			ui.$chatBody.css({ "width":ui.width+"px", "height":ui.height+"px"});
+			console.log('loaded config width: ' + ui.width + ' height: ' + ui.height);
+		}
 
 		ui.$topbar.click(function() {
 
 
 			if(ui.$chatBody.is(":visible")){
-
 				minimize();
 
 			}else {
 			
-				show();
+				maximize();
 				ui.scrollToBottom();
 			}
-
-			// chrome.storage.local.set({ chatbox_show: chatbox.showing });
 
 		});
 
@@ -78,7 +93,11 @@
 			if(boxH<70)     boxH = 70;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
-
+			ui.height = boxH;
+			ui.width = boxW;
+			console.log('chatBody width: ' + boxW + ' height: ' + boxH);
+			chatbox.config.width = ui.width;
+			chatbox.config.height = ui.height;
 			prev_x = e.screenX;
 			prev_y = e.screenY;
 
@@ -88,71 +107,67 @@
 			if (prev_x !== -1) {
 				prev_x = -1;
 				prev_y = -1;
-				// update iframe size after mouse up
-				utils.updateIframeSize('fit');
+
+
+				refreshSize();
+				chrome.storage.local.set({ chatbox_config: config });
+
 			}
 		});
 	});
+
+	function refreshSize() {
+		// Update iframe size after mouse up
+		// Could not call utils.updateIframeSize('fit') directly
+
+		// Minimize then maximize to deal with a 
+		// strange bug that scroll doesn't work
+		// after resizinng
+		ui.minimize();
+		setTimeout(function() {
+			ui.maximize();
+		}, 1);
+	}
+	ui.refreshSize = refreshSize;
 
 	function close() {
 		utils.updateIframeSize('close'); 
 	}
 	ui.close = close;
 
-	function show() {
+	function maximize() {
+		console.log('maximize chatbox');
 		ui.$showHideChatbox.text("↓");
 		ui.$username.text(chatbox.username);
 		ui.$chatBody.show();
+		ui.$username.show();
 		//show resize cursor
-		ui.$chatboxResize.css('z-index', 99999);
+		ui.$chatboxResize.css('z-index', 999999999);
 		ui.$messages[0].scrollTop = ui.$messages[0].scrollHeight;
-		
-		utils.updateIframeSize('fit');
-		chatbox.showing = true;
+
+        utils.updateIframeSize('fit');
+		ui.displayMode = 'max';
 	}
-	ui.show = show;
+	ui.maximize = maximize;
 
 	function minimize() {
+
+		console.log('minimize chatbox');
+
 		ui.$showHideChatbox.text("↑");
 		// ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
-		ui.$username.html(chatbox.NAME);
+		ui.$username.hide();
 		ui.$chatBody.hide();
-		//hide resize cursor
-		ui.$chatboxResize.css('z-index', -999);
-		utils.updateIframeSize('minimize');
-		chatbox.showing = false;
+
+		ui.$chatboxResize.css('z-index', -1); //hide resize cursor
+        utils.updateIframeSize('minimize');
+		ui.displayMode = 'min';
+
 	}
 
 	ui.minimize = minimize;
 
 	ui.updateOnlineUserCount = function (num) {ui.$onlineUserNum.text(num);};
-
-	// Receive message sent from extension
-	chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
-
-		if (request.msg == "open_chatbox"){
-			show();
-			utils.updateIframeSize('fit');
-			sendResponse({msg: "shown"});
-
-		} 
-
-		if (request.msg == "close_chatbox"){ 
-			utils.updateIframeSize('close'); 
-			sendResponse({msg: "closed"}); // updateIframeSize is async so this response is wrong 
-		}
-
-		if (request.msg == "is_chatbox_open") {
-			sendResponse(
-				{
-					is_chatbox_open: chatbox.showing,
-            		userCount: ui.$onlineUserNum.text()
-
-				}
-			);
-		}
-
-	});
 
 
 
