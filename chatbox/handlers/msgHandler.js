@@ -79,7 +79,7 @@
                     // TODO: update the entire config object when user
                     // updated extension option
                     if (data.chatbox_config && data.chatbox_config.open_chatbox_when == "never"){
-                        console.log('Received new msg, but not allowed to open chatbox.') 
+                        console.log('Received new msg while chatbox closed, but not allowed to open chatbox.') 
                     }else {
                         ui.maximize();
 

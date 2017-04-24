@@ -125,8 +125,10 @@
         // Whenever the server emits 'user joined', log it in the chat body
         socket.on('user joined', function (data) {
             if (chatbox.username != data.username){
-                ui.addLog(data.username + ' joined');
+                // ui.addLog(data.username + ' joined');
+
             }
+            console.log(data.username + ' joined');
             ui.updateOnlineUserCount(data.numUsers);
             userListHandler.userJoin(data.username);
             chatbox.onlineUserInRoom++;
@@ -137,13 +139,15 @@
 
         // Whenever the server emits 'user left', log it in the chat body
         socket.on('user left', function (data) {
-            ui.addLog(data.username + ' left');
+            // ui.addLog(data.username + ' left');
+            console.log(data.username + ' left');
+
             ui.updateOnlineUserCount(data.numUsers);
             userListHandler.userLeft(data.username);
             chatbox.onlineUserInRoom--;
 
-            if(data.numUsers === 1)
-                ui.addParticipantsMessage(data.numUsers);
+            // if(data.numUsers === 1)
+            //     ui.addParticipantsMessage(data.numUsers);
             //removeChatTyping(data);
         });
 

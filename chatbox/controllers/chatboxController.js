@@ -87,7 +87,7 @@
 			if (dir.indexOf('w') > -1)  boxW -= dx;
 			if (dir.indexOf('e') > -1)  boxW += dx;
 
-			if(boxW<250)    boxW = 250;
+			if(boxW<180)    boxW = 180;
 			if(boxH<70)     boxH = 70;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
