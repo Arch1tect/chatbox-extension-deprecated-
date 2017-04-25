@@ -96,6 +96,10 @@
             .data('username', data.username)
             .addClass(typingClass)
             .append($usernameDiv, $messageBodyDiv);
+
+        if (options.history)
+            $messageDiv.addClass('history');
+        
         $messageWrapper.append($messageDiv);
         if (data.username === chatbox.username) {
             $messageDiv.addClass('socketchatbox-message-me');

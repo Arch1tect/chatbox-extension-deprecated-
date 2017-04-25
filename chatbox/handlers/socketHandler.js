@@ -31,11 +31,13 @@
                 welcomeMsg = "Hey, " + chatbox.username;
             
             console.log(welcomeMsg);
+            ui.addLog("Room URL: " + chatbox.roomID);
 
             ui.addLog(welcomeMsg);
-            ui.addLog("Room URL: " + chatbox.roomID);
             ui.addParticipantsMessage(userCount);
             ui.welcomeMsgShown = true;
+            // ui.addLog('.');
+
         }
         console.log('Connected with server');
 
