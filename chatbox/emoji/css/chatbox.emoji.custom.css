@@ -1,0 +1,38 @@
+#socketchatbox-emoji-btn {
+	background: url(emoji.png) center center no-repeat;
+	float: right;
+	overflow: hidden;
+	height: 35px;
+	width: 50px;
+	float: right;
+	border: none;
+	background-color: #EDEDED;
+}
+
+.shortcode {
+	display: none;
+}
+
+
+.emojiPicker .sections {
+    overflow: auto;
+}
+
+
+.emojiPicker section em {
+    float: left;
+    display: inline-block;
+    padding: 5%;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.emojiPicker span.emoji {
+    width: 1.3em;
+    height: 1.3em;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-indent: -9999px;
+    transform: scale(2);
+    vertical-align: middle;

@@ -106,10 +106,23 @@
 
 
 				refreshSize();
-				chrome.storage.local.set({ chatbox_config: config });
+				chrome.storage.local.set({ chatbox_config: chatbox.config });
 
 			}
 		});
+
+		//emoji
+		$('#socketchatbox-emoji-btn').click(function(e) {
+			e.preventDefault();
+			$('.socketchatbox-inputMessage').emojiPicker('toggle');
+		});
+
+		ui.$inputMessage.emojiPicker({
+			width: '300px',
+			height: '200px',
+			button: false
+		});
+
 	});
 
 	function refreshSize() {

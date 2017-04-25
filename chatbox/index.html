@@ -5,6 +5,11 @@
 		<title>Chatbox</title>
 		<link rel="stylesheet" href="style/chatbox.css">
 		<link rel="stylesheet" href="style/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.css">		
+		<link rel="stylesheet" type="text/css" href="emoji/css/chatbox.emoji.custom.css">
+
+		<!-- Emoji Data -->
+		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.a.css">
 
 	</head>
 
@@ -38,8 +43,9 @@
 					<input class="socketchatbox-inputMessage" placeholder = "Type here..."/>
 					<label class="btn lightgray" id='socketchatbox-sendFileBtn' for = "socketchatbox-sendMedia">
 						<input id="socketchatbox-sendMedia" type="file" style="display:none;">
-						
 					</label>
+					<button id = "socketchatbox-emoji-btn"></button>
+
 				</div>
 			</div>
 		</div>
@@ -97,6 +103,9 @@
 	<script src="handlers/socketHandler.js"></script>
 	<script src="handlers/typingHandler.js"></script>
 
+
+	<script type="text/javascript" src="emoji/js/jquery.emojipicker.js"></script>
+	<script type="text/javascript" src="emoji/js/jquery.emojis.js"></script>
 
 
 </html>

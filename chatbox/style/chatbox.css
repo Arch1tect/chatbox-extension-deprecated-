@@ -56,7 +56,7 @@ input.socketchatbox-inputMessage:disabled {
   height: 35px;  
 }
 .socketchatbox-inputMessage {
-  width: calc(100% - 50px);
+  width: calc(100% - 100px);
   padding: 0px;
   padding-left: 10px;
   height: 35px;
@@ -318,3 +318,12 @@ input.socketchatbox-inputMessage:disabled {
 .lightgray {
   background: lightgray;
 }
+
+
+
+
+
+
+
+
+
