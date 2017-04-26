@@ -23,6 +23,7 @@
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
+		ui.$at = $('#socketchatbox-change-room');
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
@@ -88,7 +89,7 @@
 			if (dir.indexOf('e') > -1)  boxW += dx;
 
 			if(boxW<200)    boxW = 200;
-			if(boxH<170)     boxH = 170;
+			if(boxH<120)     boxH = 120;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
 			console.log('chatBody width: ' + boxW + ' height: ' + boxH);
@@ -103,8 +104,6 @@
 			if (prev_x !== -1) {
 				prev_x = -1;
 				prev_y = -1;
-
-
 				refreshSize();
 				chrome.storage.local.set({ chatbox_config: chatbox.config });
 
@@ -119,7 +118,6 @@
 		});
 		$('#socketchatbox-emoji-btn').click(function(e) {
 			e.preventDefault();
-			// $('.emojiPicker').toggle();
 			$('.socketchatbox-inputMessage').emojiPicker('toggle');
 		});
 		// Open then close emoji picker programmatically because first time open is too slow
@@ -153,6 +151,7 @@
 		ui.$username.text(chatbox.username);
 		ui.$chatBody.show();
 		ui.$username.show();
+		ui.$at.show();
 		//show resize cursor
 		ui.$chatboxResize.css('z-index', 999999999);
 		ui.$messages[0].scrollTop = ui.$messages[0].scrollHeight;
@@ -170,7 +169,7 @@
 		// ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
 		ui.$username.hide();
 		ui.$chatBody.hide();
-
+		ui.$at.hide();
 		ui.$chatboxResize.css('z-index', -1); //hide resize cursor
         utils.updateIframeSize('minimize');
 		ui.displayMode = 'min';
