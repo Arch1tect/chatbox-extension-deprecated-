@@ -69,7 +69,7 @@
 			dir = $(this).attr('id');
 			e.preventDefault();
 			e.stopPropagation();
-
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			utils.updateIframeSize('full size');
 
 		});
@@ -87,8 +87,8 @@
 			if (dir.indexOf('w') > -1)  boxW -= dx;
 			if (dir.indexOf('e') > -1)  boxW += dx;
 
-			if(boxW<180)    boxW = 180;
-			if(boxH<70)     boxH = 70;
+			if(boxW<200)    boxW = 200;
+			if(boxH<170)     boxH = 170;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
 			console.log('chatBody width: ' + boxW + ' height: ' + boxH);
@@ -111,17 +111,20 @@
 			}
 		});
 
-		//emoji
-		$('#socketchatbox-emoji-btn').click(function(e) {
-			e.preventDefault();
-			$('.socketchatbox-inputMessage').emojiPicker('toggle');
-		});
-
+		// emoji
 		ui.$inputMessage.emojiPicker({
-			width: '300px',
-			height: '200px',
+			width: '350px',
+			height: '300px',
 			button: false
 		});
+		$('#socketchatbox-emoji-btn').click(function(e) {
+			e.preventDefault();
+			// $('.emojiPicker').toggle();
+			$('.socketchatbox-inputMessage').emojiPicker('toggle');
+		});
+		// Open then close emoji picker programmatically because first time open is too slow
+		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
+		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
 
 	});
 

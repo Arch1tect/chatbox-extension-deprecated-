@@ -180,7 +180,7 @@
       $(document.body).click( $.proxy(this.clickOutside, this) );
 
       // Resize events forces a reposition, which may or may not actually be required
-      $(window).resize( $.proxy(this.updatePosition, this) );
+      // $(window).resize( $.proxy(this.updatePosition, this) );
     },
 
     updatePosition: function() {
@@ -196,54 +196,62 @@
 
       // Step 1
       // Luckily jquery already does this...
-      var positionedParent = this.$picker.offsetParent();
-      var parentOffset = positionedParent.offset(); // now have a top/left object
+      // var positionedParent = this.$picker.offsetParent();
+      // var parentOffset = positionedParent.offset(); // now have a top/left object
 
-      // Step 2
-      var elOffset = this.$el.offset();
-      if(this.settings.position == 'right'){
-        elOffset.left += this.$el.outerWidth() - this.settings.width;
-      }
-      elOffset.top += this.$el.outerHeight();
+      // // Step 2
+      // var elOffset = this.$el.offset();
+      // if(this.settings.position == 'right'){
+      //   elOffset.left += this.$el.outerWidth() - this.settings.width;
+      // }
+      // elOffset.top += this.$el.outerHeight();
 
-      // Step 3
-      var diffOffset = {
-        top: (elOffset.top - parentOffset.top),
-        left: (elOffset.left - parentOffset.top)
-      };
+      // // Step 3
+      // var diffOffset = {
+      //   top: (elOffset.top - parentOffset.top),
+      //   left: (elOffset.left - parentOffset.top)
+      // };
 
       this.$picker.css({
         // top: diffOffset.top,
-        right: '50px',
-        bottom: '36px'
+        right: '0px',
+        bottom: '35px'
       });
 
       return this;
     },
 
-    hide: function() {
-      this.$picker.hide(this.settings.fadeTime, 'linear', function() {
+    hide: function(immediateFade) {
+
+      // this.$picker.hide();
+      // this.active = false;
+      var fadeTime = 300;
+      if (immediateFade)
+        fadeTime = 0;
+      this.$picker.hide(0, 'swing', function() {
         this.active = false;
-        if (this.settings.onHide) {
-          this.settings.onHide( this.$picker, this.settings, this.active );
-        }
+        // if (this.settings.onHide) {
+        //   this.settings.onHide( this.$picker, this.settings, this.active );
+        // }
       }.bind(this));
     },
 
     show: function() {
       this.$el.focus();
       this.updatePosition();
-      this.$picker.show(this.settings.fadeTime, 'linear', function() {
+      this.$picker.show(300, 'swing', function() {
         this.active = true;
-        if (this.settings.onShow) {
-          this.settings.onShow( this.$picker, this.settings, this.active );
-        }
+        // if (this.settings.onShow) {
+        //   this.settings.onShow( this.$picker, this.settings, this.active );
+        // }
       }.bind(this));
     },
 
     /************
      *  EVENTS  *
      ************/
+
+
 
     iconClicked : function() {
       if ( this.$picker.is(':hidden') ) {
@@ -261,8 +269,11 @@
       var emojiUnicode = toUnicode(findEmoji(emojiShortcode).unicode[defaults.emojiSet]);
 
       insertAtCaret(this.element, emojiUnicode);
-      addToLocalStorage(emojiShortcode);
-      updateRecentlyUsed(emojiShortcode);
+      var emojiAlreadyInRecent = addToLocalStorage(emojiShortcode);
+      // Only update order in UI if adding an emoji that's not previously in recent used
+      // Because if we update order immediately, user can't continuouly click on same emoji
+      if (!emojiAlreadyInRecent)
+        updateRecentlyUsed(emojiShortcode);
 
       // For anyone who is relying on the keyup event
       $(this.element).trigger("keyup");
@@ -307,7 +318,9 @@
 
       var scrollDistance = heightOfSectionsHidden
                            + heightOfSectionToPageTop
-                           - heightOfSectionsToPageTop;
+                           - heightOfSectionsToPageTop + 7; // Add 7 to an offset bug
+
+      // console.log('emoji picker scroll ' + scrollDistance);
 
       $('.sections').off('scroll'); // Disable scroll event until animation finishes
 
@@ -393,7 +406,7 @@
         $.each($.fn.emojiPicker.emojis, function(i, emoji) {
           var shortcode = emoji.shortcode;
           if ( shortcode.indexOf(searchTerm) > -1 ) {
-            results.push('<em><div class="emoji emoji-' + shortcode + '"></div></em>');
+            results.push('<em><span class="emoji emoji-' + shortcode + '"></span></em>');
           }
         });
         searchEmojiWrap.append(results.join(''));
@@ -413,6 +426,9 @@
         switch(options) {
           case 'toggle':
             plugin.iconClicked();
+            break;
+          case 'hide':
+            plugin.hide(true);
             break;
           case 'destroy':
             plugin.destroyPicker();
@@ -567,6 +583,7 @@
   }
 
   function addToLocalStorage(emoji) {
+    var emojiAlreadyInRecent = false;
     var recentlyUsedEmojis = [];
     if (localStorage.emojis) {
       recentlyUsedEmojis = JSON.parse(localStorage.emojis);
@@ -575,6 +592,7 @@
     // If already in recently used, move to front
     var index = recentlyUsedEmojis.indexOf(emoji);
     if (index > -1) {
+      emojiAlreadyInRecent = true;
       recentlyUsedEmojis.splice(index, 1);
     }
     recentlyUsedEmojis.push(emoji);
@@ -584,6 +602,7 @@
     }
 
     localStorage.emojis = JSON.stringify(recentlyUsedEmojis);
+    return emojiAlreadyInRecent;
   }
 
   function updateRecentlyUsed(emoji) {

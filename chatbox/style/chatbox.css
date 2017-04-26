@@ -63,7 +63,7 @@ input.socketchatbox-inputMessage:disabled {
   border: 0px;
   margin: 0px;
   border: 1px solid #d8d8d8;
-  font-size: medium;
+  /*font-size: medium;*/
   line-height: 2;
 }
 
@@ -81,7 +81,22 @@ input.socketchatbox-inputMessage:disabled {
   border-radius: 0px;
   /* padding: 0; */
 }
-
+#socketchatbox-emoji-btn {
+  background: url(emoji.png) center center no-repeat;
+  float: right;
+  overflow: hidden;
+  height: 35px;
+  width: 50px;
+  float: right;
+  border: none;
+  outline: none;
+  background-color: #EDEDED;
+}
+#socketchatbox-change-room {
+  float:right;
+  color: white;
+  margin-right: 15px;
+}
 #socketchatbox-showHideChatbox {
   float:right;
   color: white;
@@ -93,6 +108,7 @@ input.socketchatbox-inputMessage:disabled {
   color: white;
   margin-right: 25px;
 }
+
 #socketchatbox-username {
   float:left;
   padding-left: 10px;
