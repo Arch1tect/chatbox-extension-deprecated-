@@ -53,25 +53,29 @@ input.socketchatbox-inputMessage:disabled {
 
 
 .socketchatbox-inputMessage-div {
-  height: 35px;  
+  height: 35px; 
+  background-color: #eceff1;
+  border-top: 1px solid lightgray;
+ 
 }
 .socketchatbox-inputMessage {
   width: calc(100% - 100px);
   padding: 0px;
   padding-left: 10px;
-  height: 35px;
+  height: 34px;
   border: 0px;
   margin: 0px;
-  border: 1px solid #d8d8d8;
+  /*border: 1px solid #d8d8d8;*/
   /*font-size: medium;*/
   line-height: 2;
+  background: transparent;
 }
 
 #socketchatbox-sendFileBtn {
-  height: 35px;
+  height: 34px;
   width: 50px;
   float: right;
-  background: #EDEDED;
+  background: transparent;
   background-image: url(send-file.png);
   background-repeat: no-repeat;
   background-position-x: 50%;
@@ -85,12 +89,13 @@ input.socketchatbox-inputMessage:disabled {
   background: url(emoji.png) center center no-repeat;
   float: right;
   overflow: hidden;
-  height: 35px;
+  height: 34px;
   width: 50px;
   float: right;
   border: none;
   outline: none;
-  background-color: #EDEDED;
+  background-color: transparent;
+
 }
 #socketchatbox-change-room {
   float:right;
@@ -209,7 +214,7 @@ input.socketchatbox-inputMessage:disabled {
   width: 100%;
   height: 100%;
   overflow-y: auto; /*only show scroll bar when needs to*/
-  background: #EDEDED;
+  background: #eceff1;
   border: none; 
   padding-right: 10px;
   padding-left: 10px;
@@ -278,7 +283,7 @@ input.socketchatbox-inputMessage:disabled {
   position: relative;
   vertical-align: top;
   line-height: 1.25em;
-  font-size: 15px;
+  font-size: 12px;
   /* word-break: break-all; */
   /* overflow-x: scroll; */
 }
