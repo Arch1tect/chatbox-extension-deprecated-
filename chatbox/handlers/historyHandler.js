@@ -34,8 +34,10 @@
                         msgHandler.processChatMessage(data, options);
                     }
 
-                    ui.addLog('____ End of Chat History ____');
-                    // ui.addLog('.');
+                    ui.addLog('___ End of Chat History ___');
+                    ui.addLog('.');
+                    ui.addLog('.');
+                    ui.addLog('.');
                 }
 
             }
