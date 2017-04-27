@@ -348,9 +348,15 @@ input.socketchatbox-inputMessage:disabled {
   font-weight: bold;
 }
 
+
 #change-room-modal-header {
   padding-bottom: 5px;
   padding-top: 5px;
+}
+
+#go-to-room-btn {
+  margin-top:10px;
+  /*float: right;*/
 }
 
 

@@ -29,6 +29,7 @@
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
 		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
 		ui.$msgModal = $('#socketchatbox-msgpopup-modal');
+		ui.$changeRoomBtn = $('#go-to-room-btn');
 		ui.displayMode = 'min'; // default css sytle
 
 
@@ -70,7 +71,23 @@
 
 		});
 
+		ui.$changeRoomBtn.click(function() {
+
+			var newRoomID = ui.$msgModalContent.val();
+			if (newRoomID !== chatbox.roomID) {
+
+				chatbox.roomID = newRoomID;
+				chatbox.socket.disconnect();
+				ui.addLog('Changing chat room...');
+				ui.welcomeMsgShown = false;
+				chatbox.connect();
+
+            }
+
+		});
+
 		ui.$msgModalContent.focus(function() {
+			// Auto select content in textarea
 		    var $this = $(this);
 		    $this.select();
 

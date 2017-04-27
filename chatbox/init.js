@@ -18,9 +18,9 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    chatbox.domain = "https://quotime.me";
+    // chatbox.domain = "https://quotime.me";
     // chatbox.domain = "https://localhost";
-    // chatbox.domain = "http://localhost:8088";
+    chatbox.domain = "http://localhost:8088";
 
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
@@ -30,7 +30,7 @@
     chatbox.NAME = 'Chatbox';
 
     var d = new Date();
-    var username = 'visitor#'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
+    var username = 'user-'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
     chatbox.username = username;
 
 
@@ -42,7 +42,6 @@
         for (var i = 0; i < ui.init.length; i++) {
             ui.init[i]();
         }
-
 
         var config = chatbox.config;
         console.log('config.open_chatbox_when: ' + config.open_chatbox_when);
@@ -63,12 +62,16 @@
 
         historyHandler.load();
         // now make your connection with server!
-        chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
-        chatbox.socket.joined = false;
-        socketEvent.register();
+        chatbox.connect();
 
 
     };
+
+    chatbox.connect = function() {
+        chatbox.socket = io(chatbox.domain, {path:'/socket.io'});
+        chatbox.socket.joined = false;
+        socketEvent.register();
+    }
 
 
 })();
