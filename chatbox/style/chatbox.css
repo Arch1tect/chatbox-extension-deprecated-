@@ -99,8 +99,10 @@ input.socketchatbox-inputMessage:disabled {
 }
 #socketchatbox-change-room {
   float:right;
-  color: white;
-  margin-right: 15px;
+    color: white;
+    padding-left: 5px;
+    width: 25px;
+    margin-right: 5px;
 }
 #socketchatbox-showHideChatbox {
   float:right;
@@ -340,11 +342,16 @@ input.socketchatbox-inputMessage:disabled {
   background: lightgray;
 }
 
+#socketchatbox-msgpopup-content {
+  min-width: 100%;
+  max-width: 100%;
+  font-weight: bold;
+}
 
-
-
-
-
+#change-room-modal-header {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 
 
 

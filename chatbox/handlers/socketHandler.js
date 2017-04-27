@@ -26,12 +26,12 @@
             // Display the welcome message
             var welcomeMsg = '';
             if (isFirstSocket)
-                welcomeMsg = "Welcome, " + chatbox.username;
+                welcomeMsg = "Welcome, " + chatbox.username + '!';
             else
-                welcomeMsg = "Hey, " + chatbox.username;
+                welcomeMsg = "Hello again, " + chatbox.username + '!';
             
             console.log(welcomeMsg);
-            ui.addLog("Room URL: " + chatbox.roomID);
+            // ui.addLog("Room URL: " + chatbox.roomID);
 
             ui.addLog(welcomeMsg);
             ui.addParticipantsMessage(userCount);

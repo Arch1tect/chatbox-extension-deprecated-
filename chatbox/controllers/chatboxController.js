@@ -27,6 +27,8 @@
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
+		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
+		ui.$msgModal = $('#socketchatbox-msgpopup-modal');
 		ui.displayMode = 'min'; // default css sytle
 
 
@@ -56,6 +58,28 @@
 			e.preventDefault();
 			e.stopPropagation();
 
+		});
+
+		ui.$at.click(function(e) {
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			ui.$msgModalContent.val(chatbox.roomID);
+			ui.$msgModal.modal('show');
+
+		});
+
+		ui.$msgModalContent.focus(function() {
+		    var $this = $(this);
+		    $this.select();
+
+		    // Work around Chrome's little problem
+		    $this.mouseup(function() {
+		        // Prevent further mouseup intervention
+		        $this.unbind("mouseup");
+		        return false;
+		    });
 		});
 
 
