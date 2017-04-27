@@ -16,6 +16,7 @@
 
         var userCount = 0;
         // TODO: wrap this in a function in userListHandler
+        userListHandler.clear();
         for (var onlineUsername in data.onlineUsers){
             userCount++;
             userListHandler.userJoin(onlineUsername);

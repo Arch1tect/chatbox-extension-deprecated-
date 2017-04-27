@@ -79,6 +79,7 @@
 				chatbox.roomID = newRoomID;
 				chatbox.socket.disconnect();
 				ui.addLog('Changing chat room...');
+				chatbox.historyHandler.load(); // must call to set correct key to save new msg
 				ui.welcomeMsgShown = false;
 				chatbox.connect();
 

@@ -5,6 +5,9 @@
 
     var onlineUsers = {}; // simply saving username, consider saving user ID in future
 
+    userListHandler.clear = function () {
+    	onlineUsers = {};
+    }
 
 	userListHandler.userJoin = function (username) {
 		onlineUsers[username] = 1;
