@@ -32,6 +32,7 @@
 		ui.$changeRoomBtn = $('#go-to-room-btn');
 		ui.$toggleRoomLock = $('#chatroom-lock-unlock');
 		ui.displayMode = 'min'; // default css sytle
+    	$('[data-toggle="tooltip"]').tooltip();   
 
 
 		var config = chatbox.config;
@@ -43,7 +44,8 @@
             ui.$toggleRoomLock.removeClass('chatroom-unlocked');
             ui.$toggleRoomLock.addClass('chatroom-locked');
         }
-        ui.$at.prop('title', 'current room: ' + chatbox.roomID);
+        
+        ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
 
 		ui.$topbar.click(function() {
 
@@ -90,8 +92,7 @@
 				ui.welcomeMsgShown = false;
 				chatbox.connect();
             	chrome.storage.local.set({ chatbox_config: chatbox.config });
-        		ui.$at.prop('title', 'current room: ' + chatbox.roomID);
-
+        		ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
             }
 
 		});
@@ -189,6 +190,7 @@
 		});
 		$('#socketchatbox-emoji-btn').click(function(e) {
 			e.preventDefault();
+			$('[data-toggle="tooltip"]').tooltip('hide');
 			$('.socketchatbox-inputMessage').emojiPicker('toggle');
 		});
 		// Open then close emoji picker programmatically because first time open is too slow

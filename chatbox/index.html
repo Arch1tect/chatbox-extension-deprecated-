@@ -23,17 +23,17 @@
 			
 			<div id="socketchatbox-ne" class="socketchatbox-resize"></div>
 			<div id='socketchatbox-top'>
-				<div id='socketchatbox-username'></div>   
-				<span title='users in current room' id='socketchatbox-online-usercount' class='badge'> 
+				<div data-toggle="tooltip" data-placement="bottom" title='Click to edit name' id='socketchatbox-username'></div>   
+				<span data-toggle="tooltip" data-placement="bottom" title='User in this room' id='socketchatbox-online-usercount' class='badge'> 
 				</span>
 				<span id='topbar-options' class='float-right'>
 
 
-					<span id='socketchatbox-change-room'>@</span>
+					<span data-toggle="tooltip" data-placement="bottom" id='socketchatbox-change-room'>@</span>
 
 					<span id='socketchatbox-showHideChatbox'>↓</span>
 
-					<span title='close chat box' id='socketchatbox-closeChatbox'>X</span>
+					<span title='Close' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-closeChatbox'>X</span>
 				</span>
 
 			</div>
@@ -47,10 +47,10 @@
 
 				<div class = "socketchatbox-inputMessage-div">    
 					<input class="socketchatbox-inputMessage" placeholder = "Type here..."/>
-					<label class="btn lightgray" id='socketchatbox-sendFileBtn' for = "socketchatbox-sendMedia">
+					<label data-toggle="tooltip" title='Send image or file' data-placement="left" class="btn" id='socketchatbox-sendFileBtn' for = "socketchatbox-sendMedia">
 						<input id="socketchatbox-sendMedia" type="file" style="display:none;">
 					</label>
-					<button id = "socketchatbox-emoji-btn"></button>
+					<button data-toggle="tooltip" title='Send emoji' id = "socketchatbox-emoji-btn"></button>
 
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 				<div class="modal-content">
 					<div id = "change-room-modal-header" class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<span id='chatroom-lock-unlock' class='chatroom-unlocked' title='stay in current room or not'></span>
+						<span data-toggle="tooltip" id='chatroom-lock-unlock' class='chatroom-unlocked' title='Toggle to stay in current room'></span>
 						<h4 class="modal-title" id="myModalLabel">Room</h4>
 
 					</div>
