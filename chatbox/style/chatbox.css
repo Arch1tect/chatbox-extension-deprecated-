@@ -386,19 +386,37 @@ input.socketchatbox-inputMessage:disabled {
 
 #change-room-modal-header .close {
   color: white;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 #change-room-modal-header .close:hover {
   opacity: 1;
 }
 
-
-
 #go-to-room-btn {
   margin-top:10px;
-  /*float: right;*/
 }
 
+#chatroom-lock-unlock {
+    background-repeat: no-repeat;
+    filter: invert(100%);
+    cursor: pointer;
+    margin-top: -10px;
+    margin-left: 50px;
+    padding: 30px;
+    transform: scale(0.5);
+    position: fixed;
+    opacity: 0.7;
+}
+#chatroom-lock-unlock:hover {
+    opacity: 1;
+}
+
+.chatroom-unlocked {
+  background-image: url('unlocked.png');
+}
+.chatroom-locked {
+  background-image: url('locked.png');
+}
 
 

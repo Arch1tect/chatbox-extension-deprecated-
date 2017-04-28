@@ -38,12 +38,35 @@
 
         console.log('Chatbox Init');
 
-        // load jquery objects and register events
+
+        var config = chatbox.config;
+
+
+        if (config.lockRoom) {
+
+            chatbox.roomID = config.roomID;
+
+        } else {
+
+            chatbox.roomID = location.search.substring(1);
+            config.roomID = chatbox.roomID;
+            chrome.storage.local.set({ chatbox_config: config });
+
+        }
+
+        console.log('room ' + chatbox.roomID);
+
+
+
+        // load jquery objects and register ui events
         for (var i = 0; i < ui.init.length; i++) {
             ui.init[i]();
         }
 
-        var config = chatbox.config;
+        historyHandler.load();
+        // now make your connection with server!
+        chatbox.connect();
+
         console.log('config.open_chatbox_when: ' + config.open_chatbox_when);
 
         // Show/hide chatbox base on chrome storage value
@@ -53,18 +76,6 @@
         else if (config.open_chatbox_when == "minimized") {
             ui.minimize();
         }
-
-
-        chatbox.roomID = location.search.substring(1);
-        console.log('room ' + chatbox.roomID);
-
-
-
-        historyHandler.load();
-        // now make your connection with server!
-        chatbox.connect();
-
-
     };
 
     chatbox.connect = function() {
@@ -105,6 +116,8 @@ $( document ).ready(function() {
 
             console.log("Creating new user id " + chatbox.uuid);
         }
+
+
 
         chatbox.init();
 

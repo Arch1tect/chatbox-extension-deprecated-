@@ -30,6 +30,7 @@
 		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
 		ui.$msgModal = $('#socketchatbox-msgpopup-modal');
 		ui.$changeRoomBtn = $('#go-to-room-btn');
+		ui.$toggleRoomLock = $('#chatroom-lock-unlock');
 		ui.displayMode = 'min'; // default css sytle
 
 
@@ -38,6 +39,11 @@
 			ui.$chatBody.css({ "width":config.width+"px", "height":config.height+"px"});
 			console.log('loaded config width: ' + config.width + ' height: ' + config.height);
 		}
+        if(config.lockRoom) {
+            ui.$toggleRoomLock.removeClass('chatroom-unlocked');
+            ui.$toggleRoomLock.addClass('chatroom-locked');
+        }
+        ui.$at.prop('title', 'current room: ' + chatbox.roomID);
 
 		ui.$topbar.click(function() {
 
@@ -77,13 +83,36 @@
 			if (newRoomID !== chatbox.roomID) {
 
 				chatbox.roomID = newRoomID;
+				chatbox.config.roomID = chatbox.roomID;
 				chatbox.socket.disconnect();
 				ui.addLog('Changing chat room...');
 				chatbox.historyHandler.load(); // must call to set correct key to save new msg
 				ui.welcomeMsgShown = false;
 				chatbox.connect();
+            	chrome.storage.local.set({ chatbox_config: chatbox.config });
+        		ui.$at.prop('title', 'current room: ' + chatbox.roomID);
 
             }
+
+		});
+
+		ui.$toggleRoomLock.click(function(){
+			
+			if(chatbox.config.lockRoom) {
+
+				ui.$toggleRoomLock.addClass('chatroom-unlocked');
+				ui.$toggleRoomLock.removeClass('chatroom-locked');
+
+			} else {
+
+				ui.$toggleRoomLock.addClass('chatroom-locked');
+				ui.$toggleRoomLock.removeClass('chatroom-unlocked');
+
+			}
+			chatbox.config.lockRoom = !chatbox.config.lockRoom;
+
+            chrome.storage.local.set({ chatbox_config: chatbox.config });
+
 
 		});
 
