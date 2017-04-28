@@ -83,11 +83,11 @@
         var message = '';
         if (numUsers === 1) {
 
-            message += "You are the only user here";
+            message += "You are the only user here.";
 
         }else {
 
-            message += "There are " + numUsers + " users here";
+            message += "There are " + numUsers + " users here.";
         }
 
         addLog(message);
