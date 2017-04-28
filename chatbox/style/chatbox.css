@@ -24,7 +24,7 @@ input.socketchatbox-inputMessage:disabled {
 
   top:0px;
   height:20px;
-  width:20px;
+  width:15px;
 /*  background-color:#000;
 */  position:absolute;
   z-index: 99999;
@@ -102,23 +102,44 @@ input.socketchatbox-inputMessage:disabled {
   transform: scale(0.8);
 
 }
+#socketchatbox-emoji-btn:hover {
+  background-color:lightgray;
+}
+#socketchatbox-sendFileBtn:hover {
+  background-color:lightgray;
+}
+
+.float-right {
+  float: right;
+}
+#topbar-options {
+  margin-right: 15px;
+
+}
+#topbar-options span {
+    color: lightgray;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#topbar-options span:hover {
+  background: #3c3c3c;
+  color:white;
+}
+
 #socketchatbox-change-room {
-  float:right;
-    color: white;
-    padding-left: 5px;
-    width: 25px;
-    margin-right: 5px;
+/*    color: white;
+    padding: 5px;*/
 }
 #socketchatbox-showHideChatbox {
-  float:right;
-  color: white;
-  margin-right: 15px;
-  line-height: 2.2;
+/*  color: white;
+    padding: 5px;*/
+    display: none;
 }
 #socketchatbox-closeChatbox {
-  float:right;
-  color: white;
-  margin-right: 25px;
+/*  color: white;
+  padding: 5px;*/
 }
 
 #socketchatbox-username {
