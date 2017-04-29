@@ -20,6 +20,13 @@ ul {
 input.socketchatbox-inputMessage:disabled {
     background: lightgray;
 }
+
+.tooltip-inner  {
+  /*padding: 10px !important;*/
+  word-wrap: break-word;
+  /*padding: 3px 8px !important;*/
+  /*text-align: center;*/
+}
 .socketchatbox-resize {
 
   top:0px;
