@@ -425,5 +425,10 @@ input.socketchatbox-inputMessage:disabled {
 .chatroom-locked {
   background-image: url('locked.png');
 }
-
+.socketchatbox-messageBody.emoji-only {
+  font-size:xx-large;
+  background:none;
+  box-shadow:none;
+  padding: 0px;
+}
 

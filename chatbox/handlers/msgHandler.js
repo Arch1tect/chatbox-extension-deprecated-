@@ -60,11 +60,18 @@
         }else{
 
             if (utils.checkImageUrl(data.message)) { // may cause secure issue?
-                //receiving image url
+                // receiving image url
                 $messageBodyDiv.html("<a target='_blank' href='" + data.message + "'><img class='chatbox-image' src='" + data.message + "'></a>");
             }else {
-                //receiving plain text
+                // receiving plain text
+
+                // If it's emoji only message, style differently
+                if (utils.stringOnlyContainEmojis(data.message)) {
+                    $messageBodyDiv.addClass("emoji-only");
+                }
+
                 $messageBodyDiv.text(data.message);
+                
             }
         }
 
