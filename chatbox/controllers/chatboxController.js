@@ -63,13 +63,17 @@
 
 
 		ui.$cross.click(function(e) {
+			$('[data-toggle="tooltip"]').tooltip('hide');
+
 			close();
 			e.preventDefault();
+
 			e.stopPropagation();
 
 		});
 
 		ui.$at.click(function(e) {
+			$('[data-toggle="tooltip"]').tooltip('hide');
 
 			e.preventDefault();
 			e.stopPropagation();

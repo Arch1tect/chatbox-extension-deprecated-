@@ -10,6 +10,7 @@
         ui.$username.click(function(e) {
 
 
+            $('[data-toggle="tooltip"]').tooltip('hide');
 
             if(!chatbox.showing) {
                 return;
@@ -34,6 +35,10 @@
                 })
                 .appendTo('#socketchatbox-username');
             $('#socketchatbox-txt_fullname').focus();
+            $('#socketchatbox-txt_fullname').blur(function(){
+                cancelNameEdit();
+            });
+
         });
 
 
