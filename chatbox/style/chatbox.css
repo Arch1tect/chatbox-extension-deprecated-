@@ -66,7 +66,7 @@ input.socketchatbox-inputMessage:disabled {
  
 }
 .socketchatbox-inputMessage {
-  width: calc(100% - 70px);
+  width: calc(100% - 105px);
   padding: 0px;
   padding-left: 10px;
   height: 34px;
@@ -108,6 +108,24 @@ input.socketchatbox-inputMessage:disabled {
   filter: grayscale(100%);
   transform: scale(0.8);
 
+}
+#socketchatbox-sticker-btn {
+  background: url(stickers.png) center center no-repeat;
+  float: right;
+  overflow: hidden;
+  height: 34px;
+  width: 35px;
+  float: right;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  filter: grayscale(100%);
+  transform: scale(0.8);
+  opacity: 0.5; /*because the other icon is too light*/
+
+}
+#socketchatbox-sticker-btn:hover {
+  background-color:lightgray;
 }
 #socketchatbox-emoji-btn:hover {
   background-color:lightgray;
@@ -226,7 +244,8 @@ input.socketchatbox-inputMessage:disabled {
   font-family:Arial,Helvetica,sans-serif;
 }
 .socketchatbox-messages img{
-  max-width: 100%;
+  max-width: 70%;
+  border-radius: 5px;
 }
 
 .socketchatbox-messages video{
@@ -297,9 +316,8 @@ input.socketchatbox-inputMessage:disabled {
   background: none;
 }
 
-.socketchatbox-message-others {
-  /* float: right; */
-  /* max-width: 100%; */
+.socketchatbox-message-others img{
+   float: right; 
 }
 
 
@@ -322,22 +340,12 @@ input.socketchatbox-inputMessage:disabled {
   /* overflow-x: scroll; */
 }
 
-.socketchatbox-messageBody.hasMedia{
-  border: 1px solid lightgray;
-  border-radius: 2px;
-  padding: 0px;
-
-}
 
 
 .socketchatbox-messageBody-me {
   background: #BBFF00;
 }
 
-.socketchatbox-messageBody-me.hasMedia {
-  border: 1px solid #BBFF00;
-  background: #FFFFFF;
-}
 
 .socketchatbox-messageBody-others {
   float: right;
@@ -431,4 +439,31 @@ input.socketchatbox-inputMessage:disabled {
   box-shadow:none;
   padding: 0px;
 }
-
+.socketchatbox-messageBody.image-or-video {
+  background:none;
+  box-shadow:none;
+  padding: 0px;
+  border-radius: 5px;
+}
+#socketchatbox-sticker-picker {
+    display: none;
+    position: absolute;
+    box-shadow: 0 0 7px #555;
+    border-radius: 5px;
+    z-index: 999999;
+    bottom: 35px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 350px;
+    width: 390px;
+    padding: 0px;
+    max-height: calc(100% - 65px);
+    max-width: 100%;
+    background: white;
+    right: 0px;
+}
+#socketchatbox-sticker-picker img {
+  width: 80px;
+  margin:5px;
+  cursor: pointer;
+}

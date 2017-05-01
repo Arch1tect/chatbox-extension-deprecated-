@@ -46,7 +46,7 @@
                 mediaType = "video controls";
 
             if (data.file.substring(0,10)==='data:image' || data.file.substring(0,10)==='data:video') {
-                $messageBodyDiv.addClass("hasMedia");
+                $messageBodyDiv.addClass("image-or-video");
                 $messageBodyDiv.html("<a target='_blank' href='" + data.file + "'><"+mediaType+" class='chatbox-image' src='"+data.file+"'></a>");
             }else{
                 $messageBodyDiv.html("<a target='_blank' download='" + data.fileName +"' href='"+data.file+"'>"+data.fileName+"</a>");
@@ -61,6 +61,7 @@
 
             if (utils.checkImageUrl(data.message)) { // may cause secure issue?
                 // receiving image url
+                $messageBodyDiv.addClass("image-or-video");
                 $messageBodyDiv.html("<a target='_blank' href='" + data.message + "'><img class='chatbox-image' src='" + data.message + "'></a>");
             }else {
                 // receiving plain text

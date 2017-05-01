@@ -5,6 +5,9 @@
     var utils = {};
     chatbox.utils = utils;
     
+    $(document.body).click(function(){
+        $('#socketchatbox-sticker-picker').hide();
+    } );
 
     $(document).on('click', '.chatbox-image', function(e) {
 

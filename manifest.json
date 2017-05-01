@@ -1,7 +1,7 @@
 {
   "name": "Chat Anywhere",
   "description": "Chat with people who are browsing the same web page!",
-  "version": "0.93",
+  "version": "0.94",
   "permissions": ["activeTab", "storage", "unlimitedStorage"],
   "content_scripts": [{
     "matches": ["<all_urls>"],
@@ -9,7 +9,7 @@
     "css": ["style/content.css"]
   }],
   "browser_action": {
-      "default_title": "Chatbox.",
+      "default_title": "Chat Anywhere",
       "default_icon": "icon.png",
       "default_popup": "popup.html"
   },

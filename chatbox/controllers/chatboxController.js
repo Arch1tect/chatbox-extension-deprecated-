@@ -77,6 +77,7 @@
 
 			e.preventDefault();
 			e.stopPropagation();
+			$('#socketchatbox-sticker-picker').hide();
 
 			ui.$msgModalContent.val(chatbox.roomID);
 			ui.$msgModal.modal('show');
@@ -144,8 +145,10 @@
 			prev_x = e.screenX;
 			prev_y = e.screenY;
 			dir = $(this).attr('id');
+
 			e.preventDefault();
 			e.stopPropagation();
+			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			utils.updateIframeSize('full size');
 
@@ -200,6 +203,19 @@
 		// Open then close emoji picker programmatically because first time open is too slow
 		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
 		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
+
+		$('#socketchatbox-sticker-btn').click(function(e) {
+			$('[data-toggle="tooltip"]').tooltip('hide');
+
+			$('#socketchatbox-sticker-picker').slideToggle();
+			$('.socketchatbox-inputMessage').emojiPicker('hide');
+			e.stopPropagation();
+		});
+		$('#socketchatbox-sticker-picker img').click(function(e) {
+			// console.log($(this).attr('src'));
+			chatbox.msgHandler.sendMessage($(this).attr('src'));
+		});
+
 
 	});
 
