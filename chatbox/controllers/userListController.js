@@ -7,6 +7,8 @@
 	ui.init.push(function() {
 
 		ui.$onlineUserNum.click(function(e) {
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 
 			if (ui.$chatBody.is(":visible")){
 

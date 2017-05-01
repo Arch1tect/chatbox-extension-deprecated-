@@ -28,7 +28,7 @@
     { name: 'travel', label: 'Travel & Places' },
     { name: 'object', label: 'Objects' },
     { name: 'symbol', label: 'Symbols' },
-    { name: 'flag', label: 'Flags' }
+    // { name: 'flag', label: 'Flags' }
   ];
 
   function EmojiPicker( element, options ) {
@@ -185,33 +185,6 @@
 
     updatePosition: function() {
 
-      /*  Process:
-          1. Find the nearest positioned element by crawling up the ancestors, record it's offset
-          2. Find the bottom left or right of the input element, record this (Account for position setting of left or right)
-          3. Find the difference between the two, as this will become our new position
-          4. Magic.
-
-          N.B. The removed code had a reference to top/bottom positioning, but I don't see the use case for this..
-      */
-
-      // Step 1
-      // Luckily jquery already does this...
-      // var positionedParent = this.$picker.offsetParent();
-      // var parentOffset = positionedParent.offset(); // now have a top/left object
-
-      // // Step 2
-      // var elOffset = this.$el.offset();
-      // if(this.settings.position == 'right'){
-      //   elOffset.left += this.$el.outerWidth() - this.settings.width;
-      // }
-      // elOffset.top += this.$el.outerHeight();
-
-      // // Step 3
-      // var diffOffset = {
-      //   top: (elOffset.top - parentOffset.top),
-      //   left: (elOffset.left - parentOffset.top)
-      // };
-
       this.$picker.css({
         // top: diffOffset.top,
         right: '0px',
@@ -223,17 +196,13 @@
 
     hide: function(immediateFade) {
 
-      // this.$picker.hide();
-      // this.active = false;
       var fadeTime = 300;
-      if (immediateFade)
+      if (immediateFade) 
         fadeTime = 0;
-      this.$picker.hide(0, 'swing', function() {
+      this.$picker.hide(fadeTime, 'swing', function() {
         this.active = false;
-        // if (this.settings.onHide) {
-        //   this.settings.onHide( this.$picker, this.settings, this.active );
-        // }
       }.bind(this));
+      
     },
 
     show: function() {
@@ -241,9 +210,6 @@
       this.updatePosition();
       this.$picker.show(300, 'swing', function() {
         this.active = true;
-        // if (this.settings.onShow) {
-        //   this.settings.onShow( this.$picker, this.settings, this.active );
-        // }
       }.bind(this));
     },
 

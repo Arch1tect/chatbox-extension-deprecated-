@@ -4,7 +4,31 @@
     window.chatbox = window.chatbox || {}; 
     var utils = {};
     chatbox.utils = utils;
-    
+    $(window).keydown(function (event) {
+
+    // When the client hits ENTER on their keyboard
+    if (event.which === 13) {
+
+        if ($('#socketchatbox-txt_fullname').is(":focus")) {
+            changeNameByEdit();
+            ui.$inputMessage.focus();
+            return;
+        }
+
+    }
+
+    // When the client hits ESC on their keyboard
+    if (event.which === 27) {
+        $('#socketchatbox-sticker-picker').hide();
+        ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+
+        if ($('#socketchatbox-txt_fullname').is(":focus")) {
+            cancelNameEdit();
+            return;
+        }
+    }
+
+});
     $(document.body).click(function(){
         $('#socketchatbox-sticker-picker').hide();
     } );

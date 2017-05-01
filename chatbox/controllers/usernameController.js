@@ -41,32 +41,6 @@
 
         });
 
-
-        $(window).keydown(function (event) {
-
-            // When the client hits ENTER on their keyboard
-            if (event.which === 13) {
-
-                ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open; not working here because event is caught by emoji plugin
-
-                if ($('#socketchatbox-txt_fullname').is(":focus")) {
-                    changeNameByEdit();
-                    ui.$inputMessage.focus();
-                    return;
-                }
-
-            }
-
-            // When the client hits ESC on their keyboard
-            if (event.which === 27) {
-                if ($('#socketchatbox-txt_fullname').is(":focus")) {
-                    cancelNameEdit();
-                    return;
-                }
-            }
-
-        });
-
     });
 
     function cancelNameEdit() {

@@ -48,6 +48,8 @@
         ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
 
 		ui.$topbar.click(function() {
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 
 
 			if(ui.$chatBody.is(":visible")){
@@ -78,6 +80,7 @@
 			e.preventDefault();
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 
 			ui.$msgModalContent.val(chatbox.roomID);
 			ui.$msgModal.modal('show');
@@ -192,17 +195,16 @@
 		// emoji
 		ui.$inputMessage.emojiPicker({
 			width: '350px',
-			height: '300px',
+			height: '350px',
 			button: false
 		});
 		$('#socketchatbox-emoji-btn').click(function(e) {
-			e.preventDefault();
 			$('[data-toggle="tooltip"]').tooltip('hide');
 			$('.socketchatbox-inputMessage').emojiPicker('toggle');
 		});
 		// Open then close emoji picker programmatically because first time open is too slow
 		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
-		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
+		$('.socketchatbox-inputMessage').emojiPicker('toggle');
 
 		$('#socketchatbox-sticker-btn').click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
