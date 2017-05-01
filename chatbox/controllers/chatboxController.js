@@ -192,6 +192,8 @@
 			}
 		});
 
+		// TODO: move emoji and sticker code below to a new controller.js
+
 		// emoji
 		ui.$inputMessage.emojiPicker({
 			width: '350px',
@@ -217,6 +219,21 @@
 			// console.log($(this).attr('src'));
 			chatbox.msgHandler.sendMessage($(this).attr('src'));
 		});
+
+        $(window).keydown(function (event) {
+
+            // When the client hits ENTER on their keyboard
+            if (event.which === 13) {
+                chatbox.ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+            }
+
+            // When the client hits ESC on their keyboard
+            if (event.which === 27) {
+                $('#socketchatbox-sticker-picker').hide();
+                chatbox.ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+            }
+
+        });
 
 
 	});
