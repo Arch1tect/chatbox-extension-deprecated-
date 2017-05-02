@@ -52,8 +52,8 @@ input.socketchatbox-inputMessage:disabled {
   width:100%;
 }
 #socketchatbox-body {
-  height: 350px;
-  width: 350px;
+  height: 300px;
+  width: 300px;
   display: none;
   /*  outline: 1px solid black; */
 }
@@ -456,7 +456,7 @@ input.socketchatbox-inputMessage:disabled {
     overflow-y: overlay;
     height: 350px;
     width: 390px;
-    padding: 10px;
+    padding: 5px;
     max-height: calc(100% - 65px);
     max-width: 100%;
     background: white;
