@@ -28,6 +28,42 @@ function showHideChatbox() {
 	});
 }
 
+function checkChatboxStatus() {
+	console.log('Check if chatbox open and get online user count');
+	chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
+
+		// since only one tab should be active and in the current window at once
+		// the return variable should only have one entry
+		var activeTab = arrayOfTabs[0];
+		var activeTabId = activeTab.id; // or do whatever you need
+		
+		// TBD: activeTab.url and activeTab.title are available, no need
+		// to call .sendMessage if those are only info need from tab
+
+		// Ask chatbox whether it's open or not
+		// And how many users online at current page
+		chrome.tabs.sendMessage(activeTabId, {msg: 'is_chatbox_open'}, function(resp){
+			
+			
+			$('#user-count').text(resp.userCount);
+			if (resp.is_chatbox_open) { 
+				$('#open-chatbox').text('Close Chatbox');
+			}
+			else { 
+				$('#open-chatbox').text('Open Chatbox');
+			}
+
+			setTimeout(function(){
+				checkChatboxStatus();
+			}, 2000); 
+			// do this every 2 sec to pull latest user count
+
+		});	
+	});
+
+
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	$('#open-chatbox').click(showHideChatbox);
@@ -60,30 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
-	chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
+	checkChatboxStatus();
 
-		// since only one tab should be active and in the current window at once
-		// the return variable should only have one entry
-		var activeTab = arrayOfTabs[0];
-		var activeTabId = activeTab.id; // or do whatever you need
-		
-		// TBD: activeTab.url and activeTab.title are available, no need
-		// to call .sendMessage if those are only info need from tab
 
-		// Ask chatbox whether it's open or not
-		// And how many users online at current page
-		chrome.tabs.sendMessage(activeTabId, {msg: 'is_chatbox_open'}, function(resp){
-			
-			
-			$('#user-count').text(resp.userCount);
-			if (resp.is_chatbox_open) { 
-				$('#open-chatbox').text('Close Chatbox');
-			}
-			else { 
-				$('#open-chatbox').text('Open Chatbox');
-			}
 
-		});	});
 });
 
 // function parseTabContent(responseObj) {
