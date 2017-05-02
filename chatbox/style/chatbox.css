@@ -453,10 +453,10 @@ input.socketchatbox-inputMessage:disabled {
     z-index: 999999;
     bottom: 35px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: overlay;
     height: 350px;
     width: 390px;
-    padding: 0px;
+    padding: 10px;
     max-height: calc(100% - 65px);
     max-width: 100%;
     background: white;
