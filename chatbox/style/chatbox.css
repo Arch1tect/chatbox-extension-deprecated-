@@ -1,3 +1,4 @@
+
 /* ======================================================= */
 /* ================ General Chatbox Style =================*/
 /* ======================================================= */
@@ -10,7 +11,8 @@
 html {
   overflow: hidden;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.5) !important;
+  /*background-color: rgba(255, 255, 255, 0.5) !important;*/
+  background-color: transparent !important;
   font-weight: 100;
 }
 ul {
@@ -20,7 +22,9 @@ ul {
 input.socketchatbox-inputMessage:disabled {
     background: lightgray;
 }
-
+body {
+  background: none;
+}
 .tooltip-inner  {
   /*padding: 10px !important;*/
   word-wrap: break-word;
@@ -224,22 +228,15 @@ input.socketchatbox-inputMessage:disabled {
   /* border: 1px solid black; */
   line-height: 30px;
 }
-
-
 .socketchatbox-page {
   font-size: 12px; 
   margin: 0;
   padding: 0;
   position: fixed;
   bottom:0px;
-  /*overflow: auto;*/
   max-width:100%;
   line-height:1em;
-  /*  resize: horizontal;
-*/
-
   border-right: 1px solid gray;
-  /*background:white;*/
   z-index:999;
   font-family:Arial,Helvetica,sans-serif;
 }
@@ -313,7 +310,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .history .socketchatbox-messageBody{
-  background: none;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .socketchatbox-message-others img{
@@ -466,4 +463,47 @@ input.socketchatbox-inputMessage:disabled {
   width: 80px;
   margin:5px;
   cursor: pointer;
+}
+
+
+
+/* ======================================================= */
+/* ================ Blend in Chatbox Style =================*/
+/* ======================================================= */
+::-webkit-scrollbar { 
+    display: none; 
+}
+.socketchatbox-page {
+  border:none;
+}
+#socketchatbox-top {
+  background: none;
+}
+#socketchatbox-online-usercount {
+  background: rgba(0, 0, 0, 0.1);
+}
+.socketchatbox-chatArea {
+    /*background: rgba(255, 255, 255, 0.8);*/
+    background: none;
+}
+.socketchatbox-messageBody-me {
+    /*background: rgba(187, 255, 0, 0.9);*/
+    background: rgba(255, 255, 255, 0.99);
+}
+.socketchatbox-messageBody-others {
+    background: rgba(255, 255, 255, 0.99);
+}
+.socketchatbox-messageBody {
+  /*background:none;*/
+}
+.socketchatbox-username {
+    display: none;
+}
+.socketchatbox-log {
+    background: rgba(255, 255, 255, 0.9);
+    /*background: none;*/
+    border-radius: 5px;
+}
+.socketchatbox-inputMessage-div {
+  /*background: none;*/
 }
