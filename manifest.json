@@ -1,7 +1,7 @@
 {
   "name": "Chat Anywhere",
   "description": "Chat with people who are browsing the same web page!",
-  "version": "0.95",
+  "version": "0.9.6",
   "permissions": ["activeTab", "storage", "unlimitedStorage"],
   "content_scripts": [{
     "matches": ["<all_urls>"],

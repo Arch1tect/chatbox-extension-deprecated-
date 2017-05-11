@@ -38,14 +38,18 @@
         } else {
             $messageBodyDiv.addClass('socketchatbox-messageBody-others');
         }
-
+        var stringForNotification = '';
         // received image file in base64
         if (data.file) {
+            stringForNotification = 'file';
             var mediaType = "img";
-            if (data.file.substring(0,10)==='data:video')
+            if (data.file.substring(0,10)==='data:video'){
+                stringForNotification = 'video';
                 mediaType = "video controls";
+            }
 
             if (data.file.substring(0,10)==='data:image' || data.file.substring(0,10)==='data:video') {
+                stringForNotification = 'image';
                 $messageBodyDiv.addClass("image-or-video");
                 $messageBodyDiv.html("<a target='_blank' href='" + data.file + "'><"+mediaType+" class='chatbox-image' src='"+data.file+"'></a>");
             }else{
@@ -58,7 +62,7 @@
 
 
         }else{
-
+            stringForNotification = data.message;
             if (utils.checkImageUrl(data.message)) { // may cause secure issue?
                 // receiving image url
                 $messageBodyDiv.addClass("image-or-video");
@@ -79,6 +83,23 @@
         // receiving new message
         if (!options.history && !options.typing) {
             historyHandler.save(data);
+
+
+            // wait until I can know if the msg is read
+            // try {
+            //     if(data.username !== chatbox.username) {
+            //         chrome.notifications.create('new_msg', {
+            //                 type: 'basic',
+            //                 iconUrl: '/icon.png',
+            //                 title: data.username,
+            //                 message: stringForNotification
+            //             }, function(notificationId) {});
+
+            //     }
+            // } catch (err) {
+            //     console.log('Error sending notification');
+            //     console.log(err);
+            // }
 
             // If it's a new message, unless option set to never auto open
             // chatbox, we'll show chatbox.
