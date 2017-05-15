@@ -60,10 +60,15 @@
     // Add it to chat area
     function addMessageElement($el) {
 
-        ui.$messages.append($el);
+        // calculate this boolean before appending msg element
+        var shouldAutoScrollToBottom = ui.$chatArea[0].scrollHeight - ui.$chatArea[0].scrollTop - ui.$chatBody.height() < 100;
 
-        //loading media takes time so we delay the scroll down
-        setTimeout(function(){scrollToBottom();}, 100);
+        ui.$messages.append($el);
+        // don't auto scroll to bottom if user was reading something above
+        if (shouldAutoScrollToBottom) {
+            //loading media takes time so we delay the scroll down
+            setTimeout(function(){scrollToBottom();}, 100);
+        }
         
     }
 

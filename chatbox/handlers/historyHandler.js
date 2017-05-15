@@ -39,6 +39,7 @@
                     ui.addLog('.');
                     ui.addLog('.');
                 }
+                // ui.scrollToBottom();
 
             }
         });
