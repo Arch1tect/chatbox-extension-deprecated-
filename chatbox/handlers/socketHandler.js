@@ -48,9 +48,20 @@
     socketEvent.register = function() {
         // Socket events
         var socket = chatbox.socket;
+        socket.on('disconnect', function () {
+            chatbox.ui.$onlineUserNum.css('background-color', 'gray');
+            $('.socketchatbox-typing').show();
+            $('.socketchatbox-typing').css('background-color', 'gray');
+            $('.socketchatbox-typing').text('You are offline.');
+        });
+
+
 
         // Once connected, user will receive the invitation to login using uuid
         socket.on('login', function (data) {
+            chatbox.ui.$onlineUserNum.css('background-color', '#0089FF');
+            $('.socketchatbox-typing').css('background-color', 'rgba(63, 161, 245, 0.6)');
+            $('.socketchatbox-typing').hide();
 
             socket.emit('login', {
                 username: chatbox.username,
