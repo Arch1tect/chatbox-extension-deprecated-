@@ -43,20 +43,29 @@ function checkChatboxStatus() {
 		// Ask chatbox whether it's open or not
 		// And how many users online at current page
 		chrome.tabs.sendMessage(activeTabId, {msg: 'is_chatbox_open'}, function(resp){
-			
-			
-			$('#user-count').text(resp.userCount);
-			if (resp.is_chatbox_open) { 
-				$('#open-chatbox').text('Close Chatbox');
-			}
-			else { 
-				$('#open-chatbox').text('Open Chatbox');
-			}
-
 			setTimeout(function(){
 				checkChatboxStatus();
 			}, 2000); 
-			// do this every 2 sec to pull latest user count
+
+			if (resp) {
+				if (resp.userCount > 0) {
+					console.log('resp.userCount ' + resp.userCount);
+					$('#user-count').text(resp.userCount);
+					if (resp.is_chatbox_open) { 
+						$('#open-chatbox').text('Close Chatbox');
+					}
+					else { 
+						$('#open-chatbox').text('Open Chatbox');
+					}
+					$('#online-user-msg').show();
+
+				}
+				// do this every 2 sec to pull latest user count
+			} else {
+				$('#online-user-msg').text('Please try refreshing this page.');
+				$('#online-user-msg').show();
+			}
+			
 
 		});	
 	});

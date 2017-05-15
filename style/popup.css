@@ -19,6 +19,7 @@
 }
 #online-user-msg {
 	float: right;
+	display: none;
 }
 .red {
 	color: red;
@@ -26,7 +27,7 @@
 
 
 a {
-	text-decoration: none;
+	/*text-decoration: none;*/
 }
 a:focus{
     outline: none;
@@ -42,6 +43,11 @@ body {
 	font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
 }
 
+footer {
+	position: fixed;
+	bottom: 10px;
+	width:330px;
+}
 /*input {
 	min-width: 250px;
 	display: inline;
