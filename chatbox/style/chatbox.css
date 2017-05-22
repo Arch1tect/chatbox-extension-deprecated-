@@ -2,7 +2,24 @@
 /* ================ General Chatbox Style =================*/
 /* ======================================================= */
 
-
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px lightgray; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1); 
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); */
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0,0,0,0.05); 
+}
 
 * {
   box-sizing: border-box;
@@ -153,6 +170,7 @@ input.socketchatbox-inputMessage:disabled {
   color:white;
 }
 
+
 #socketchatbox-change-room {
 /*    color: white;
     padding: 5px;*/
@@ -170,14 +188,13 @@ input.socketchatbox-inputMessage:disabled {
 #socketchatbox-username {
   float:left;
   padding-left: 10px;
-/*  padding-right: 10px;
-*/  /*min-width: 20%;*/
   color: white;
   display: none;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 80px;
-  /*max-width:60%;*/
+  max-width: calc(100% - 150px);  
+  min-width: 30px;
+  text-align: center;
 }
 
 #socketchatbox-online-usercount {
@@ -272,8 +289,47 @@ input.socketchatbox-inputMessage:disabled {
   padding-right: 10px;
   padding-left: 10px;
   padding-top: 30px;
-  /*border-right: 1px solid;*/
 }
+
+.socketchatbox-inbox {
+  height: 100%;
+  width: 100%;
+  display: none;
+  /*border-bottom: 1px solid;*/
+}
+
+.socketchatbox-friend-messages {
+  height: 100%;
+  padding: 10px;
+  width: calc(100% - 100px);
+  background: #eceff1;
+  float: right;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.socketchatbox-friend-list {
+  width: 100px;
+  height: 100%;
+  overflow: auto;
+  background: #eceff1;
+  float: left;
+  border-right: 1px solid lightgray;
+
+}
+
+
+.socketchatbox-friend-list div {
+  padding: 10px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.socketchatbox-friend-list div:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
 
 .socketchatbox-message-wrapper {
   /* width: 100%; */
@@ -318,6 +374,7 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-message-others img{
    float: right; 
+   max-width: 70%;
 }
 
 

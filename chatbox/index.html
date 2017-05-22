@@ -3,10 +3,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Chatbox</title>
-		<link rel="stylesheet" href="style/chatbox.css">
-		<link rel="stylesheet" href="style/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style/chatbox.css">
+		<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.css">		
 		<link rel="stylesheet" type="text/css" href="emoji/css/chatbox.emoji.custom.css">
+		<link rel="stylesheet" type="text/css" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
 
 		<!-- Emoji Data -->
 		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.a.css">
@@ -23,17 +24,21 @@
 			
 			<div id="socketchatbox-ne" class="socketchatbox-resize"></div>
 			<div id='socketchatbox-top'>
-				<div data-toggle="tooltip" data-placement="bottom" title='Edit your name' id='socketchatbox-username'></div>   
+  
 				<span data-toggle="tooltip" data-placement="bottom" title='User in this room' id='socketchatbox-online-usercount' class='badge'> 
 				</span>
+
+				<div data-toggle="tooltip" data-placement="bottom" title='Edit your name' id='socketchatbox-username'></div>
+
 				<span id='topbar-options' class='float-right'>
 
+					<span class="fa fa-inbox" title='Go to inbox' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-inbox'></span>
 
-					<span data-toggle="tooltip" data-placement="bottom" id='socketchatbox-change-room'>@</span>
+					<span class="fa fa-map-signs" data-toggle="tooltip" data-placement="bottom" id='socketchatbox-change-room'></span>
 
 					<span id='socketchatbox-showHideChatbox'>↓</span>
 
-					<span title='Close' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-closeChatbox'>X</span>
+					<span class="fa fa-close" title='Close' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-closeChatbox'></span>
 				</span>
 
 			</div>
@@ -76,11 +81,50 @@
 				</div>
 				<div class='socketchatbox-onlineusers'></div>
 				<div class = "socketchatbox-typing"> </div>
+				<div class="socketchatbox-inbox">
+					<div class="socketchatbox-friend-list">
+						<div>David</div>
+						<div>David</div>
+						<div>David</div>
+						<div>Luna</div>
+						<div>David</div>
+						<div>David</div>
+						<div>Some long name</div>
+						<div>David</div>
+						<div>Linda Ding</div>
+						<div>David</div>
+						<div>David</div>
+					</div>
+					<div class="socketchatbox-friend-messages">
 
+
+
+						<div class="socketchatbox-message-wrapper">
+							<div class="socketchatbox-message socketchatbox-message-others">
+								<div class="socketchatbox-username">yoyo<span class="socketchatbox-messagetime"> (5/14 18:15:32)</span>
+								</div>
+								<span class="socketchatbox-messageBody socketchatbox-messageBody-others image-or-video"><a target="_blank" href="stickers/bunny/heart.gif"><img class="chatbox-image" src="stickers/bunny/heart.gif"></a>
+								</span>
+							</div>
+
+						</div>
+
+<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-others"><div class="socketchatbox-username">专业小朋友<span class="socketchatbox-messagetime"> (02:26:43)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-others">HI</span></div></div>
+
+
+<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-others"><div class="socketchatbox-username">专业小朋友<span class="socketchatbox-messagetime"> (02:26:43)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-others">The social network has acknowledged that the documents seen by the newspaper were similar to what it used internally.</span></div></div>
+
+
+<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-me"><div class="socketchatbox-username">Arch<span class="socketchatbox-messagetime"> (02:27:06)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-me">yo</span></div></div>
+
+<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-me"><div class="socketchatbox-username">Arch<span class="socketchatbox-messagetime"> (02:27:06)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-me">The manuals cover a vast array of sensitive subjects, including hate speech, revenge porn, self-harm, suicide, cannibalism and threats of violence.
+</span></div></div>
+
+					</div>
+				</div>
 				<div class="socketchatbox-chatArea">
 					<ul class="socketchatbox-messages"></ul>
 				</div>
-
 				<div class = "socketchatbox-inputMessage-div">    
 					<input class="socketchatbox-inputMessage" placeholder = "Type here..."/>
 					<label data-toggle="tooltip" title='Send image or file' data-placement="left" class="btn" id='socketchatbox-sendFileBtn' for = "socketchatbox-sendMedia">

@@ -8,10 +8,9 @@ function createChatbox() {
 
 		chatboxIFrame  = document.createElement ("iframe");
 		chatboxIFrame.src  = chrome.extension.getURL ("chatbox/index.html?"+location.href);
-		chatboxIFrame.id="chatbox-iframe";
-		// chatboxIFrame.allowtransparency = true;
+		chatboxIFrame.id = "chatbox-iframe";
+
 		document.body.insertBefore(chatboxIFrame, document.body.firstChild);
-		// chatboxIFrame.style.display = 'block';
 		chatboxCreated = true;
 	}
 }

@@ -20,17 +20,26 @@
 		ui.$chatBox = $('.socketchatbox-page');
 		ui.$topbar = $('#socketchatbox-top');
 		ui.$chatBody = $('#socketchatbox-body');
+		ui.$chatArea = $(".socketchatbox-chatArea");
+		ui.$inboxArea = $('.socketchatbox-inbox');
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
+		ui.$topbarOptions = $('#topbar-options');
 		ui.$at = $('#socketchatbox-change-room');
-		ui.$chatArea = $(".socketchatbox-chatArea");
+		ui.$inboxBtn = $('#socketchatbox-inbox');
+		
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
 		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
 		ui.$msgModal = $('#socketchatbox-msgpopup-modal');
 		ui.$changeRoomBtn = $('#go-to-room-btn');
 		ui.$toggleRoomLock = $('#chatroom-lock-unlock');
+
+		ui.$friendList = $('.socketchatbox-friend-list');
+		ui.$friend = $('.socketchatbox-friend-list div');
+		ui.$friendMessages = $('.socketchatbox-friend-messages');
+
 		ui.displayMode = 'min'; // default css sytle
     	$('[data-toggle="tooltip"]').tooltip();   
 
@@ -63,6 +72,23 @@
 
 		});
 
+
+		ui.$friend.click(function(e) {
+			console.log(this);
+		});
+
+		ui.$inboxBtn.click(function(e) {
+			$('[data-toggle="tooltip"]').tooltip('hide');
+
+			e.preventDefault();
+			e.stopPropagation();
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+
+			ui.$chatArea.slideToggle();
+			ui.$inboxArea.slideToggle();
+
+		});
 
 		ui.$cross.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
@@ -171,7 +197,7 @@
 			if (dir.indexOf('w') > -1)  boxW -= dx;
 			if (dir.indexOf('e') > -1)  boxW += dx;
 
-			if(boxW<200)    boxW = 200;
+			if(boxW<250)    boxW = 250;
 			if(boxH<120)     boxH = 120;
 
 			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
@@ -264,7 +290,9 @@
 		ui.$username.text(chatbox.username);
 		ui.$chatBody.show();
 		ui.$username.show();
-		ui.$at.show();
+
+		ui.$topbarOptions.show();
+
 		//show resize cursor
 		ui.$chatboxResize.css('z-index', 999999999);
 		ui.$messages[0].scrollTop = ui.$messages[0].scrollHeight;
@@ -282,7 +310,8 @@
 		// ui.$username.html("<a href='https://quotime.me' target='_blank'>" + chatbox.NAME + '</a>');
 		ui.$username.hide();
 		ui.$chatBody.hide();
-		ui.$at.hide();
+		ui.$topbarOptions.hide();
+
 		ui.$chatboxResize.css('z-index', -1); //hide resize cursor
         utils.updateIframeSize('minimize');
 		ui.displayMode = 'min';
