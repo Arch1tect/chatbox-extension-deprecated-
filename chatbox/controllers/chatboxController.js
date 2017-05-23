@@ -28,6 +28,7 @@
 		ui.$topbarOptions = $('#topbar-options');
 		ui.$at = $('#socketchatbox-change-room');
 		ui.$inboxBtn = $('#socketchatbox-inbox');
+		ui.$refreshBtn = $('#socketchatbox-refresh');
 		
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
@@ -78,6 +79,22 @@
 
 		ui.$friend.click(function(e) {
 			console.log(this);
+		});
+
+		ui.$refreshBtn.click(function(e) {
+
+			$('[data-toggle="tooltip"]').tooltip('hide');
+
+			e.preventDefault();
+			e.stopPropagation();
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+			
+			
+			chatbox.socket.disconnect();
+			ui.welcomeMsgShown = false;
+			chatbox.connect();
+            
 		});
 
 		ui.$inboxBtn.click(function(e) {
