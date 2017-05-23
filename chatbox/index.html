@@ -82,46 +82,53 @@
 				<div class='socketchatbox-onlineusers'></div>
 				<div class = "socketchatbox-typing"> </div>
 				<div class="socketchatbox-inbox">
-					<div class="socketchatbox-friend-list">
-						<div>David</div>
-						<div>David</div>
-						<div>David</div>
-						<div>Luna</div>
-						<div>David</div>
-						<div>David</div>
-						<div>Some long name</div>
-						<div>David</div>
-						<div>Linda Ding</div>
-						<div>David</div>
-						<div>David</div>
-					</div>
-					<div class="socketchatbox-friend-messages">
-
-
-
-						<div class="socketchatbox-message-wrapper">
-							<div class="socketchatbox-message socketchatbox-message-others">
-								<div class="socketchatbox-username">yoyo<span class="socketchatbox-messagetime"> (5/14 18:15:32)</span>
-								</div>
-								<span class="socketchatbox-messageBody socketchatbox-messageBody-others image-or-video"><a target="_blank" href="stickers/bunny/heart.gif"><img class="chatbox-image" src="stickers/bunny/heart.gif"></a>
-								</span>
-							</div>
-
+					<div class="socketchatbox-inbox-title">Private Messages</div>
+					<div class="socketchatbox-inbox-wrapper">
+						<div class="socketchatbox-friend-list">
+							<div>David</div>
+							<div>David</div>
+							<div>David</div>
+							<div>Luna</div>
+							<div>David</div>
+							<div>David</div>
+							<div>Some long name</div>
+							<div>David</div>
+							<div>Linda Ding</div>
+							<div>David</div>
+							<div>David</div>
 						</div>
-
-<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-others"><div class="socketchatbox-username">专业小朋友<span class="socketchatbox-messagetime"> (02:26:43)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-others">HI</span></div></div>
-
-
-<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-others"><div class="socketchatbox-username">专业小朋友<span class="socketchatbox-messagetime"> (02:26:43)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-others">The social network has acknowledged that the documents seen by the newspaper were similar to what it used internally.</span></div></div>
+						<div class="socketchatbox-friend-messages">
 
 
-<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-me"><div class="socketchatbox-username">Arch<span class="socketchatbox-messagetime"> (02:27:06)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-me">yo</span></div></div>
+							<div class="socketchatbox-message-wrapper">
+								<div class="socketchatbox-message socketchatbox-message-others">
+									
+									<span class="socketchatbox-messageBody socketchatbox-messageBody-others image-or-video"><a target="_blank" href="stickers/bunny/heart.gif"><img class="chatbox-image" src="stickers/bunny/heart.gif"></a>
+									</span>
+								</div>
+							</div>
+							<div class="socketchatbox-message-wrapper">
+								<div class="socketchatbox-message socketchatbox-message-others"><span class="socketchatbox-messageBody socketchatbox-messageBody-others">HI</span></div>
 
-<div class="socketchatbox-message-wrapper"><div class="socketchatbox-message socketchatbox-message-me"><div class="socketchatbox-username">Arch<span class="socketchatbox-messagetime"> (02:27:06)</span></div><span class="socketchatbox-messageBody socketchatbox-messageBody-me">The manuals cover a vast array of sensitive subjects, including hate speech, revenge porn, self-harm, suicide, cannibalism and threats of violence.
-</span></div></div>
-
+							</div>
+							<div class="socketchatbox-message-wrapper">
+								<div class="socketchatbox-message socketchatbox-message-others">
+								<span class="socketchatbox-messageBody socketchatbox-messageBody-others">The social network has acknowledged that the documents seen by the newspaper were similar to what it used internally.</span></div>
+							</div>
+							<div class="socketchatbox-message-wrapper">
+								<div class="socketchatbox-message socketchatbox-message-me">
+								<span class="socketchatbox-messageBody socketchatbox-messageBody-me">yo</span></div>
+							</div>
+							<div class="socketchatbox-message-wrapper">
+								<div class="socketchatbox-message socketchatbox-message-me">
+								<span class="socketchatbox-messageBody socketchatbox-messageBody-me">The manuals cover a vast array of sensitive subjects, including hate speech, revenge porn, self-harm, suicide, cannibalism and threats of violence.
+								</span></div>
+							</div>
+						</div>
 					</div>
 				</div>
+
+
 				<div class="socketchatbox-chatArea">
 					<ul class="socketchatbox-messages"></ul>
 				</div>
@@ -155,8 +162,11 @@
 				<div class="modal-content">
 					<div id = "change-room-modal-header" class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<span data-toggle="tooltip" data-placement="bottom" id='chatroom-lock-unlock' class='chatroom-unlocked' title='Toggle to stay in current room'></span>
-						<h4 class="modal-title" id="myModalLabel">Room</h4>
+						
+
+						<h4 class="modal-title" id="socketchatbox-modal-title">Chat room</h4>
+
+						<span class="fa fa-lock" title='Toggle to stay in current room' data-toggle="tooltip" data-placement="bottom" id='chatroom-lock-unlock'></span>
 
 					</div>
 					<div class="modal-body">

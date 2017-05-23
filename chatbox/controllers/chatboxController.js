@@ -50,11 +50,14 @@
 			console.log('loaded config width: ' + config.width + ' height: ' + config.height);
 		}
         if(config.lockRoom) {
-            ui.$toggleRoomLock.removeClass('chatroom-unlocked');
-            ui.$toggleRoomLock.addClass('chatroom-locked');
+            ui.$toggleRoomLock.removeClass('fa-unlock-alt');
+            ui.$toggleRoomLock.addClass('fa-lock');
+        }else {
+            ui.$toggleRoomLock.removeClass('fa-lock');
+            ui.$toggleRoomLock.addClass('fa-unlock-alt');	
         }
         
-        ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
+        ui.$at.attr('data-original-title', chatbox.roomID);  
 
 		ui.$topbar.click(function() {
 			$('#socketchatbox-sticker-picker').hide();
@@ -142,13 +145,13 @@
 			
 			if(chatbox.config.lockRoom) {
 
-				ui.$toggleRoomLock.addClass('chatroom-unlocked');
-				ui.$toggleRoomLock.removeClass('chatroom-locked');
+				ui.$toggleRoomLock.addClass('fa-unlock-alt');
+				ui.$toggleRoomLock.removeClass('fa-lock');
 
 			} else {
 
-				ui.$toggleRoomLock.addClass('chatroom-locked');
-				ui.$toggleRoomLock.removeClass('chatroom-unlocked');
+				ui.$toggleRoomLock.addClass('fa-lock');
+				ui.$toggleRoomLock.removeClass('fa-unlock-alt');
 
 			}
 			chatbox.config.lockRoom = !chatbox.config.lockRoom;
@@ -296,7 +299,7 @@
 		ui.$username.text(chatbox.username);
 		ui.$chatBody.show();
 		ui.$username.show();
-
+		ui.$topbar.css('background','rgba(0, 0, 0, 0.75)');
 		ui.$topbarOptions.show();
 
 		//show resize cursor
@@ -317,7 +320,7 @@
 		ui.$username.hide();
 		ui.$chatBody.hide();
 		ui.$topbarOptions.hide();
-
+		ui.$topbar.css('background','none');
 		ui.$chatboxResize.css('z-index', -1); //hide resize cursor
         utils.updateIframeSize('minimize');
 		ui.displayMode = 'min';

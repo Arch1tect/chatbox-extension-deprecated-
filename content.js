@@ -39,9 +39,9 @@ function resizeIFrameToFitContent(e) {
 	else if (msg.state === 'minimize') {
 		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = "100px";
-		chatboxIFrame.style.height = "30px";
-		chatboxIFrame.style.minHeight = "30px";
-		console.log('resize iframe to 100 x 30');
+		chatboxIFrame.style.height = "31px";
+		chatboxIFrame.style.minHeight = "31px";
+		console.log('resize iframe to 100 x 31');
 
 	}
 	else if (msg.state === 'close') {	//only hide but still running
