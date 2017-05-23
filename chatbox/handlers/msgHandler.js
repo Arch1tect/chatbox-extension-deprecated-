@@ -16,23 +16,27 @@
            data.username = "empty name";
 
         var d = new Date();
-        var msg_post_time_html = "<span class='socketchatbox-messagetime'>";                    
+        var msg_post_time = "";                    
 
         if (options.history) {
 
-            msg_post_time_html += ' ('+ data.post_time +')';
+            msg_post_time = data.post_time;
 
         } else {
 
-            msg_post_time_html += ' ('+('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2)+')';
+            msg_post_time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
         }
         
-        msg_post_time_html += "</span>";
 
-        var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username) + msg_post_time_html);
+        var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username));
 
         $usernameDiv.addClass('socketchatbox-username');
         var $messageBodyDiv = $('<span class="socketchatbox-messageBody">');
+        
+        $messageBodyDiv.prop('title', msg_post_time);
+        // $messageBodyDiv.attr('data-toggle', "tooltip"); commented out because seems to be too eye-catching
+        // $messageBodyDiv.tooltip();
+
         if (data.username === chatbox.username) {
             $messageBodyDiv.addClass('socketchatbox-messageBody-me');
         } else {
@@ -47,7 +51,6 @@
                 stringForNotification = 'video';
                 mediaType = "video controls";
             }
-
             if (data.file.substring(0,10)==='data:image' || data.file.substring(0,10)==='data:video') {
                 stringForNotification = 'image';
                 $messageBodyDiv.addClass("image-or-video");
