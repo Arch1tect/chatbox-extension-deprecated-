@@ -84,7 +84,13 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+			
+			if(ui.$inboxArea.is(':visible')) 
+				ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
+			else
+				ui.$inboxBtn.attr('data-original-title', 'Close inbox');  
 
+			ui.$inboxBtn.toggleClass('selected');
 			ui.$chatArea.slideToggle();
 			ui.$inboxArea.slideToggle();
 

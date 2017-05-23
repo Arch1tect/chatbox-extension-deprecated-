@@ -165,7 +165,7 @@ input.socketchatbox-inputMessage:disabled {
     padding-right: 7px;
 }
 
-#topbar-options span:hover {
+#topbar-options span:hover,  #topbar-options span.selected{
   background: #3c3c3c;
   color:white;
 }
