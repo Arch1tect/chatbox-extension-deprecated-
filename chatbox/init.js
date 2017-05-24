@@ -33,6 +33,14 @@
     var username = 'user-'+ (''+d.getMinutes()).slice(-1)+ d.getSeconds();
     chatbox.username = username;
 
+    chatbox.inbox = {};
+
+    chatbox.inbox.pullMessages = function() {
+        $.get("http://localhost:9000/db/message/user/" + chatbox.uuid, function(data, status) {
+            console.log(data);
+            chatbox.inbox.messages = data;
+        });
+    }
 
     chatbox.init = function() {
 
@@ -64,6 +72,9 @@
         }
 
         historyHandler.load();
+
+        chatbox.inbox.pullMessages();
+
         // now make your connection with server!
         chatbox.connect();
 

@@ -37,11 +37,12 @@
         // $messageBodyDiv.attr('data-toggle', "tooltip"); commented out because seems to be too eye-catching
         // $messageBodyDiv.tooltip();
 
-        if (data.username === chatbox.username) {
+        if (data.sender === chatbox.uuid || data.username === chatbox.username) {
             $messageBodyDiv.addClass('socketchatbox-messageBody-me');
         } else {
             $messageBodyDiv.addClass('socketchatbox-messageBody-others');
         }
+
         var stringForNotification = '';
         // received image file in base64
         if (data.file) {
@@ -84,7 +85,7 @@
         }
 
         // receiving new message
-        if (!options.history && !options.typing) {
+        if (!options.history && !options.typing && !options.inbox) {
             historyHandler.save(data);
 
 
@@ -127,7 +128,11 @@
         var $messageDiv = $("<div class='socketchatbox-message'></div>")
             .data('username', data.username)
             .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv);
+
+        if (!options.inbox)
+            $messageDiv.append($usernameDiv);
+        
+        $messageDiv.append($messageBodyDiv);
 
         if (options.history)
             $messageDiv.addClass('history');

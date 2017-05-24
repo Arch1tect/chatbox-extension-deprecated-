@@ -75,7 +75,7 @@
 			}
 
 		});
-		
+
 		ui.$topbarOptions.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 
@@ -88,6 +88,14 @@
 
 		ui.$friend.click(function(e) {
 			console.log(this);
+			var options = {};
+            options.inbox = true;
+			var index;
+
+			for (index=0; index<chatbox.inbox.messages.length; index++) {
+				chatbox.msgHandler.processChatMessage(chatbox.inbox.messages[index], options);
+			}
+			
 		});
 
 		ui.$refreshBtn.click(function(e) {
