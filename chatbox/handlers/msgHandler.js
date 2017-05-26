@@ -15,15 +15,24 @@
         if (typeof data.username === 'undefined' || data.username==='')
            data.username = "empty name";
 
-        var d = new Date();
-        var msg_post_time = "";                    
+        var msg_post_time = "";  
 
-        if (options.history) {
+        if (options.inbox) {
+            // console.log(data.create_time);
+            d = new Date(data.create_time + ' UTC');
+            var _time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+            var _month_date = (d.getMonth()+1) + '/' + d.getDate();
+            var _post_time = _month_date+' '+_time;
+            msg_post_time = _post_time;
+
+        }                  
+
+        else if (options.history) {
 
             msg_post_time = data.post_time;
 
         } else {
-
+            var d = new Date();
             msg_post_time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
         }
         
@@ -152,10 +161,29 @@
 
 
     function sendMessage(msg) {
-        var data = {};
-        data.username = chatbox.username;
-        data.msg = msg+'';//cast string
-        chatbox.socket.emit('new message', data);
+
+        var privateMsg = ui.$inboxArea.is(':visible');
+
+        if (privateMsg) {
+            var receiverId = $('.socketchatbox-friend-list div.selected').data('uid');
+            var payload = {
+                'sender': chatbox.uuid,
+                'receiver': receiverId,
+                'message': msg
+            }
+            console.log('Send private message to ' + receiverId);
+
+            $.post(chatbox.inboxUrl + "/db/message", payload, function(resp) {
+              console.log(resp);
+              chatbox.inbox.pullMessages();
+            });
+
+        }else {
+            var data = {};
+            data.username = chatbox.username;
+            data.msg = msg+'';//cast string
+            chatbox.socket.emit('new message', data);
+        }
     }
 
     msgHandler.sendMessage = sendMessage;

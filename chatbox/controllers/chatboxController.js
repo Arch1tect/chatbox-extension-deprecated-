@@ -64,7 +64,6 @@
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 
-
 			if(ui.$chatBody.is(":visible")){
 				minimize();
 
@@ -88,15 +87,30 @@
 
 		ui.$friend.click(function(e) {
 			console.log(this);
+			console.log($(this).data('uid'));
+
+			$('.socketchatbox-friend-list div.selected').removeClass('selected');
+			$(this).addClass('selected');
+
+			ui.renderInboxMessage();
+			
+		});
+
+		ui.renderInboxMessage = function() {
+
+			ui.$friendMessages.empty();
 			var options = {};
             options.inbox = true;
 			var index;
+			var inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
 
 			for (index=0; index<chatbox.inbox.messages.length; index++) {
-				chatbox.msgHandler.processChatMessage(chatbox.inbox.messages[index], options);
+
+				var data = chatbox.inbox.messages[index];
+				if (data.sender == inboxUserId || data.receiver == inboxUserId)
+					chatbox.msgHandler.processChatMessage(data, options);
 			}
-			
-		});
+		};
 
 		ui.$refreshBtn.click(function(e) {
 
@@ -107,7 +121,6 @@
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			
-
 			chatbox.socket.disconnect();
 			ui.welcomeMsgShown = false;
 			chatbox.connect();

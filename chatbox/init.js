@@ -19,6 +19,7 @@
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
     chatbox.domain = "https://quotime.me";
+    chatbox.inboxUrl = "http://localhost:9000";
     // chatbox.domain = "https://localhost";
     // chatbox.domain = "http://localhost:8088";
 
@@ -35,10 +36,16 @@
 
     chatbox.inbox = {};
 
+    chatbox.inbox.keepPullingMessages = function() {
+        chatbox.inbox.pullMessages();
+        setTimeout(function(){chatbox.inbox.keepPullingMessages();}, 5000);
+    }
+
     chatbox.inbox.pullMessages = function() {
-        $.get("http://localhost:9000/db/message/user/" + chatbox.uuid, function(data, status) {
+        $.get(chatbox.inboxUrl + "/db/message/user/" + chatbox.uuid, function(data, status) {
             console.log(data);
             chatbox.inbox.messages = data;
+            chatbox.ui.renderInboxMessage();
         });
     }
 
@@ -73,7 +80,7 @@
 
         historyHandler.load();
 
-        chatbox.inbox.pullMessages();
+        chatbox.inbox.keepPullingMessages();
 
         // now make your connection with server!
         chatbox.connect();

@@ -344,6 +344,11 @@ input.socketchatbox-inputMessage:disabled {
   cursor: pointer;
 }
 
+.socketchatbox-friend-list div.selected {
+  background-color: lightgray;
+  font-weight: bold;
+}
+
 
 .socketchatbox-message-wrapper {
   /* width: 100%; */

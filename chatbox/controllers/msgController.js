@@ -85,7 +85,7 @@
 
     ui.addMessageElement = addMessageElement;
 
-        // Log a message
+    // Log a message
     function addLog(log) {
         var $el = $('<li>').addClass('socketchatbox-log').text(log);
         addMessageElement($el);
