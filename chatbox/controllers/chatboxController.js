@@ -91,24 +91,30 @@
 
 			$('.socketchatbox-friend-list div.selected').removeClass('selected');
 			$(this).addClass('selected');
-
-			ui.renderInboxMessage();
+			var clearUI = true;
+			ui.renderInboxMessage(clearUI);
 			
 		});
 
-		ui.renderInboxMessage = function() {
-
-			ui.$friendMessages.empty();
+		ui.renderInboxMessage = function(clearUI) {
+		// Only append new msg that wasn't rendered before
+			if (clearUI) {
+				ui.$friendMessages.empty();
+				chatbox.inbox.lastRenderedMsgID = 0;
+			}
 			var options = {};
             options.inbox = true;
 			var index;
 			var inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
 
+
 			for (index=0; index<chatbox.inbox.messages.length; index++) {
 
 				var data = chatbox.inbox.messages[index];
-				if (data.sender == inboxUserId || data.receiver == inboxUserId)
+				if ( (!chatbox.inbox.lastRenderedMsgID || data.id > chatbox.inbox.lastRenderedMsgID) && (data.sender == inboxUserId || data.receiver == inboxUserId)) {
 					chatbox.msgHandler.processChatMessage(data, options);
+					chatbox.inbox.lastRenderedMsgID = data.id;
+				}
 			}
 		};
 

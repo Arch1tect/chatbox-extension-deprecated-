@@ -64,6 +64,7 @@
         if (options && options.inbox) {
             
             ui.$friendMessages.append($el);
+            ui.$friendMessages[0].scrollTop = ui.$friendMessages[0].scrollHeight;
 
         } else {
 

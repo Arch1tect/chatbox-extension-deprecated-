@@ -41,9 +41,10 @@
         setTimeout(function(){chatbox.inbox.keepPullingMessages();}, 5000);
     }
 
+    // This is pulling all messages, makes sense for first load
+    // but we only need to pull front-end opened conversation for the long-pulling
     chatbox.inbox.pullMessages = function() {
         $.get(chatbox.inboxUrl + "/db/message/user/" + chatbox.uuid, function(data, status) {
-            console.log(data);
             chatbox.inbox.messages = data;
             chatbox.ui.renderInboxMessage();
         });
