@@ -188,6 +188,7 @@ input.socketchatbox-inputMessage:disabled {
 #socketchatbox-username {
   float:left;
   padding-left: 10px;
+  padding-right: 10px;
   color: white;
   display: none;
   white-space: nowrap;
@@ -199,16 +200,10 @@ input.socketchatbox-inputMessage:disabled {
 
 #socketchatbox-online-usercount {
     line-height: 15px;
-    /* padding: 5px; */
     color: white;
     background: #0089FF;
-    margin-left: 10px;
-    /*border-radius: 50%; */
-    /*border: 0px;*/
-    /*padding: 3px 7px 3px 7px;*/
-    /*display: none;*/
-    /* height: 100%; */
 }
+
 .socketchatbox-onlineusers {
   background: rgba(77, 172, 255, 0.8);
   outline: 1px solid rgba(77, 172, 255, 0.8);
@@ -317,8 +312,6 @@ input.socketchatbox-inputMessage:disabled {
 .socketchatbox-friend-messages {
   height: 100%;
   padding: 10px;
-  width: calc(100% - 100px);
-  float: right;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -349,6 +342,24 @@ input.socketchatbox-inputMessage:disabled {
   font-weight: bold;
 }
 
+#socketchatbox-toggle-friend-list {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 70px;
+  padding: 10px;
+  color: gray;
+  cursor: pointer;
+  background: white;
+  border: 1px solid lightgray;
+}
+#socketchatbox-toggle-friend-list.fa-chevron-right {
+  left: 0px;
+}
+
+#socketchatbox-toggle-friend-list:hover {
+  color: black;
+}
 
 .socketchatbox-message-wrapper {
   /* width: 100%; */

@@ -38,6 +38,7 @@
 		ui.$toggleRoomLock = $('#chatroom-lock-unlock');
 
 		ui.$friendList = $('.socketchatbox-friend-list');
+		ui.$toggleFriendList = $('#socketchatbox-toggle-friend-list');
 		ui.$friend = $('.socketchatbox-friend-list div');
 		ui.$friendMessages = $('.socketchatbox-friend-messages');
 
@@ -83,6 +84,22 @@
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			
+		});
+
+		ui.$toggleFriendList.click(function(e) {
+
+
+			if ($('.socketchatbox-friend-list').width() < 50) {
+				$(this).addClass('fa-chevron-left');
+				$(this).removeClass('fa-chevron-right');
+				$('.socketchatbox-friend-list').css('width', '100px');
+
+			}else {
+				$(this).addClass('fa-chevron-right');
+				$(this).removeClass('fa-chevron-left');
+				$('.socketchatbox-friend-list').css('width', '0px');
+
+			}
 		});
 
 		ui.$friend.click(function(e) {
@@ -141,10 +158,15 @@
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			
-			if(ui.$inboxArea.is(':visible')) 
+			if(ui.$inboxArea.is(':visible')) {
 				ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
-			else
+				ui.$toggleFriendList.hide();
+			}
+			else{
 				ui.$inboxBtn.attr('data-original-title', 'Close inbox');  
+				ui.$toggleFriendList.fadeIn('slow');
+
+			}
 
 			ui.$inboxBtn.toggleClass('selected');
 			ui.$chatArea.slideToggle();
