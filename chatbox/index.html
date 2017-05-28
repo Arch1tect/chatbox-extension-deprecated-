@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Chatbox</title>
-		<link rel="stylesheet" type="text/css" href="style/chatbox.css">
 		<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.css">		
 		<link rel="stylesheet" type="text/css" href="emoji/css/chatbox.emoji.custom.css">
@@ -11,6 +10,9 @@
 
 		<!-- Emoji Data -->
 		<link rel="stylesheet" type="text/css" href="emoji/css/jquery.emojipicker.a.css">
+
+		<link rel="stylesheet" type="text/css" href="style/chatbox.css">
+
 
 	</head>
 
@@ -32,11 +34,7 @@
 
 				<span id='topbar-options' class='float-right'>
 
-					<span class="fa fa-refresh" title='Refresh' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-refresh'></span>
-
 					<span class="fa fa-inbox" title='Open inbox' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-inbox'></span>
-
-					<span class="fa fa-map-signs" data-toggle="tooltip" data-placement="bottom" id='socketchatbox-change-room'></span>
 
 					<span id='socketchatbox-showHideChatbox'>↓</span>
 
@@ -100,45 +98,19 @@
 							<div>David</div>
 							<div>David</div>
 						</div>
-						<div class="socketchatbox-friend-messages">
-
-
-<!-- 							<div class="socketchatbox-message-wrapper">
-								<div class="socketchatbox-message socketchatbox-message-others">
-									
-									<span class="socketchatbox-messageBody socketchatbox-messageBody-others image-or-video"><a target="_blank" href="stickers/bunny/heart.gif"><img class="chatbox-image" src="stickers/bunny/heart.gif"></a>
-									</span>
-								</div>
-							</div>
-							<div class="socketchatbox-message-wrapper">
-								<div class="socketchatbox-message socketchatbox-message-others"><span class="socketchatbox-messageBody socketchatbox-messageBody-others">HI</span></div>
-
-							</div>
-							<div class="socketchatbox-message-wrapper">
-								<div class="socketchatbox-message socketchatbox-message-others">
-								<span class="socketchatbox-messageBody socketchatbox-messageBody-others">The social network has acknowledged that the documents seen by the newspaper were similar to what it used internally.</span></div>
-							</div>
-							<div class="socketchatbox-message-wrapper">
-								<div class="socketchatbox-message socketchatbox-message-me">
-								<span class="socketchatbox-messageBody socketchatbox-messageBody-me">yo</span></div>
-							</div>
-							<div class="socketchatbox-message-wrapper">
-								<div class="socketchatbox-message socketchatbox-message-me">
-								<span class="socketchatbox-messageBody socketchatbox-messageBody-me">The manuals cover a vast array of sensitive subjects, including hate speech, revenge porn, self-harm, suicide, cannibalism and threats of violence.
-								</span></div>
-							</div>
-
-
- -->
-
-
-						</div>
+						<div class="socketchatbox-friend-messages"></div>
 					</div>
 				</div>
 
 
-				<div class="socketchatbox-chatArea">
-					<ul class="socketchatbox-messages"></ul>
+				<div class="socketchatbox-chatroom-wrapper">
+					<div id="socketchatbox-chatroom-title">
+						<span class="fa fa-refresh" title='Refresh chatroom' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-refresh'></span><span id="socketchatbox-chatroom-url"></span>
+					</div>
+
+					<div class="socketchatbox-chatArea">
+						<ul class="socketchatbox-messages"></ul>
+					</div>
 				</div>
 				<div class = "socketchatbox-inputMessage-div">    
 					<input class="socketchatbox-inputMessage" placeholder = "Type here..."/>

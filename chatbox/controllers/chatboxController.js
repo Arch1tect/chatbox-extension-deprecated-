@@ -20,13 +20,15 @@
 		ui.$chatBox = $('.socketchatbox-page');
 		ui.$topbar = $('#socketchatbox-top');
 		ui.$chatBody = $('#socketchatbox-body');
+
+		ui.$chatroomWraper = $(".socketchatbox-chatroom-wrapper");
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$inboxArea = $('.socketchatbox-inbox');
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
 		ui.$topbarOptions = $('#topbar-options');
-		ui.$at = $('#socketchatbox-change-room');
+		ui.$at = $('#socketchatbox-chatroom-url');
 		ui.$inboxBtn = $('#socketchatbox-inbox');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
 		
@@ -59,7 +61,8 @@
             ui.$toggleRoomLock.addClass('fa-unlock-alt');	
         }
         
-        ui.$at.attr('data-original-title', chatbox.roomID);  
+        // ui.$at.attr('data-original-title', chatbox.roomID);  
+        ui.$at.text(chatbox.roomID);
 
 		ui.$topbar.click(function() {
 			$('#socketchatbox-sticker-picker').hide();
@@ -124,7 +127,7 @@
 			var index;
 			var inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
 
-
+			console.log('renderInboxMessage');
 			for (index=0; index<chatbox.inbox.messages.length; index++) {
 
 				var data = chatbox.inbox.messages[index];
@@ -146,6 +149,15 @@
 			
 			chatbox.socket.disconnect();
 			ui.welcomeMsgShown = false;
+
+			if (chatbox.config.lockRoom) {
+				// if chat room is set to lock, refresh uses the same chat room ID
+			}else {
+				// otherwise get true url in address bar
+				chatbox.roomID = location.search.substring(1);
+				// TODO: this is not working in some case, e.g. Youtube page change
+			}
+
 			chatbox.connect();
             
 		});
@@ -157,7 +169,7 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-			
+
 			if(ui.$inboxArea.is(':visible')) {
 				ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
 				ui.$toggleFriendList.hide();
@@ -169,7 +181,7 @@
 			}
 
 			ui.$inboxBtn.toggleClass('selected');
-			ui.$chatArea.slideToggle();
+			ui.$chatroomWraper.slideToggle();
 			ui.$inboxArea.slideToggle();
 
 		});
@@ -211,7 +223,9 @@
 				ui.welcomeMsgShown = false;
 				chatbox.connect();
             	chrome.storage.local.set({ chatbox_config: chatbox.config });
-        		ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
+        		// ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
+                ui.$at.text(chatbox.roomID);
+
             }
 
 		});

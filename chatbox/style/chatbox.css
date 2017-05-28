@@ -21,6 +21,11 @@
   background: rgba(0,0,0,0.05); 
 }
 
+/*bootstrap modal override*/
+.modal-content {
+    border: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -265,21 +270,25 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .socketchatbox-log {
-  /*color: gray;*/
-  /*font-size: smaller;*/
+  color: #9E9E9E;
+  font-size: 11px;
   /*font-weight: 600;*/
-  margin-bottom: 10px;
-  padding: 5px;
+  margin-bottom: 5px;
+  padding: 0px;
   text-align: center;
+}
+
+.socketchatbox-chatroom-wrapper {
+  height: 100%;
+  background: #eceff1;
 }
 
 
 .socketchatbox-chatArea {
 
   width: 100%;
-  height: 100%;
+  height: calc(100% - 30px);
   overflow-y: auto; /*only show scroll bar when needs to*/
-  background: #eceff1;
   border: none; 
   padding-right: 10px;
   padding-left: 10px;
@@ -296,11 +305,19 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-inbox-wrapper {
   height: calc(100% - 30px);
-  /*height: 100%;*/
   width: 100%;
 }
 
-.socketchatbox-inbox-title {
+#socketchatbox-refresh {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#socketchatbox-chatroom-url {
+  cursor: pointer;
+}
+
+.socketchatbox-inbox-title, #socketchatbox-chatroom-title{
   height: 30px;
   padding: 10px;
   border-bottom: 1px solid lightgray;
@@ -345,8 +362,9 @@ input.socketchatbox-inputMessage:disabled {
 #socketchatbox-toggle-friend-list {
   position: absolute;
   display: none;
+  z-index: 2;
   top: 50%;
-  left: 70px;
+  left: 69px;
   padding: 10px;
   color: gray;
   cursor: pointer;
