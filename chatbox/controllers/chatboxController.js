@@ -93,15 +93,29 @@
 
 
 			if ($('.socketchatbox-friend-list').width() < 50) {
-				$(this).addClass('fa-chevron-left');
-				$(this).removeClass('fa-chevron-right');
-				$('.socketchatbox-friend-list').css('width', '100px');
+
+				$('.socketchatbox-friend-list').animate({
+					width: '100px'
+				}, 300);
+				$(this).animate({
+					left: '69px'
+				}, 300, function(){
+					$(this).addClass('fa-chevron-left');
+					$(this).removeClass('fa-chevron-right');
+				});
+				// $('.socketchatbox-friend-list').css('width', '100px');
 
 			}else {
-				$(this).addClass('fa-chevron-right');
-				$(this).removeClass('fa-chevron-left');
-				$('.socketchatbox-friend-list').css('width', '0px');
-
+				// $('.socketchatbox-friend-list').css('width', '0px');
+				$('.socketchatbox-friend-list').animate({
+					width: '0px'
+				}, 300)
+				$(this).animate({
+					left: '0px'
+				}, 300, function(){
+					$(this).removeClass('fa-chevron-left');
+					$(this).addClass('fa-chevron-right');
+				});
 			}
 		});
 
