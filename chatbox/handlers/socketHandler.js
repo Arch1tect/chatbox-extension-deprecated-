@@ -62,7 +62,7 @@
             chatbox.ui.$onlineUserNum.css('background-color', '#0089FF');
             $('.socketchatbox-typing').text('Connected!');
             $('.socketchatbox-typing').css('background-color', 'rgba(63, 161, 245, 0.8)');
-            
+            chatbox.ui.$refreshBtn.removeClass('fa-spin');
             setTimeout(function(){
                 $('.socketchatbox-typing').fadeOut();
             }, 2000);

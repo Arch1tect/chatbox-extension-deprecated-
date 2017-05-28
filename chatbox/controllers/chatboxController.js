@@ -160,9 +160,10 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-			
+
 			chatbox.socket.disconnect();
 			ui.welcomeMsgShown = false;
+
 
 			if (chatbox.config.lockRoom) {
 				// if chat room is set to lock, refresh uses the same chat room ID
@@ -172,6 +173,7 @@
 				// TODO: this is not working in some case, e.g. Youtube page change
 			}
 
+			$(this).addClass('fa-spin');
 			setTimeout(function(){
 				chatbox.connect(); // make it slower so user can see the change better
 			}, 1000);
@@ -241,10 +243,11 @@
 				ui.welcomeMsgShown = false;
 
             	chrome.storage.local.set({ chatbox_config: chatbox.config });
+        		ui.$refreshBtn.addClass('fa-spin');
+				ui.$at.attr('data-original-title', 'Current chatroom: ' + chatbox.roomID);  
+                ui.$at.text(chatbox.roomID);
         		
         		setTimeout(function(){
-					ui.$at.attr('data-original-title', 'Current chatroom: ' + chatbox.roomID);  
-                	ui.$at.text(chatbox.roomID);
 					chatbox.connect(); // make it slower so user can see the change better
 				
 				}, 1000);
