@@ -19,7 +19,8 @@
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
     chatbox.domain = "https://quotime.me";
-    chatbox.inboxUrl = "http://localhost:9000";
+    // chatbox.inboxUrl = "http://localhost:9000";
+    chatbox.inboxUrl = chatbox.domain;
     // chatbox.domain = "https://localhost";
     // chatbox.domain = "http://localhost:8088";
 

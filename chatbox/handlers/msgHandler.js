@@ -39,7 +39,9 @@
 
         var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username));
 
-        $usernameDiv.addClass('socketchatbox-username');
+        $usernameDiv.addClass('socketchatbox-msg-username');
+        $usernameDiv.data('uid', data.uid);
+
         var $messageBodyDiv = $('<span class="socketchatbox-messageBody">');
         
         $messageBodyDiv.prop('title', msg_post_time);
@@ -138,8 +140,10 @@
             .data('username', data.username)
             .addClass(typingClass)
 
-        if (!options.inbox)
+        if (!options.inbox){
+
             $messageDiv.append($usernameDiv);
+        }
         
         $messageDiv.append($messageBodyDiv);
 
