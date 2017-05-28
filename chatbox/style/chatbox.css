@@ -321,9 +321,14 @@ input.socketchatbox-inputMessage:disabled {
   height: 30px;
   padding: 10px;
   border-bottom: 1px solid lightgray;
-  /*display: none;*/
   width: 100%;
   text-align: center;
+}
+
+#socketchatbox-chatroom-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .socketchatbox-friend-messages {
@@ -463,7 +468,7 @@ input.socketchatbox-inputMessage:disabled {
   /* height: 25px; */
   padding: 7px;
   display: none;
-    background: rgba(63, 161, 245, 0.6);
+    background: rgba(63, 161, 245, 0.8);
     /*outline: 1px solid rgba(63, 161, 245, 0.65);*/
   bottom: 35px;
   width: 100%;

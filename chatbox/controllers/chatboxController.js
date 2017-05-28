@@ -61,7 +61,7 @@
             ui.$toggleRoomLock.addClass('fa-unlock-alt');	
         }
         
-        // ui.$at.attr('data-original-title', chatbox.roomID);  
+        ui.$at.attr('data-original-title', 'Current chatroom: ' + chatbox.roomID);  
         ui.$at.text(chatbox.roomID);
 
 		ui.$topbar.click(function() {
@@ -158,7 +158,11 @@
 				// TODO: this is not working in some case, e.g. Youtube page change
 			}
 
-			chatbox.connect();
+			setTimeout(function(){
+				chatbox.connect(); // make it slower so user can see the change better
+			}, 1000);
+
+			
             
 		});
 
@@ -221,10 +225,20 @@
 				chatbox.historyHandler.load(); // must call to set correct key to save new msg
 				ui.addLog('Chat room changed.');
 				ui.welcomeMsgShown = false;
-				chatbox.connect();
+
             	chrome.storage.local.set({ chatbox_config: chatbox.config });
-        		// ui.$at.attr('data-original-title', 'Room: ' + chatbox.roomID);  
-                ui.$at.text(chatbox.roomID);
+        		
+        		setTimeout(function(){
+					ui.$at.attr('data-original-title', 'Current chatroom: ' + chatbox.roomID);  
+                	ui.$at.text(chatbox.roomID);
+					chatbox.connect(); // make it slower so user can see the change better
+				
+				}, 1000);
+
+        		
+
+
+
 
             }
 
