@@ -30,7 +30,7 @@
                     'type': 'text',
                     'name': 'fname',
                     'id': 'socketchatbox-txt_fullname',
-                    'size': '10',
+                    'size': '15',
                     'value': name
                 })
                 .appendTo('#socketchatbox-username');
@@ -81,6 +81,7 @@
         var name = $('#socketchatbox-txt_fullname').val();
         name = utils.cleanInput(name);
         name = $.trim(name);
+        name = name.substring(0,15);
         // if (name === chatbox.username || name === "")  {
         //     ui.$username.text(chatbox.username);
         //     return;
