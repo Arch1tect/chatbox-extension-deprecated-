@@ -418,6 +418,9 @@ input.socketchatbox-inputMessage:disabled {
 
 }
 
+.socketchatbox-msg-username:hover {
+  color: #0089ff;
+}
 
 .socketchatbox-message.history {
   /*filter: grayscale(90%);*/
@@ -585,14 +588,15 @@ input.socketchatbox-inputMessage:disabled {
     font-size: 11px;
     padding-top: 2px; 
     padding-bottom: 2px; 
-    box-shadow: 0 0 3px #737373;
+    box-shadow: 0 0 7px #737373;
 
 
 }
 
 .socketchatbox-username-action div {
   cursor: pointer;
-  padding: 5px 15px;
+  padding: 3px 15px;
+  color: black;
 }
 
 .socketchatbox-username-action div:hover {
@@ -603,6 +607,6 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-message-others .socketchatbox-username-action{
   right: 0px;
-  margin-top: 14px;
+  /*margin-top: 14px;*/
 }
 

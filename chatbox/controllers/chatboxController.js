@@ -121,8 +121,8 @@
 		});
 
 		ui.$friend.click(function(e) {
-			console.log(this);
-			console.log($(this).data('uid'));
+			// console.log(this);
+			// console.log($(this).data('uid'));
 
 			$('.socketchatbox-friend-list div.selected').removeClass('selected');
 			$(this).addClass('selected');
@@ -145,7 +145,7 @@
 			$actionMenu.append($('<div>Message</div>'));
 			$actionMenu.append($('<div>Follow</div>'));
 			$actionMenuWrapper.append($actionMenu);
-			$(this).after($actionMenuWrapper);
+			$(this).append($actionMenuWrapper);
 
 		});
 
@@ -160,7 +160,7 @@
 			var index;
 			var inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
 
-			console.log('renderInboxMessage');
+			// console.log('renderInboxMessage');
 			for (index=0; index<chatbox.inbox.messages.length; index++) {
 
 				var data = chatbox.inbox.messages[index];
