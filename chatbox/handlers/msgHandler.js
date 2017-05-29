@@ -17,6 +17,8 @@
 
         var msg_post_time = "";  
 
+        var sentByMe = data.sender === chatbox.uuid || data.username === chatbox.username;
+
         if (options.inbox) {
             // console.log(data.create_time);
             d = new Date(data.create_time + ' UTC');
@@ -48,7 +50,7 @@
         // $messageBodyDiv.attr('data-toggle', "tooltip"); commented out because seems to be too eye-catching
         // $messageBodyDiv.tooltip();
 
-        if (data.sender === chatbox.uuid || data.username === chatbox.username) {
+        if (sentByMe) {
             $messageBodyDiv.addClass('socketchatbox-messageBody-me');
         } else {
             $messageBodyDiv.addClass('socketchatbox-messageBody-others');
@@ -143,6 +145,8 @@
         if (!options.inbox){
 
             $messageDiv.append($usernameDiv);
+            if (!sentByMe)
+                $messageDiv.append($('<br/>'));
         }
         
         $messageDiv.append($messageBodyDiv);

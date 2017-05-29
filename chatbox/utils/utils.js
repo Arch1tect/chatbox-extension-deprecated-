@@ -6,6 +6,7 @@
     chatbox.utils = utils;
 
     $(document.body).click(function(){
+        $('.socketchatbox-username-action-wrapper').remove();
         $('#socketchatbox-sticker-picker').hide();
     } );
 

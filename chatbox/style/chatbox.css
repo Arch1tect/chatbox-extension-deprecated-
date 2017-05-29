@@ -227,10 +227,6 @@ input.socketchatbox-inputMessage:disabled {
   color: #FFF;
 }
 
-/*#socketchatbox-username a {
-  color: white;
-  text-decoration: none;
-}*/
 #socketchatbox-top {
   min-width: 100px;
   cursor: pointer;
@@ -362,7 +358,6 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-friend-list div.selected {
   background-color: lightgray;
-  font-weight: bold;
 }
 
 #socketchatbox-toggle-friend-list {
@@ -407,14 +402,20 @@ input.socketchatbox-inputMessage:disabled {
   line-height: 1em;
 
 }
-.socketchatbox-message-me >.socketchatbox-msg-username{
-  /*display: none;*/
-  text-align: left;
+.socketchatbox-message-me .socketchatbox-msg-username {
+  /*text-align: left;*/
   padding-left: 5px;
+}
+
+.socketchatbox-message-others .socketchatbox-msg-username {
+  float: right;
 }
 
 .socketchatbox-msg-username {
   line-height: 1em;
+  cursor: pointer;
+  display: table-cell;
+
 }
 
 
@@ -479,7 +480,7 @@ input.socketchatbox-inputMessage:disabled {
  
 .socketchatbox-msg-username {
   /*font-weight: 700; */
-  text-align: right;
+  /*text-align: right;*/
   /*font-size: smaller;*/
 }
 
@@ -571,3 +572,37 @@ input.socketchatbox-inputMessage:disabled {
   margin:5px;
   cursor: pointer;
 }
+.socketchatbox-username-action-wrapper {
+  position: relative;
+  height: 0;
+}
+
+.socketchatbox-username-action {
+    position: absolute;
+    z-index: 2;
+    background: white;
+    border: 1px solid #9E9E9E;
+    font-size: 11px;
+    padding-top: 2px; 
+    padding-bottom: 2px; 
+    box-shadow: 0 0 3px #737373;
+
+
+}
+
+.socketchatbox-username-action div {
+  cursor: pointer;
+  padding: 5px 15px;
+}
+
+.socketchatbox-username-action div:hover {
+  background-color: #0089FF;
+  color: white;
+}
+
+
+.socketchatbox-message-others .socketchatbox-username-action{
+  right: 0px;
+  margin-top: 14px;
+}
+

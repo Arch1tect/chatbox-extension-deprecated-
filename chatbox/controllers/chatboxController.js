@@ -67,7 +67,7 @@
 		ui.$topbar.click(function() {
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-
+			$('.socketchatbox-username-action-wrapper').remove();
 			if(ui.$chatBody.is(":visible")){
 				minimize();
 
@@ -84,6 +84,7 @@
 
 			e.preventDefault();
 			e.stopPropagation();
+			$('.socketchatbox-username-action-wrapper').remove();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			
@@ -130,6 +131,24 @@
 			
 		});
 
+		ui.$chatArea.on("click", ".socketchatbox-msg-username", function(e) {
+
+			e.preventDefault();
+			e.stopPropagation();
+			$('.socketchatbox-username-action-wrapper').remove();
+			console.log($(this).data('uid'));
+			var $actionMenuWrapper = $('<div></div>');
+			$actionMenuWrapper.addClass('socketchatbox-username-action-wrapper');
+			var $actionMenu = $('<div></div>');			
+			$actionMenu.addClass('socketchatbox-username-action');
+			// $actionMenu.append($('<div>Profile</div>'));
+			$actionMenu.append($('<div>Message</div>'));
+			$actionMenu.append($('<div>Follow</div>'));
+			$actionMenuWrapper.append($actionMenu);
+			$(this).after($actionMenuWrapper);
+
+		});
+
 		ui.renderInboxMessage = function(clearUI) {
 		// Only append new msg that wasn't rendered before
 			if (clearUI) {
@@ -160,7 +179,7 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-
+			$('.socketchatbox-username-action-wrapper').remove();
 			chatbox.socket.disconnect();
 			ui.welcomeMsgShown = false;
 
@@ -189,7 +208,7 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-
+			$('.socketchatbox-username-action-wrapper').remove();
 			if(ui.$inboxArea.is(':visible')) {
 				ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
 				ui.$toggleFriendList.hide();
@@ -223,7 +242,7 @@
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
-
+			$('.socketchatbox-username-action-wrapper').remove();
 			ui.$msgModalContent.val(chatbox.roomID);
 			ui.$msgModal.modal('show');
 
@@ -307,10 +326,11 @@
 
 			e.preventDefault();
 			e.stopPropagation();
+
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			utils.updateIframeSize('full size');
-
+			$('.socketchatbox-username-action-wrapper').remove();
 		});
 
 		$(document).mousemove(function(e){
@@ -385,6 +405,7 @@
 
             // When the client hits ESC on their keyboard
             if (event.which === 27) {
+            	$('.socketchatbox-username-action-wrapper').remove();
                 $('#socketchatbox-sticker-picker').hide();
                 chatbox.ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
             }
