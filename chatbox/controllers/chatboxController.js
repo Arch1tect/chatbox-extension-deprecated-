@@ -120,30 +120,58 @@
 			}
 		});
 
-		ui.$friend.click(function(e) {
-			// console.log(this);
-			// console.log($(this).data('uid'));
+		ui.$friendList.on("click", "div", function(e) {
+			selectUserFromInboxList($(this));
+		});
 
+
+		function selectUserFromInboxList($userDiv) {
+			console.log($userDiv);
 			$('.socketchatbox-friend-list div.selected').removeClass('selected');
-			$(this).addClass('selected');
+			$userDiv.addClass('selected');
 			var clearUI = true;
 			ui.renderInboxMessage(clearUI);
-			
-		});
+		}
 
 		ui.$chatArea.on("click", ".socketchatbox-msg-username", function(e) {
 
 			e.preventDefault();
 			e.stopPropagation();
 			$('.socketchatbox-username-action-wrapper').remove();
-			console.log($(this).data('uid'));
+
+			var uid = $(this).data('uid');
+			var username = $(this).text();
 			var $actionMenuWrapper = $('<div></div>');
 			$actionMenuWrapper.addClass('socketchatbox-username-action-wrapper');
 			var $actionMenu = $('<div></div>');			
 			$actionMenu.addClass('socketchatbox-username-action');
 			// $actionMenu.append($('<div>Profile</div>'));
-			$actionMenu.append($('<div>Message</div>'));
+
+			var $msgActionBtn = $('<div>Message</div>');
+			$msgActionBtn.click(function(){
+
+				if (!chatbox.inbox.users)
+					chatbox.inbox.users = {};
+
+				// If not already in the inbox list, add user
+				if (!(uid in chatbox.inbox.users)) {
+					chatbox.inbox.users[uid] = username;
+					var $username = $('<div data-uid="'+uid+'"></div>');
+					// weird that $username.data(...) doesn't work, so I did it this way
+					$username.text(username);
+					ui.$friendList.prepend($username);
+
+				}
+
+				var $receiver = ui.$friendList.find("[data-uid='" + uid +"']" );
+				
+				selectUserFromInboxList($receiver);
+				ui.toggleInbox();
+			})
+
 			$actionMenu.append($('<div>Follow</div>'));
+			$actionMenu.append($msgActionBtn);
+
 			$actionMenuWrapper.append($actionMenu);
 			$(this).append($actionMenuWrapper);
 
@@ -201,11 +229,10 @@
             
 		});
 
-		ui.$inboxBtn.click(function(e) {
+		function toggleInbox() {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 
-			e.preventDefault();
-			e.stopPropagation();
+
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			$('.socketchatbox-username-action-wrapper').remove();
@@ -222,7 +249,14 @@
 			ui.$inboxBtn.toggleClass('selected');
 			ui.$chatroomWraper.slideToggle();
 			ui.$inboxArea.slideToggle();
+		}
 
+		ui.toggleInbox = toggleInbox;
+
+		ui.$inboxBtn.click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			toggleInbox();
 		});
 
 		ui.$cross.click(function(e) {
