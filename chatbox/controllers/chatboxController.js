@@ -153,15 +153,7 @@
 				if (!chatbox.inbox.users)
 					chatbox.inbox.users = {};
 
-				// If not already in the inbox list, add user
-				if (!(uid in chatbox.inbox.users)) {
-					chatbox.inbox.users[uid] = username;
-					var $username = $('<div data-uid="'+uid+'"></div>');
-					// weird that $username.data(...) doesn't work, so I did it this way
-					$username.text(username);
-					ui.$friendList.prepend($username);
-
-				}
+				ui.updateInboxContactList(uid, username);
 
 				var $receiver = ui.$friendList.find("[data-uid='" + uid +"']" );
 				
@@ -176,6 +168,28 @@
 			$(this).append($actionMenuWrapper);
 
 		});
+
+		ui.updateInboxContactList = function(uid, username) {
+			// If not already in the inbox list, add user
+			chatbox.inbox.contact = chatbox.inbox.contact || {};
+
+			if (!(uid in chatbox.inbox.contact)) {
+
+				chatbox.inbox.contact[uid] = username;
+
+				if (!username) {
+					//should not happen, just in case
+					username = "no name";
+
+				}
+				if (uid != chatbox.uuid) {
+					var $username = $('<div data-uid="'+uid+'"></div>');
+					// weird that $username.data(...) doesn't work, so I did it this way
+					$username.text(username);
+					ui.$friendList.prepend($username);
+				}
+			}
+		}
 
 		ui.renderInboxMessage = function(clearUI) {
 		// Only append new msg that wasn't rendered before

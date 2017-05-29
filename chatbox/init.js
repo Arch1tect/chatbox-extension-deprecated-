@@ -19,8 +19,8 @@
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
     chatbox.domain = "https://quotime.me";
-    // chatbox.inboxUrl = "http://localhost:9000";
-    chatbox.inboxUrl = chatbox.domain;
+    chatbox.inboxUrl = "http://localhost:9000";
+    // chatbox.inboxUrl = chatbox.domain;
     // chatbox.domain = "https://localhost";
     // chatbox.domain = "http://localhost:8088";
 
@@ -39,7 +39,7 @@
 
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
-        setTimeout(function(){chatbox.inbox.keepPullingMessages();}, 5000);
+        setTimeout(function(){chatbox.inbox.keepPullingMessages();}, 10*1000);
     }
 
     // This is pulling all messages, makes sense for first load
@@ -47,6 +47,17 @@
     chatbox.inbox.pullMessages = function() {
         $.get(chatbox.inboxUrl + "/db/message/user/" + chatbox.uuid, function(data, status) {
             chatbox.inbox.messages = data;
+            var index = 0;
+            for (; index<chatbox.inbox.messages.length; index++) {
+
+                var msg = chatbox.inbox.messages[index];
+                chatbox.ui.updateInboxContactList(msg.sender, msg.sendername);
+                chatbox.ui.updateInboxContactList(msg.receiver, msg.receivername);
+
+            }
+
+            
+            // console.log(data);
             chatbox.ui.renderInboxMessage();
         });
     }
@@ -116,14 +127,6 @@ $( document ).ready(function() {
         var config = chatbox.config;
 
 
-        if (config.chatbox_username) {
-            console.log("username from local storage: " + config.chatbox_username);
-            chatbox.username = config.chatbox_username; 
-        }else {
-            console.log("no username in local storage");
-        }
-
-
         if (config.uuid) {
             console.log("Found user id " + config.uuid);
             chatbox.uuid = config.uuid;
@@ -132,12 +135,27 @@ $( document ).ready(function() {
 
             chatbox.uuid = chatbox.utils.guid();
             config.uuid =  chatbox.uuid;
-            chrome.storage.local.set({ chatbox_config: config });
 
             console.log("Creating new user id " + chatbox.uuid);
         }
 
+        if (config.chatbox_username) {
+            console.log("username from local storage: " + config.chatbox_username);
+            chatbox.username = config.chatbox_username; 
+        }else {
+            console.log("no username in local storage, send default name to server db");
+            var payload = {
+                'uuid': chatbox.uuid,
+                'name': chatbox.username
+            }
+            $.post(chatbox.inboxUrl + "/db/user/change_name", payload, function(resp) {
+              console.log(resp);
+            });
+            config.chatbox_username = chatbox.username; 
 
+        }
+        
+        chrome.storage.local.set({ chatbox_config: config });
 
         chatbox.init();
 

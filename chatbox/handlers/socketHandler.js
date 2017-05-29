@@ -59,13 +59,14 @@
 
         // Once connected, user will receive the invitation to login using uuid
         socket.on('login', function (data) {
+            $('.socketchatbox-typing').show();
             chatbox.ui.$onlineUserNum.css('background-color', '#0089FF');
             $('.socketchatbox-typing').text('Connected!');
             $('.socketchatbox-typing').css('background-color', 'rgba(63, 161, 245, 0.8)');
             chatbox.ui.$refreshBtn.removeClass('fa-spin');
             setTimeout(function(){
                 $('.socketchatbox-typing').fadeOut();
-            }, 2000);
+            }, 1500);
 
             socket.emit('login', {
                 username: chatbox.username,

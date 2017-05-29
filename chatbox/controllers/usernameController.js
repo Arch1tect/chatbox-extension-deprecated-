@@ -97,7 +97,14 @@
         config.chatbox_username = name;
         chrome.storage.local.set({ chatbox_config: config });
 
+        var payload = {
+            'uuid': chatbox.uuid,
+            'name': name
+        }
 
+        $.post(chatbox.inboxUrl + "/db/user/change_name", payload, function(resp) {
+          console.log(resp);
+        });
 
         //if (!sendingFile) {
 
