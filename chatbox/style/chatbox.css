@@ -320,6 +320,8 @@ input.socketchatbox-inputMessage:disabled {
   border-bottom: 1px solid lightgray;
   width: 100%;
   text-align: center;
+  background: white;
+
 }
 
 #socketchatbox-chatroom-title {
@@ -417,6 +419,10 @@ input.socketchatbox-inputMessage:disabled {
   display: table-cell;
 
 }
+.history {
+  color: gray;
+}
+
 
 .socketchatbox-msg-username:hover {
   color: #0089ff;
