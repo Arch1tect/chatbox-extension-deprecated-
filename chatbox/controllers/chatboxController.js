@@ -140,12 +140,13 @@
 			$('.socketchatbox-username-action-wrapper').remove();
 
 			var uid = $(this).data('uid');
+			if (uid == chatbox.uuid) // Don't show menu if clicking oneself
+				return;
 			var username = $(this).text();
 			var $actionMenuWrapper = $('<div></div>');
 			$actionMenuWrapper.addClass('socketchatbox-username-action-wrapper');
 			var $actionMenu = $('<div></div>');			
 			$actionMenu.addClass('socketchatbox-username-action');
-			// $actionMenu.append($('<div>Profile</div>'));
 
 			var $msgActionBtn = $('<div>Message</div>');
 			$msgActionBtn.click(function(){
@@ -160,8 +161,9 @@
 				selectUserFromInboxList($receiver);
 				ui.toggleInbox();
 			})
-
-			$actionMenu.append($('<div>Follow</div>'));
+			
+			// $actionMenu.append($('<div>Profile</div>'));
+			// $actionMenu.append($('<div>Follow</div>'));
 			$actionMenu.append($msgActionBtn);
 
 			$actionMenuWrapper.append($actionMenu);
@@ -318,11 +320,6 @@
 					chatbox.connect(); // make it slower so user can see the change better
 				
 				}, 1000);
-
-        		
-
-
-
 
             }
 

@@ -17,7 +17,7 @@
 
         var msg_post_time = "";  
 
-        var sentByMe = data.sender === chatbox.uuid || data.username === chatbox.username;
+        var sentByMe = data.sender === chatbox.uuid;
 
         if (options.inbox) {
             // console.log(data.create_time);
@@ -49,12 +49,6 @@
         $messageBodyDiv.prop('title', msg_post_time);
         // $messageBodyDiv.attr('data-toggle', "tooltip"); commented out because seems to be too eye-catching
         // $messageBodyDiv.tooltip();
-
-        if (sentByMe) {
-            $messageBodyDiv.addClass('socketchatbox-messageBody-me');
-        } else {
-            $messageBodyDiv.addClass('socketchatbox-messageBody-others');
-        }
 
         var stringForNotification = '';
         // received image file in base64
@@ -155,7 +149,7 @@
             $messageDiv.addClass('history');
         
         $messageWrapper.append($messageDiv);
-        if (data.username === chatbox.username) {
+        if (sentByMe) {
             $messageDiv.addClass('socketchatbox-message-me');
         } else {
             $messageDiv.addClass('socketchatbox-message-others');

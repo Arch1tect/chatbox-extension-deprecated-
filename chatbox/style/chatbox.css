@@ -220,8 +220,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .socketchatbox-onlineusers span{
-  /* margin: 5px; */
-  /* line-height: 1.3em; */
+
   display: inline-block;
   padding: 5px;
   color: #FFF;
@@ -233,9 +232,6 @@ input.socketchatbox-inputMessage:disabled {
   height: 30px;
   background: rgba(0, 0, 0, 0.75);
   padding-left: 10px;
-  /*color: black;*/
-  /*font-size: 90%;*/
-  /* border: 1px solid black; */
   line-height: 30px;
 }
 
@@ -246,23 +242,19 @@ input.socketchatbox-inputMessage:disabled {
   padding: 0;
   position: fixed;
   bottom:0px;
-  /*overflow: auto;*/
   max-width:100%;
   line-height:1em;
-  /*  resize: horizontal;
-*/
   border-top: 1px solid lightgray;
   border-right: 1px solid lightgray;
-  /*background:white;*/
   z-index:999;
   font-family:Arial,Helvetica,sans-serif;
 }
-.socketchatbox-messages img{
+.socketchatbox-message img{
   max-width: 70%;
   border-radius: 5px;
 }
 
-.socketchatbox-messages video{
+.socketchatbox-message video{
   max-width: 100%;
 }
 
@@ -374,18 +366,14 @@ input.socketchatbox-inputMessage:disabled {
   background: white;
   border: 1px solid lightgray;
 }
-/*#socketchatbox-toggle-friend-list.fa-chevron-right {
-  left: 0px;
-}*/
+
 
 #socketchatbox-toggle-friend-list:hover {
   color: black;
 }
 
 .socketchatbox-message-wrapper {
-  /* width: 100%; */
   overflow: auto;
-  /* margin-bottom: 15px; */
   padding-bottom: 10px;
 }
 
@@ -438,7 +426,6 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-message-others img{
    float: right; 
-   max-width: 70%;
 }
 
 
@@ -457,18 +444,16 @@ input.socketchatbox-inputMessage:disabled {
   vertical-align: top;
   line-height: 1.25em;
   font-size: 12px;
-  /* word-break: break-all; */
-  /* overflow-x: scroll; */
+
 }
 
 
 
-.socketchatbox-messageBody-me {
+.socketchatbox-message-me .socketchatbox-messageBody {
   background: #BBFF00;
 }
 
-
-.socketchatbox-messageBody-others {
+.socketchatbox-message-others .socketchatbox-messageBody {
   float: right;
 }
 
@@ -487,11 +472,7 @@ input.socketchatbox-inputMessage:disabled {
   z-index: 10;
 }
  
-.socketchatbox-msg-username {
-  /*font-weight: 700; */
-  /*text-align: right;*/
-  /*font-size: smaller;*/
-}
+
 
 
 #socketchatbox-imagepopup-src {
