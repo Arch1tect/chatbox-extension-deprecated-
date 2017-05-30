@@ -42,7 +42,7 @@
         var $usernameDiv = $('<div></div>').html(utils.cleanInput(data.username));
 
         $usernameDiv.addClass('socketchatbox-msg-username');
-        $usernameDiv.data('uid', data.uid);
+        $usernameDiv.data('uid', data.sender);
 
         var $messageBodyDiv = $('<span class="socketchatbox-messageBody">');
         

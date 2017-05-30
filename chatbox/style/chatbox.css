@@ -37,7 +37,6 @@ html {
 }
 ul {
   list-style: none;
-  word-wrap: break-word;
 }
 input.socketchatbox-inputMessage:disabled {
     background: lightgray;
@@ -416,7 +415,7 @@ input.socketchatbox-inputMessage:disabled {
   vertical-align: top;
   line-height: 1.25em;
   font-size: 12px;
-
+  word-wrap: break-word;
 }
 
 

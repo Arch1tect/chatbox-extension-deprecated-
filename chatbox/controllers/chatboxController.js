@@ -140,6 +140,7 @@
 			$('.socketchatbox-username-action-wrapper').remove();
 
 			var uid = $(this).data('uid');
+			console.log('uid '+uid);
 			if (uid == chatbox.uuid) // Don't show menu if clicking oneself
 				return;
 			var username = $(this).text();
@@ -161,7 +162,7 @@
 				selectUserFromInboxList($receiver);
 				ui.toggleInbox();
 			})
-			
+
 			// $actionMenu.append($('<div>Profile</div>'));
 			// $actionMenu.append($('<div>Follow</div>'));
 			$actionMenu.append($msgActionBtn);

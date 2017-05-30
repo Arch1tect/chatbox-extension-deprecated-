@@ -46,7 +46,10 @@
     // but we only need to pull front-end opened conversation for the long-pulling
     chatbox.inbox.pullMessages = function() {
         $.get(chatbox.inboxUrl + "/db/message/user/" + chatbox.uuid, function(data, status) {
-            chatbox.inbox.messages = data;
+            chatbox.inbox.messages = data.sort(sortByMsgId);
+
+
+
             var index = 0;
             for (; index<chatbox.inbox.messages.length; index++) {
 
@@ -60,6 +63,10 @@
             // console.log(data);
             chatbox.ui.renderInboxMessage();
         });
+    }
+
+    function sortByMsgId(a, b) {
+        return a.id > b.id ? 1 : -1;
     }
 
     chatbox.init = function() {
