@@ -126,7 +126,7 @@
 
 
 		function selectUserFromInboxList($userDiv) {
-			console.log($userDiv);
+			// console.log($userDiv);
 			$('.socketchatbox-friend-list div.selected').removeClass('selected');
 			$userDiv.addClass('selected');
 			var clearUI = true;

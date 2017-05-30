@@ -19,8 +19,8 @@
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
     chatbox.domain = "https://quotime.me";
-    chatbox.inboxUrl = "http://localhost:9000";
-    // chatbox.inboxUrl = chatbox.domain;
+    // chatbox.inboxUrl = "http://localhost:9000";
+    chatbox.inboxUrl = chatbox.domain;
     // chatbox.domain = "https://localhost";
     // chatbox.domain = "http://localhost:8088";
 
@@ -39,7 +39,11 @@
 
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
-        setTimeout(function(){chatbox.inbox.keepPullingMessages();}, 10*1000);
+
+        var interval = 15*1000;
+        if(ui.$inboxArea.is(':visible')) 
+            interval = 2*1000;
+        setTimeout(function(){chatbox.inbox.keepPullingMessages();}, interval);
     }
 
     // This is pulling all messages, makes sense for first load

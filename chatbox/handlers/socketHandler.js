@@ -97,7 +97,7 @@
         // Whenever the server emits 'new message', update the chat body
         socket.on('new message', function (data) {
             msgHandler.processChatMessage(data);
-            console.log(data);
+            // console.log(data);
             // play new msg sound and change chatbox color to notify users
             if (data.username !== chatbox.username) {
                 //newMsgBeep();
