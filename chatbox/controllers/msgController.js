@@ -22,7 +22,7 @@
 
             } else {
 
-                if (ui.$inputMessage.is(":focus")) {
+                if (ui.$inputMessage.is(":focus") && !(ui.$inboxArea.is(':visible'))) {
 
                     chatbox.socket.emit('typing', {});
 
