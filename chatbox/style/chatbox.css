@@ -94,8 +94,6 @@ input.socketchatbox-inputMessage:disabled {
   height: 34px;
   border: 0px;
   margin: 0px;
-  /*border: 1px solid #d8d8d8;*/
-  /*font-size: medium;*/
   line-height: 2;
   background: transparent;
 }
@@ -176,19 +174,6 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 
-#socketchatbox-change-room {
-/*    color: white;
-    padding: 5px;*/
-}
-#socketchatbox-showHideChatbox {
-/*  color: white;
-    padding: 5px;*/
-    display: none;
-}
-#socketchatbox-closeChatbox {
-/*  color: white;
-  padding: 5px;*/
-}
 
 #socketchatbox-username {
   float:left;
@@ -382,9 +367,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .socketchatbox-messages {
-  /*height: 100%;*/
   margin: 0;
-  /* padding-bottom: 0px; */
   padding: 0;
 }
 #socketchatbox-txt_fullname {
@@ -392,12 +375,8 @@ input.socketchatbox-inputMessage:disabled {
   line-height: 1em;
 
 }
-.socketchatbox-message-me .socketchatbox-msg-username {
-  /*text-align: left;*/
-  padding-left: 5px;
-}
 
-.socketchatbox-message-others .socketchatbox-msg-username {
+.socketchatbox-message-me .socketchatbox-msg-username {
   float: right;
 }
 
@@ -416,16 +395,9 @@ input.socketchatbox-inputMessage:disabled {
   color: #0089ff;
 }
 
-.socketchatbox-message.history {
-  /*filter: grayscale(90%);*/
-}
 
 .history .socketchatbox-messageBody{
   background: none;
-}
-
-.socketchatbox-message-others img{
-   float: right; 
 }
 
 
@@ -453,7 +425,11 @@ input.socketchatbox-inputMessage:disabled {
   background: #BBFF00;
 }
 
-.socketchatbox-message-others .socketchatbox-messageBody {
+.socketchatbox-message-me .socketchatbox-messageBody {
+  float: right;
+}
+
+.socketchatbox-message-me img {
   float: right;
 }
 
@@ -592,7 +568,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 
-.socketchatbox-message-others .socketchatbox-username-action{
+.socketchatbox-message-me .socketchatbox-username-action{
   right: 0px;
   /*margin-top: 14px;*/
 }

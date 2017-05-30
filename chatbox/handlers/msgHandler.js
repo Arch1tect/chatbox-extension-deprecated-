@@ -139,7 +139,7 @@
         if (!options.inbox){
 
             $messageDiv.append($usernameDiv);
-            if (!sentByMe)
+            if (sentByMe)
                 $messageDiv.append($('<br/>'));
         }
         
