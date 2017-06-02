@@ -162,13 +162,14 @@ input.socketchatbox-inputMessage:disabled {
 }
 #topbar-options span {
     color: lightgray;
-    padding: 3px;
+    /*padding: 3px;*/
     padding-left: 7px;
     padding-right: 7px;
+    line-height: 20px;
 }
 
 #topbar-options span:hover,  #topbar-options span.selected{
-  background: #3c3c3c;
+  background: gray;;
   color:white;
 }
 
