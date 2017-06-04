@@ -24,12 +24,14 @@
 		ui.$chatroomWraper = $(".socketchatbox-chatroom-wrapper");
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$inboxArea = $('.socketchatbox-inbox');
+		ui.$profileArea = $('.socketchatbox-profile');
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
 		ui.$topbarOptions = $('#topbar-options');
 		ui.$at = $('#socketchatbox-chatroom-url');
 		ui.$inboxBtn = $('#socketchatbox-inbox');
+		ui.$profileBtn = $('#socketchatbox-profile');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
 		
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
@@ -246,6 +248,33 @@
             
 		});
 
+		function toggleProfile() {
+			$('[data-toggle="tooltip"]').tooltip('hide');
+
+
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+			$('.socketchatbox-username-action-wrapper').remove();
+			if(ui.$profileArea.is(':visible')) {
+				ui.$toggleFriendList.hide();
+				ui.$chatroomWraper.slideDown();
+
+			}
+			else{
+				ui.$toggleFriendList.fadeIn('slow');
+				ui.$inboxArea.slideUp();
+				ui.$chatroomWraper.slideUp();
+				ui.$inboxBtn.removeClass('selected');
+
+			}
+
+			ui.$profileBtn.toggleClass('selected');
+			ui.$profileArea.slideToggle();
+		}
+
+		ui.toggleProfile = toggleProfile;
+
+
 		function toggleInbox() {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 
@@ -254,17 +283,21 @@
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			$('.socketchatbox-username-action-wrapper').remove();
 			if(ui.$inboxArea.is(':visible')) {
-				ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
+				// ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
 				ui.$toggleFriendList.hide();
+				ui.$chatroomWraper.slideDown();
 			}
 			else{
-				ui.$inboxBtn.attr('data-original-title', 'Close inbox');  
+				// ui.$inboxBtn.attr('data-original-title', 'Close inbox');  
 				ui.$toggleFriendList.fadeIn('slow');
+				ui.$chatroomWraper.slideUp();
+				ui.$profileArea.slideUp();
+				ui.$profileBtn.removeClass('selected');
+
 
 			}
 
 			ui.$inboxBtn.toggleClass('selected');
-			ui.$chatroomWraper.slideToggle();
 			ui.$inboxArea.slideToggle();
 		}
 
@@ -275,7 +308,11 @@
 			e.stopPropagation();
 			toggleInbox();
 		});
-
+		ui.$profileBtn.click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			toggleProfile();
+		});
 		ui.$cross.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 

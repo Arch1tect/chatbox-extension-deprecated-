@@ -277,6 +277,14 @@ input.socketchatbox-inputMessage:disabled {
   /*border-bottom: 1px solid;*/
 }
 
+.socketchatbox-profile {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: #eceff1;
+  /*border-bottom: 1px solid;*/
+}
+
 .socketchatbox-inbox-wrapper {
   height: calc(100% - 30px);
   width: 100%;
@@ -291,7 +299,7 @@ input.socketchatbox-inputMessage:disabled {
   cursor: pointer;
 }
 
-.socketchatbox-inbox-title, #socketchatbox-chatroom-title{
+.socketchatbox-page-title {
   height: 30px;
   padding: 10px;
   border-bottom: 1px solid lightgray;

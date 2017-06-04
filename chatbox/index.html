@@ -34,7 +34,9 @@
 
 				<span id='topbar-options' class='float-right'>
 
-					<span class="fa fa-inbox" title='Open inbox' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-inbox'></span>
+					<span class="fa fa-user" title='Profile' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-profile'></span>
+
+					<span class="fa fa-inbox" title='Inbox' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-inbox'></span>
 
 					<!-- <span id='socketchatbox-showHideChatbox'>↓</span> -->
 
@@ -82,7 +84,7 @@
 				<div class='socketchatbox-onlineusers'></div>
 				<div class = "socketchatbox-typing"> </div>
 				<div class="socketchatbox-inbox">
-					<div class="socketchatbox-inbox-title">Private Messages</div>
+					<div class="socketchatbox-page-title">Private Messages</div>
 					<div class="socketchatbox-inbox-wrapper">
 						<span class="fa fa-chevron-left" id="socketchatbox-toggle-friend-list"></span>
 						<div class="socketchatbox-friend-list">
@@ -90,10 +92,15 @@
 						<div class="socketchatbox-friend-messages"></div>
 					</div>
 				</div>
-
+				<div class="socketchatbox-profile">
+					<div class="socketchatbox-page-title">Profile</div>
+					<div class="socketchatbox-profile-wrapper">
+						
+					</div>
+				</div>
 
 				<div class="socketchatbox-chatroom-wrapper">
-					<div id="socketchatbox-chatroom-title">
+					<div id="socketchatbox-chatroom-title" class="socketchatbox-page-title">
 						<span class="fa fa-refresh" title='Refresh chatroom' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-refresh'></span><span id="socketchatbox-chatroom-url" data-toggle="tooltip" data-placement="bottom"></span>
 					</div>
 
