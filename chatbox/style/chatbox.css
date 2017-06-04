@@ -158,7 +158,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 #topbar-options {
   margin-right: 15px;
-
+  font-size: 15px;
 }
 #topbar-options span {
     color: lightgray;
