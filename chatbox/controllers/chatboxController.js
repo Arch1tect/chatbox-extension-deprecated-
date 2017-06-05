@@ -21,6 +21,8 @@
 		ui.$topbar = $('#socketchatbox-top');
 		ui.$chatBody = $('#socketchatbox-body');
 
+		ui.$profileUsername = $('.socketchatbox-profile-name');
+
 		ui.$chatroomWraper = $(".socketchatbox-chatroom-wrapper");
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$inboxArea = $('.socketchatbox-inbox');

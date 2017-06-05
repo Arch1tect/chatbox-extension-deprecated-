@@ -285,6 +285,16 @@ input.socketchatbox-inputMessage:disabled {
   /*border-bottom: 1px solid;*/
 }
 
+.socketchatbox-profile-img {
+  border-radius: 50%;
+  width: 70px;
+}
+
+.socketchatbox-profile-name {
+  margin: 15px;
+  font-size: 15px;
+}
+
 .socketchatbox-inbox-wrapper {
   height: calc(100% - 30px);
   width: 100%;

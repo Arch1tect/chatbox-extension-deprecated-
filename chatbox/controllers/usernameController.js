@@ -120,6 +120,7 @@
             chatbox.username = name;
             console.log("Server says username should be " + name);
             ui.$username.text(chatbox.username);
+            ui.$profileUsername.text(chatbox.username);
         }
     }
 
