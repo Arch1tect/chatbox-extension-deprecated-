@@ -308,6 +308,9 @@
 		ui.$inboxBtn.click(function(e) {
 			e.preventDefault();
 			e.stopPropagation();
+			$('#socketchatbox-inbox').addClass('fa-inbox');
+            $('#socketchatbox-inbox').removeClass('fa-envelope');
+            $('#socketchatbox-inbox').removeClass('yellowgreen');            
 			toggleInbox();
 		});
 		ui.$profileBtn.click(function(e) {

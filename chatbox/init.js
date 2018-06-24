@@ -1,5 +1,6 @@
 (function() {
     "use strict";
+    var devMode = true;
     window.chatbox = window.chatbox || {};
     chatbox.ui = {};
     chatbox.ui.init = []; //init is an array of functions
@@ -18,11 +19,14 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    // chatbox.domain = "https://quotime.me";
-    // chatbox.inboxUrl = "http://localhost:9000";
-    // chatbox.domain = "https://localhost";
-    chatbox.domain = "http://localhost:8088";
+    chatbox.domain = "https://quotime.me";
     chatbox.inboxUrl = chatbox.domain;
+
+    // chatbox.domain = "https://localhost";
+    if (devMode) {
+        chatbox.domain = "http://localhost:8088";
+        chatbox.inboxUrl = "http://localhost:9000";
+    }
 
 
 
@@ -38,6 +42,7 @@
     chatbox.username = username;
 
     chatbox.inbox = {};
+    chatbox.inbox.messages = [];
 
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
@@ -52,10 +57,16 @@
     // but we only need to pull front-end opened conversation for the long-pulling
     chatbox.inbox.pullMessages = function() {
         $.get(chatbox.inboxUrl + "/db/message/user/" + chatbox.uuid, function(data, status) {
+            // TODO: Only need to pull messages not loaded yet.
+            // Important, otherwise it's a huge waste
+            if (chatbox.inbox.messages.length < data.length) {
+                $('#socketchatbox-inbox').removeClass('fa-inbox');
+                $('#socketchatbox-inbox').addClass('fa-envelope');
+                $('#socketchatbox-inbox').addClass('yellowgreen');            
+
+            }
+
             chatbox.inbox.messages = data.sort(sortByMsgId);
-
-
-
             var index = 0;
             for (; index<chatbox.inbox.messages.length; index++) {
 

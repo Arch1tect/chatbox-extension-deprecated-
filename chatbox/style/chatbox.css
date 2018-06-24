@@ -436,7 +436,9 @@ input.socketchatbox-inputMessage:disabled {
   word-wrap: break-word;
 }
 
-
+.yellowgreen {
+  color: #BBFF00 !important;
+}
 
 .socketchatbox-message-me .socketchatbox-messageBody {
   background: #BBFF00;
