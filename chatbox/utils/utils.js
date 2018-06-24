@@ -65,19 +65,18 @@
         else
             chatbox.showing = true;
 
-        // hide chatbox for a sec just because 
-        // the second iframe goes full window
-        // chatbox would jump to the top of the window
-        // then come back down
-
         if (state == "fit") {
         }
 
         if (state == "full size") {
-            chatbox.ui.$chatBox.hide();
-            setTimeout(function() {
-                chatbox.ui.$chatBox.show();
-            }, 100);
+            // hide chatbox for a sec just because 
+            // the second iframe goes full window
+            // chatbox would jump to the top of the window
+            // then come back down
+            // chatbox.ui.$chatBox.hide();
+            // setTimeout(function() {
+            //     chatbox.ui.$chatBox.show();
+            // }, 100);
         }
 
         resizeMsg.size = { height: chatbox.ui.$chatBody.outerHeight()+chatbox.ui.$inputMessage.outerHeight()+chatbox.ui.$topbar.outerHeight(), width: chatbox.ui.$chatBody.outerWidth()};

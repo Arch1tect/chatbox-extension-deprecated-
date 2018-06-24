@@ -18,11 +18,13 @@
 
     // change this to the port you want to use on server if you are hosting
     // TODO: move to config file
-    chatbox.domain = "https://quotime.me";
+    // chatbox.domain = "https://quotime.me";
     // chatbox.inboxUrl = "http://localhost:9000";
-    chatbox.inboxUrl = chatbox.domain;
     // chatbox.domain = "https://localhost";
-    // chatbox.domain = "http://localhost:8088";
+    chatbox.domain = "http://localhost:8088";
+    chatbox.inboxUrl = chatbox.domain;
+
+
 
     // This uuid is unique for each browser but not unique for each connection
     // because one browser can have multiple tabs each with connections to the chatbox server.
@@ -40,7 +42,7 @@
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
 
-        var interval = 15*1000;
+        var interval = 10*1000;
         if(ui.$inboxArea.is(':visible')) 
             interval = 2*1000;
         setTimeout(function(){chatbox.inbox.keepPullingMessages();}, interval);
@@ -60,10 +62,7 @@
                 var msg = chatbox.inbox.messages[index];
                 chatbox.ui.updateInboxContactList(msg.sender, msg.sendername);
                 chatbox.ui.updateInboxContactList(msg.receiver, msg.receivername);
-
             }
-
-            
             // console.log(data);
             chatbox.ui.renderInboxMessage();
         });
@@ -76,26 +75,16 @@
     chatbox.init = function() {
 
         console.log('Chatbox Init');
-
-
         var config = chatbox.config;
 
-
         if (config.lockRoom) {
-
             chatbox.roomID = config.roomID;
-
         } else {
-
             chatbox.roomID = location.search.substring(1);
             config.roomID = chatbox.roomID;
             chrome.storage.local.set({ chatbox_config: config });
-
         }
-
         console.log('room ' + chatbox.roomID);
-
-
 
         // load jquery objects and register ui events
         for (var i = 0; i < ui.init.length; i++) {
@@ -103,7 +92,6 @@
         }
 
         historyHandler.load();
-
         chatbox.inbox.keepPullingMessages();
 
         // now make your connection with server!

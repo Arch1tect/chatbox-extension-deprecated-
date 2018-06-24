@@ -507,10 +507,12 @@
 		// Minimize then maximize to deal with a 
 		// strange bug that scroll doesn't work
 		// after resizinng
-		ui.minimize();
-		setTimeout(function() {
-			ui.maximize();
-		}, 1);
+		// ui.minimize();
+		// setTimeout(function() {
+		// 	ui.maximize();
+		// }, 1);
+		ui.maximize();
+
 	}
 	ui.refreshSize = refreshSize;
 
