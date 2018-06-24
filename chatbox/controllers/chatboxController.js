@@ -27,6 +27,7 @@
 		ui.$chatArea = $(".socketchatbox-chatArea");
 		ui.$inboxArea = $('.socketchatbox-inbox');
 		ui.$profileArea = $('.socketchatbox-profile');
+		ui.$commentsArea = $('.socketchatbox-comments');
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');
@@ -34,6 +35,8 @@
 		ui.$at = $('#socketchatbox-chatroom-url');
 		ui.$inboxBtn = $('#socketchatbox-inbox');
 		ui.$profileBtn = $('#socketchatbox-profile');
+		ui.$commentsBtn = $('#socketchatbox-comments');
+		ui.$liveChatBtn = $('#socketchatbox-live');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
 		
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
@@ -277,46 +280,79 @@
 		ui.toggleProfile = toggleProfile;
 
 
-		function toggleInbox() {
+		function showComments() {
 			$('[data-toggle="tooltip"]').tooltip('hide');
-
-
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			$('.socketchatbox-username-action-wrapper').remove();
-			if(ui.$inboxArea.is(':visible')) {
-				// ui.$inboxBtn.attr('data-original-title', 'Open inbox');  
-				ui.$toggleFriendList.hide();
-				ui.$chatroomWraper.slideDown();
-			}
-			else{
-				// ui.$inboxBtn.attr('data-original-title', 'Close inbox');  
-				ui.$toggleFriendList.fadeIn('slow');
-				ui.$chatroomWraper.slideUp();
-				ui.$profileArea.slideUp();
-				ui.$profileBtn.removeClass('selected');
-
-
-			}
-
-			ui.$inboxBtn.toggleClass('selected');
-			ui.$inboxArea.slideToggle();
+			
+			ui.$toggleFriendList.hide();
+			ui.$chatroomWraper.slideUp();
+			ui.$inboxArea.slideUp();
+			ui.$inboxBtn.removeClass('selected');
+			ui.$liveChatBtn.removeClass('selected');
+			ui.$commentsBtn.addClass('selected');
+			ui.$commentsArea.slideDown();
 		}
 
-		ui.toggleInbox = toggleInbox;
+		ui.showComments = showComments;
+
+		function showLiveChat() {
+			$('[data-toggle="tooltip"]').tooltip('hide');
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+			$('.socketchatbox-username-action-wrapper').remove();
+			ui.$toggleFriendList.hide();
+			ui.$commentsArea.slideUp();
+			ui.$inboxArea.slideUp();
+
+			ui.$chatroomWraper.slideDown();
+			ui.$inboxBtn.removeClass('selected');
+			ui.$commentsBtn.removeClass('selected');
+			ui.$liveChatBtn.addClass('selected');
+		}
+
+		ui.showLiveChat = showLiveChat;
+
+		function showInbox() {
+			$('#socketchatbox-inbox').addClass('fa-inbox');
+            $('#socketchatbox-inbox').removeClass('fa-envelope');
+            $('#socketchatbox-inbox').removeClass('yellowgreen');
+			$('[data-toggle="tooltip"]').tooltip('hide');
+			$('#socketchatbox-sticker-picker').hide();
+			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
+			$('.socketchatbox-username-action-wrapper').remove();
+			ui.$toggleFriendList.fadeIn('slow');
+			ui.$chatroomWraper.slideUp();
+			ui.$commentsArea.slideUp();
+			ui.$liveChatBtn.removeClass('selected');
+			ui.$commentsBtn.removeClass('selected');
+			ui.$inboxBtn.addClass('selected');
+			ui.$inboxArea.slideDown();
+
+		}
+
+		ui.showInbox = showInbox;
 
 		ui.$inboxBtn.click(function(e) {
 			e.preventDefault();
-			e.stopPropagation();
-			$('#socketchatbox-inbox').addClass('fa-inbox');
-            $('#socketchatbox-inbox').removeClass('fa-envelope');
-            $('#socketchatbox-inbox').removeClass('yellowgreen');            
-			toggleInbox();
+			e.stopPropagation();            
+			showInbox();
 		});
-		ui.$profileBtn.click(function(e) {
+		// ui.$profileBtn.click(function(e) {
+		// 	e.preventDefault();
+		// 	e.stopPropagation();
+		// 	toggleProfile();
+		// });
+		ui.$commentsBtn.click(function(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			toggleProfile();
+			showComments();
+		});
+		ui.$liveChatBtn.click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			showLiveChat();
 		});
 		ui.$cross.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');

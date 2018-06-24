@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    var devMode = true;
+    var devMode = false;
     window.chatbox = window.chatbox || {};
     chatbox.ui = {};
     chatbox.ui.init = []; //init is an array of functions
