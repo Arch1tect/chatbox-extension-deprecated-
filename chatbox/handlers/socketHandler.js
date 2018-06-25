@@ -173,7 +173,7 @@
 
         // Whenever the server emits 'change name', log it in the chat body
         socket.on('log change name', function (data) {
-            ui.addLog(data.oldname + ' changes name to ' + data.username);
+            ui.addLog(data.oldname + ' changed name to ' + data.username);
             userListHandler.userChangeName(data.oldname, data.username);
 
         });

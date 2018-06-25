@@ -497,12 +497,23 @@
 		// emoji
 		ui.$inputMessage.emojiPicker({
 			width: '350px',
-			height: '350px',
+			height: '250px',
 			button: false
 		});
 		$('#socketchatbox-emoji-btn').click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 			$('.socketchatbox-inputMessage').emojiPicker('toggle');
+			// $('.emojiPicker nav').hide();
+			// $('.emojiPicker nav').css('display', 'none');
+			// setTimeout(function(){
+			// 	$('.emojiPicker nav').fadeIn('slow');
+			// }, 3000)
+			// $('.emojiPicker nav').css('display', 'flex');
+			// hacky fix for emoji nav bar position issue
+			// $('.emojiPicker nav').toggle('fast', function() {
+			// 	$('.emojiPicker nav').toggle('slow'); 
+			// });
+
 		});
 		// Open then close emoji picker programmatically because first time open is too slow
 		// $('.socketchatbox-inputMessage').emojiPicker('toggle');
