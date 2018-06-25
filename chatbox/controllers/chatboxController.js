@@ -28,6 +28,7 @@
 		ui.$inboxArea = $('.socketchatbox-inbox');
 		ui.$profileArea = $('.socketchatbox-profile');
 		ui.$commentsArea = $('.socketchatbox-comments');
+		ui.$commentsBody = $('.socketchatbox-commentsArea');
 		ui.$showHideChatbox =  $('#socketchatbox-showHideChatbox');
 		ui.$chatboxResize = $('.socketchatbox-resize');
 		ui.$cross = $('#socketchatbox-closeChatbox');

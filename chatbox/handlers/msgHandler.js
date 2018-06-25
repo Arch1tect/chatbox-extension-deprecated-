@@ -160,8 +160,6 @@
 
     msgHandler.processChatMessage = processChatMessage;
 
-
-
     function sendMessage(msg) {
 
         var privateMsg = ui.$inboxArea.is(':visible');
@@ -173,13 +171,22 @@
                 'receiver': receiverId,
                 'message': msg
             }
-            console.log('Send private message to ' + receiverId);
+            console.log('Sending private message to ' + receiverId);
 
             $.post(chatbox.inboxUrl + "/db/message", payload, function(resp) {
               console.log(resp);
               chatbox.inbox.pullMessages();
             });
-
+        }else if (ui.$commentsArea.is(':visible')){
+            var payload = {
+                'user_id': chatbox.uuid,
+                'message': msg
+            }
+            console.log('Leaving comment on url' + chatbox.roomID);
+            $.post(chatbox.inboxUrl + "/db/comments/url/"+ chatbox.roomID, payload, function(resp) {
+              console.log(resp);
+              chatbox.loadComments();
+            });
         }else {
             var data = {};
             data.username = chatbox.username;

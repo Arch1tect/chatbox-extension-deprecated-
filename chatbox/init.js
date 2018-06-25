@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    var devMode = false;
+    var devMode = true;
     window.chatbox = window.chatbox || {};
     chatbox.ui = {};
     chatbox.ui.init = []; //init is an array of functions
@@ -47,9 +47,9 @@
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
 
-        var interval = 10*1000;
+        var interval = 1000*1000;
         if(ui.$inboxArea.is(':visible')) 
-            interval = 2*1000;
+            interval = 200*1000;
         setTimeout(function(){chatbox.inbox.keepPullingMessages();}, interval);
     }
 
@@ -79,6 +79,29 @@
         });
     }
 
+    chatbox.loadComments = function() {
+        chatbox.lastCommentId = chatbox.lastCommentId || -1;
+        $.get(chatbox.inboxUrl + "/db/comments/offset/" + chatbox.lastCommentId + "/url/" + chatbox.roomID, function(resp, status) {
+            console.log(resp);
+            var index = 0;
+            for (; index<resp.length; index++) {
+                var data = resp[index];
+                chatbox.lastCommentId = data.id;
+                var $commentDiv = $('<div></div>');
+                var $commentBody = $('<p></p>');
+                $commentBody.text(data.content);
+                var $nameTimeWrapper = $('<span></span>');
+                var $nameSpan = $('<span></span>');
+                $nameSpan.text(data.name);
+                $nameTimeWrapper.append($nameSpan);
+                $commentDiv.append($nameTimeWrapper);
+                $commentDiv.append($commentBody);
+                ui.$commentsBody.append($commentDiv);
+            }
+
+        });
+    }
+
     function sortByMsgId(a, b) {
         return a.id > b.id ? 1 : -1;
     }
@@ -104,7 +127,7 @@
 
         historyHandler.load();
         chatbox.inbox.keepPullingMessages();
-
+        chatbox.loadComments();
         // now make your connection with server!
         chatbox.connect();
 
@@ -129,7 +152,8 @@
 })();
 
 $( document ).ready(function() {
-
+    // Find username in local storage and update server DB?
+    // Who should be the source of truth?
     chrome.storage.local.get('chatbox_config', function(data) {
 
         chatbox.config = data.chatbox_config || {};
