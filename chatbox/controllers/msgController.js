@@ -71,7 +71,8 @@
             // calculate this boolean before appending msg element
             
             var shouldAutoScrollToBottom = ui.$chatArea[0].scrollHeight - ui.$chatArea[0].scrollTop - ui.$chatBody.height() < 100;
-
+            shouldAutoScrollToBottom = true;
+            // always scroll until we add a noty about getting new message
             ui.$messages.append($el);
             // don't auto scroll to bottom if user was reading something above
             if (shouldAutoScrollToBottom) {

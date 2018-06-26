@@ -92,13 +92,19 @@
                 $commentBody.text(data.content);
                 var $nameTimeWrapper = $('<span></span>');
                 var $nameSpan = $('<span></span>');
+                var $timeSpan = $('<small></small>');
                 $nameSpan.text(data.name);
+                $timeSpan.text(data.created_time.substring(0,data.created_time.length-3));
                 $nameTimeWrapper.append($nameSpan);
+                $nameTimeWrapper.append($timeSpan);
                 $commentDiv.append($nameTimeWrapper);
                 $commentDiv.append($commentBody);
                 ui.$commentsBody.append($commentDiv);
             }
-
+            ui.$commentsBody[0].scrollTop = ui.$commentsBody[0].scrollHeight;
+            setTimeout(function(){
+                ui.$refreshCommentsBtn.removeClass('fa-spin');
+            }, 500);
         });
     }
 

@@ -39,6 +39,7 @@
 		ui.$commentsBtn = $('#socketchatbox-comments');
 		ui.$liveChatBtn = $('#socketchatbox-live');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
+		ui.$refreshCommentsBtn = $('#socketchatbox-refresh-comments');
 		
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
@@ -168,7 +169,7 @@
 				var $receiver = ui.$friendList.find("[data-uid='" + uid +"']" );
 				
 				selectUserFromInboxList($receiver);
-				ui.toggleInbox();
+				ui.showInbox();
 			})
 
 			// $actionMenu.append($('<div>Profile</div>'));
@@ -224,6 +225,11 @@
 			}
 		};
 
+		ui.$refreshCommentsBtn.click(function(e) {
+			ui.$refreshCommentsBtn.addClass('fa-spin');
+			chatbox.loadComments();
+		});
+
 		ui.$refreshBtn.click(function(e) {
 
 			$('[data-toggle="tooltip"]').tooltip('hide');
@@ -235,8 +241,6 @@
 			$('.socketchatbox-username-action-wrapper').remove();
 			chatbox.socket.disconnect();
 			ui.welcomeMsgShown = false;
-
-
 			if (chatbox.config.lockRoom) {
 				// if chat room is set to lock, refresh uses the same chat room ID
 			}else {
@@ -244,42 +248,31 @@
 				chatbox.roomID = location.search.substring(1);
 				// TODO: this is not working in some case, e.g. Youtube page change
 			}
-
 			$(this).addClass('fa-spin');
 			setTimeout(function(){
 				chatbox.connect(); // make it slower so user can see the change better
 			}, 1000);
-
-			
-            
 		});
 
 		function toggleProfile() {
 			$('[data-toggle="tooltip"]').tooltip('hide');
-
-
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			$('.socketchatbox-username-action-wrapper').remove();
 			if(ui.$profileArea.is(':visible')) {
 				ui.$toggleFriendList.hide();
 				ui.$chatroomWraper.slideDown();
-
 			}
 			else{
 				ui.$toggleFriendList.fadeIn('slow');
 				ui.$inboxArea.slideUp();
 				ui.$chatroomWraper.slideUp();
 				ui.$inboxBtn.removeClass('selected');
-
 			}
-
 			ui.$profileBtn.toggleClass('selected');
 			ui.$profileArea.slideToggle();
 		}
-
 		ui.toggleProfile = toggleProfile;
-
 
 		function showComments() {
 			$('[data-toggle="tooltip"]').tooltip('hide');
@@ -295,7 +288,6 @@
 			ui.$commentsBtn.addClass('selected');
 			ui.$commentsArea.slideDown();
 		}
-
 		ui.showComments = showComments;
 
 		function showLiveChat() {
@@ -312,7 +304,6 @@
 			ui.$commentsBtn.removeClass('selected');
 			ui.$liveChatBtn.addClass('selected');
 		}
-
 		ui.showLiveChat = showLiveChat;
 
 		function showInbox() {
@@ -330,7 +321,6 @@
 			ui.$commentsBtn.removeClass('selected');
 			ui.$inboxBtn.addClass('selected');
 			ui.$inboxArea.slideDown();
-
 		}
 
 		ui.showInbox = showInbox;

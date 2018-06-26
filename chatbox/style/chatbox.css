@@ -293,6 +293,16 @@ input.socketchatbox-inputMessage:disabled {
   font-size: 12px;
   word-wrap: break-word;
   background: white;
+  display: table;
+}
+
+.socketchatbox-commentsArea span span {
+  margin: 3px;
+}
+
+.socketchatbox-commentsArea span small {
+  color: gray;
+  margin-left: 10px;
 }
 
 .socketchatbox-inbox {
@@ -427,24 +437,21 @@ input.socketchatbox-inputMessage:disabled {
   line-height: 1em;
 
 }
-
 .socketchatbox-message-me .socketchatbox-msg-username {
   float: right;
+  padding-right: 5px;
 }
-
 .socketchatbox-msg-username {
   line-height: 1em;
   display: table-cell;
 }
-
 .history {
   color: gray;
 }
-
 .socketchatbox-message-others .socketchatbox-msg-username {
   cursor: pointer;
+  padding-left: 5px;
 }
-
 .socketchatbox-message-others .socketchatbox-msg-username:hover {
   color: #0089ff;
 }
