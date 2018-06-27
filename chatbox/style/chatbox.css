@@ -280,10 +280,10 @@ input.socketchatbox-inputMessage:disabled {
   padding-top: 30px;
 }
 
-.socketchatbox-commentsArea p {
+.socketchatbox-commentsArea .comment-body {
   margin-top: 5px;
   margin-bottom: 15px;
-  max-width: 350px;
+  max-width: 85%;
   background-color: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0 0 6px #B2B2B2;
@@ -293,14 +293,13 @@ input.socketchatbox-inputMessage:disabled {
   font-size: 12px;
   word-wrap: break-word;
   background: white;
-  display: table;
 }
 
-.socketchatbox-commentsArea span span {
+.socketchatbox-commentsArea .comment-header span {
   margin: 3px;
 }
 
-.socketchatbox-commentsArea span small {
+.socketchatbox-commentsArea .comment-header small {
   color: gray;
   margin-left: 10px;
 }

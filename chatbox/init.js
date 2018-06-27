@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    var devMode = true;
+    var devMode = false;
     window.chatbox = window.chatbox || {};
     chatbox.ui = {};
     chatbox.ui.init = []; //init is an array of functions
@@ -88,9 +88,11 @@
                 var data = resp[index];
                 chatbox.lastCommentId = data.id;
                 var $commentDiv = $('<div></div>');
-                var $commentBody = $('<p></p>');
+                var $commentBody = $('<div></div>');
+                $commentBody.addClass('comment-body');
                 $commentBody.text(data.content);
-                var $nameTimeWrapper = $('<span></span>');
+                var $nameTimeWrapper = $('<div></div>');
+                $nameTimeWrapper.addClass('comment-header');
                 var $nameSpan = $('<span></span>');
                 var $timeSpan = $('<small></small>');
                 $nameSpan.text(data.name);
