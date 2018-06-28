@@ -287,6 +287,12 @@
 			ui.$liveChatBtn.removeClass('selected');
 			ui.$commentsBtn.addClass('selected');
 			ui.$commentsArea.slideDown();
+
+			$('#socketchatbox-sticker-btn').hide();
+			$('#socketchatbox-emoji-btn').hide();
+			$('#socketchatbox-sendFileBtn').hide();
+			$('.socketchatbox-inputMessage').css('width', '100%');
+
 		}
 		ui.showComments = showComments;
 
@@ -303,6 +309,12 @@
 			ui.$inboxBtn.removeClass('selected');
 			ui.$commentsBtn.removeClass('selected');
 			ui.$liveChatBtn.addClass('selected');
+
+			$('#socketchatbox-sticker-btn').show();
+			$('#socketchatbox-emoji-btn').show();
+			$('#socketchatbox-sendFileBtn').show();
+			$('.socketchatbox-inputMessage').css('width', 'calc(100% - 105px)');
+
 		}
 		ui.showLiveChat = showLiveChat;
 
@@ -321,6 +333,10 @@
 			ui.$commentsBtn.removeClass('selected');
 			ui.$inboxBtn.addClass('selected');
 			ui.$inboxArea.slideDown();
+			$('#socketchatbox-sticker-btn').show();
+			$('#socketchatbox-emoji-btn').show();
+			$('#socketchatbox-sendFileBtn').show();
+			$('.socketchatbox-inputMessage').css('width', 'calc(100% - 105px)');
 		}
 
 		ui.showInbox = showInbox;
@@ -494,17 +510,6 @@
 		$('#socketchatbox-emoji-btn').click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
 			$('.socketchatbox-inputMessage').emojiPicker('toggle');
-			// $('.emojiPicker nav').hide();
-			// $('.emojiPicker nav').css('display', 'none');
-			// setTimeout(function(){
-			// 	$('.emojiPicker nav').fadeIn('slow');
-			// }, 3000)
-			// $('.emojiPicker nav').css('display', 'flex');
-			// hacky fix for emoji nav bar position issue
-			// $('.emojiPicker nav').toggle('fast', function() {
-			// 	$('.emojiPicker nav').toggle('slow'); 
-			// });
-
 		});
 		// Open then close emoji picker programmatically because first time open is too slow
 		// $('.socketchatbox-inputMessage').emojiPicker('toggle');

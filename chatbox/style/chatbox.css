@@ -95,6 +95,7 @@ input.socketchatbox-inputMessage:disabled {
   margin: 0px;
   line-height: 2;
   background: transparent;
+  float: left;
 }
 
 #socketchatbox-sendFileBtn {
