@@ -76,6 +76,9 @@
             }
             // console.log(data);
             chatbox.ui.renderInboxMessage();
+            setTimeout(function(){
+                ui.$refreshMessageBtn.removeClass('fa-spin');
+            }, 500);
         });
     }
 

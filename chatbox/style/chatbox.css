@@ -283,6 +283,7 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-commentsArea .comment-body {
   margin-top: 5px;
+  display: inline-block;
   margin-bottom: 15px;
   max-width: 85%;
   background-color: #FFFFFF;
@@ -478,7 +479,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .yellowgreen {
-  color: #BBFF00 !important;
+  /*color: #BBFF00 !important;*/
 }
 
 .socketchatbox-message-me .socketchatbox-messageBody {

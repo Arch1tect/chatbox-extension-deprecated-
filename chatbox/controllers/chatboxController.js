@@ -40,7 +40,7 @@
 		ui.$liveChatBtn = $('#socketchatbox-live');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
 		ui.$refreshCommentsBtn = $('#socketchatbox-refresh-comments');
-		
+		ui.$refreshMessageBtn = $('#socketchatbox-refresh-inbox');
 		ui.$onlineUserNum = $('#socketchatbox-online-usercount');
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
 		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
@@ -230,6 +230,11 @@
 			chatbox.loadComments();
 		});
 
+		ui.$refreshMessageBtn.click(function(e) {
+			ui.$refreshMessageBtn.addClass('fa-spin');
+			chatbox.inbox.pullMessages();
+		});
+
 		ui.$refreshBtn.click(function(e) {
 
 			$('[data-toggle="tooltip"]').tooltip('hide');
@@ -291,7 +296,8 @@
 			$('#socketchatbox-sticker-btn').hide();
 			$('#socketchatbox-emoji-btn').hide();
 			$('#socketchatbox-sendFileBtn').hide();
-			$('.socketchatbox-inputMessage').css('width', '100%');
+			ui.$inputMessage.css('width', '100%');
+			ui.$inputMessage.attr("placeholder", "Leave a comment on this page...");
 
 		}
 		ui.showComments = showComments;
@@ -313,7 +319,8 @@
 			$('#socketchatbox-sticker-btn').show();
 			$('#socketchatbox-emoji-btn').show();
 			$('#socketchatbox-sendFileBtn').show();
-			$('.socketchatbox-inputMessage').css('width', 'calc(100% - 105px)');
+			ui.$inputMessage.css('width', 'calc(100% - 105px)');
+			ui.$inputMessage.attr("placeholder", "Enter live chat message...");
 
 		}
 		ui.showLiveChat = showLiveChat;
@@ -336,7 +343,9 @@
 			$('#socketchatbox-sticker-btn').show();
 			$('#socketchatbox-emoji-btn').show();
 			$('#socketchatbox-sendFileBtn').show();
-			$('.socketchatbox-inputMessage').css('width', 'calc(100% - 105px)');
+			ui.$inputMessage.css('width', 'calc(100% - 105px)');
+			ui.$inputMessage.attr("placeholder", "Enter message to send...");
+
 		}
 
 		ui.showInbox = showInbox;
