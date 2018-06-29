@@ -86,6 +86,13 @@ input.socketchatbox-inputMessage:disabled {
   border-top: 1px solid lightgray;
  
 }
+
+.socketchatbox-inputMessage-div textarea{
+  display: none;
+  width:100%;
+  float: left;
+}
+
 .socketchatbox-inputMessage {
   width: calc(100% - 105px);
   padding: 0px;

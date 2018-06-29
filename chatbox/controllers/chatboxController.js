@@ -14,6 +14,7 @@
 	ui.init.push(function() {
 
 		ui.$inputMessage = $('.socketchatbox-inputMessage');
+		ui.$inputComment = $('.socketchatbox-inputMessage-div textarea');
 		ui.$messages = $('.socketchatbox-messages');
 		ui.$username = $('#socketchatbox-username');
 		ui.$usernameInput = $('.socketchatbox-usernameInput'); 
@@ -296,8 +297,11 @@
 			$('#socketchatbox-sticker-btn').hide();
 			$('#socketchatbox-emoji-btn').hide();
 			$('#socketchatbox-sendFileBtn').hide();
-			ui.$inputMessage.css('width', '100%');
-			ui.$inputMessage.attr("placeholder", "Leave a comment on this page...");
+
+			ui.$inputComment.show();
+			ui.$inputMessage.hide();
+			// ui.$inputMessage.css('width', '100%');
+			// ui.$inputMessage.attr("placeholder", "Leave a comment on this page...");
 
 		}
 		ui.showComments = showComments;
