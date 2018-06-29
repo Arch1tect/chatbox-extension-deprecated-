@@ -69,17 +69,12 @@
         }
 
         if (state == "full size") {
-            // hide chatbox for a sec just because 
-            // the second iframe goes full window
-            // chatbox would jump to the top of the window
-            // then come back down
-            // chatbox.ui.$chatBox.hide();
-            // setTimeout(function() {
-            //     chatbox.ui.$chatBox.show();
-            // }, 100);
         }
-
-        resizeMsg.size = { height: chatbox.ui.$chatBody.outerHeight()+chatbox.ui.$inputMessage.outerHeight()+chatbox.ui.$topbar.outerHeight(), width: chatbox.ui.$chatBody.outerWidth()};
+        var inputHeight = chatbox.ui.$inputMessage.height()+2;
+        // if (chatbox.ui.$inputComment.is(':visible')) {
+        //     inputHeight = chatbox.ui.$inputComment.height()+5;
+        // }
+        resizeMsg.size = { height: chatbox.ui.$chatBody.height()+chatbox.ui.$topbar.height()+inputHeight, width: chatbox.ui.$chatBody.outerWidth()};
         window.parent.postMessage(resizeMsg, "*");
 
     }

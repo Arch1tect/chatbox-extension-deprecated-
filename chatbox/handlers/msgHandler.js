@@ -177,16 +177,6 @@
               console.log(resp);
               chatbox.inbox.pullMessages();
             });
-        }else if (ui.$commentsArea.is(':visible')){
-            var payload = {
-                'user_id': chatbox.uuid,
-                'message': msg
-            }
-            console.log('Leaving comment on url' + chatbox.roomID);
-            $.post(chatbox.inboxUrl + "/db/comments/url/"+ chatbox.roomID, payload, function(resp) {
-              console.log(resp);
-              chatbox.loadComments();
-            });
         }else {
             var data = {};
             data.username = chatbox.username;

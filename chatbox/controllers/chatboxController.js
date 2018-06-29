@@ -14,7 +14,8 @@
 	ui.init.push(function() {
 
 		ui.$inputMessage = $('.socketchatbox-inputMessage');
-		ui.$inputComment = $('.socketchatbox-inputMessage-div textarea');
+		ui.$inputMessageWrapper = $('.socketchatbox-inputMessage-div');
+		ui.$inputComment = $('#socketchatbox-body textarea');
 		ui.$messages = $('.socketchatbox-messages');
 		ui.$username = $('#socketchatbox-username');
 		ui.$usernameInput = $('.socketchatbox-usernameInput'); 
@@ -38,6 +39,8 @@
 		ui.$inboxBtn = $('#socketchatbox-inbox');
 		ui.$profileBtn = $('#socketchatbox-profile');
 		ui.$commentsBtn = $('#socketchatbox-comments');
+		ui.$openCommentModalBtnWrapper = $('#socketchatbox-comment-btn-wrapper');
+		// ui.$openCommentModalBtn = $('#socketchatbox-comment-btn');
 		ui.$liveChatBtn = $('#socketchatbox-live');
 		ui.$refreshBtn = $('#socketchatbox-refresh');
 		ui.$refreshCommentsBtn = $('#socketchatbox-refresh-comments');
@@ -46,6 +49,7 @@
 		ui.$onlineUsers = $('.socketchatbox-onlineusers');
 		ui.$msgModalContent = $('#socketchatbox-msgpopup-content');
 		ui.$msgModal = $('#socketchatbox-msgpopup-modal');
+		ui.$commentModal = $('#socketchatbox-comment-modal');
 		ui.$changeRoomBtn = $('#go-to-room-btn');
 		ui.$toggleRoomLock = $('#chatroom-lock-unlock');
 
@@ -236,6 +240,10 @@
 			chatbox.inbox.pullMessages();
 		});
 
+		ui.$openCommentModalBtnWrapper.click(function(e) {
+			ui.$commentModal.modal('show');
+		});
+
 		ui.$refreshBtn.click(function(e) {
 
 			$('[data-toggle="tooltip"]').tooltip('hide');
@@ -294,14 +302,8 @@
 			ui.$commentsBtn.addClass('selected');
 			ui.$commentsArea.slideDown();
 
-			$('#socketchatbox-sticker-btn').hide();
-			$('#socketchatbox-emoji-btn').hide();
-			$('#socketchatbox-sendFileBtn').hide();
-
-			ui.$inputComment.show();
-			ui.$inputMessage.hide();
-			// ui.$inputMessage.css('width', '100%');
-			// ui.$inputMessage.attr("placeholder", "Leave a comment on this page...");
+			ui.$openCommentModalBtnWrapper.show();
+			ui.$inputMessageWrapper.hide();
 
 		}
 		ui.showComments = showComments;
@@ -320,12 +322,9 @@
 			ui.$commentsBtn.removeClass('selected');
 			ui.$liveChatBtn.addClass('selected');
 
-			$('#socketchatbox-sticker-btn').show();
-			$('#socketchatbox-emoji-btn').show();
-			$('#socketchatbox-sendFileBtn').show();
-			ui.$inputMessage.css('width', 'calc(100% - 105px)');
+			ui.$openCommentModalBtnWrapper.hide();
+			ui.$inputMessageWrapper.show();
 			ui.$inputMessage.attr("placeholder", "Enter live chat message...");
-
 		}
 		ui.showLiveChat = showLiveChat;
 
@@ -344,10 +343,9 @@
 			ui.$commentsBtn.removeClass('selected');
 			ui.$inboxBtn.addClass('selected');
 			ui.$inboxArea.slideDown();
-			$('#socketchatbox-sticker-btn').show();
-			$('#socketchatbox-emoji-btn').show();
-			$('#socketchatbox-sendFileBtn').show();
-			ui.$inputMessage.css('width', 'calc(100% - 105px)');
+
+			ui.$openCommentModalBtnWrapper.hide();
+			ui.$inputMessageWrapper.show();
 			ui.$inputMessage.attr("placeholder", "Enter message to send...");
 
 		}
@@ -397,8 +395,22 @@
 
 		});
 
-		ui.$changeRoomBtn.click(function() {
 
+		$('#submit-comment-btn').click(function(e) {
+            var payload = {
+                'user_id': chatbox.uuid,
+                'message': $('#socketchatbox-comment-content').val()
+            }
+            console.log('Leaving comment on url' + chatbox.roomID);
+            $.post(chatbox.inboxUrl + "/db/comments/url/"+ chatbox.roomID, payload, function(resp) {
+              console.log(resp);
+              $('#socketchatbox-comment-content').val('');
+              chatbox.loadComments();
+            });
+    });
+
+
+		ui.$changeRoomBtn.click(function() {
 			var newRoomID = ui.$msgModalContent.val();
 			if (newRoomID !== chatbox.roomID) {
 

@@ -120,14 +120,13 @@
 					<div id="socketchatbox-chatroom-title" class="socketchatbox-page-title">
 						<span class="fa fa-refresh" title='Re-enter chatroom' data-toggle="tooltip" data-placement="bottom" id='socketchatbox-refresh'></span><span id="socketchatbox-chatroom-url" data-toggle="tooltip" data-placement="bottom"></span>
 					</div>
-
 					<div class="socketchatbox-chatArea">
 						<ul class="socketchatbox-messages"></ul>
 					</div>
 				</div>
+				<!-- <textarea placeholder="Leave a comment on this page..."></textarea> -->
+				<div class="btn btn-default" id="socketchatbox-comment-btn-wrapper"><span class="fa fa-pencil" id='socketchatbox-comment-btn'></span><span>Add your comment!</span></div>
 				<div class = "socketchatbox-inputMessage-div">
-					<textarea rows="3" placeholder="Leave a comment on this page..."> 
-					</textarea>
 					<input class="socketchatbox-inputMessage" placeholder = "Enter live chat message..."/>
 					<label data-toggle="tooltip" title='Send image or file' data-placement="left" class="btn" id='socketchatbox-sendFileBtn' for = "socketchatbox-sendMedia">
 						<input id="socketchatbox-sendMedia" type="file" style="display:none;">
@@ -138,7 +137,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<!-- image pop up bootstrap modal -->
 		<div class="modal fade" id="socketchatbox-imagepopup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -151,25 +149,40 @@
 		  </div>
 		</div>
 
-		<!-- admin message pop up bootstrap modal -->
+		<div class="modal fade" id="socketchatbox-comment-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<textarea placeholder="Add your comment here..." id="socketchatbox-comment-content"></textarea>
+					</div>
+					<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        				<button type="button" id="submit-comment-btn" class="btn btn-primary" data-dismiss="modal">Submit!</button>
+      				</div>
+				</div>
+			</div>
+		</div>
+
+
 		<div class="modal fade" id="socketchatbox-msgpopup-modal" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div id = "change-room-modal-header" class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						
 
-						<h4 class="modal-title" id="socketchatbox-modal-title">Chat room</h4>
+						<h4 class="modal-title" id="socketchatbox-modal-title">Chatroom URL</h4>
 
 						<span class="fa fa-lock" title='Toggle to stay in current room' data-toggle="tooltip" data-placement="bottom" id='chatroom-lock-unlock'></span>
 
 					</div>
 					<div class="modal-body">
 						<textarea id="socketchatbox-msgpopup-content"></textarea>
-						<center>
-							<button type="button" id="go-to-room-btn" class="btn btn-primary" data-dismiss="modal">Change Room!</button>
-						</center>
 					</div>
+					<div class="modal-footer">
+        				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="button" id="go-to-room-btn" class="btn btn-primary" data-dismiss="modal">Go!</button>
+      				</div>
+
 				</div>
 			</div>
 		</div>
