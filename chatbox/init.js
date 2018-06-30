@@ -47,9 +47,9 @@
     chatbox.inbox.keepPullingMessages = function() {
         chatbox.inbox.pullMessages();
 
-        var interval = 1000*1000;
+        var interval = 30*1000;
         if(ui.$inboxArea.is(':visible')) 
-            interval = 200*1000;
+            interval = 5*1000;
         setTimeout(function(){chatbox.inbox.keepPullingMessages();}, interval);
     }
 
@@ -62,20 +62,39 @@
             if (chatbox.inbox.messages.length < data.length) {
                 $('#socketchatbox-inbox').removeClass('fa-inbox');
                 $('#socketchatbox-inbox').addClass('fa-envelope');
-                $('#socketchatbox-inbox').addClass('yellowgreen');            
-
+                $('#socketchatbox-inbox').addClass('yellowgreen');
             }
 
             chatbox.inbox.messages = data.sort(sortByMsgId);
+            var chatbotStickerMsg = {
+                'id': -1,
+                'message': 'Welcome! Thank you for using this app and please feel free to send us feedback! ;)',
+                'sender': 'chat-bot',
+                'sendername': 'chat bot',
+                'receiver': chatbox.uuid
+            }
+            chatbox.inbox.messages.unshift(chatbotStickerMsg);
+            var chatbotMessage = {
+                'id': -2,
+                'message': 'stickers/bunny/hi.gif',
+                'sender': 'chat-bot',
+                'sendername': 'chat bot',
+                'receiver': chatbox.uuid
+            }
+            chatbox.inbox.messages.unshift(chatbotMessage);
             var index = 0;
             for (; index<chatbox.inbox.messages.length; index++) {
-
                 var msg = chatbox.inbox.messages[index];
                 chatbox.ui.updateInboxContactList(msg.sender, msg.sendername);
                 chatbox.ui.updateInboxContactList(msg.receiver, msg.receivername);
             }
             // console.log(data);
+            if (!chatbox.inbox.inboxUserId) {
+                $('.socketchatbox-friend-list div').first().addClass('selected')
+            }
             chatbox.ui.renderInboxMessage();
+            // select first contact if no one selected
+            $('.socketchatbox-friend-list div')
             setTimeout(function(){
                 ui.$refreshMessageBtn.removeClass('fa-spin');
             }, 500);

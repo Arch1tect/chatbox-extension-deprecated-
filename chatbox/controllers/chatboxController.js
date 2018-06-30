@@ -55,7 +55,8 @@
 
 		ui.$friendList = $('.socketchatbox-friend-list');
 		ui.$toggleFriendList = $('#socketchatbox-toggle-friend-list');
-		ui.$friend = $('.socketchatbox-friend-list div');
+		// shouldn't use ui.$friend, new friends not exist yet
+		// ui.$friend = $('.socketchatbox-friend-list div');
 		ui.$friendMessages = $('.socketchatbox-friend-messages');
 
 		ui.displayMode = 'min'; // default css sytle
@@ -217,13 +218,13 @@
 			var options = {};
             options.inbox = true;
 			var index;
-			var inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
+			chatbox.inbox.inboxUserId = $('.socketchatbox-friend-list div.selected').data('uid');
 
 			// console.log('renderInboxMessage');
 			for (index=0; index<chatbox.inbox.messages.length; index++) {
 
 				var data = chatbox.inbox.messages[index];
-				if ( (!chatbox.inbox.lastRenderedMsgID || data.id > chatbox.inbox.lastRenderedMsgID) && (data.sender == inboxUserId || data.receiver == inboxUserId)) {
+				if ( (!chatbox.inbox.lastRenderedMsgID || data.id > chatbox.inbox.lastRenderedMsgID) && (data.sender == chatbox.inbox.inboxUserId || data.receiver == chatbox.inbox.inboxUserId)) {
 					chatbox.msgHandler.processChatMessage(data, options);
 					chatbox.inbox.lastRenderedMsgID = data.id;
 				}
@@ -374,17 +375,13 @@
 		});
 		ui.$cross.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
-
 			close();
 			e.preventDefault();
-
 			e.stopPropagation();
-
 		});
 
 		ui.$at.click(function(e) {
 			$('[data-toggle="tooltip"]').tooltip('hide');
-
 			e.preventDefault();
 			e.stopPropagation();
 			$('#socketchatbox-sticker-picker').hide();
@@ -392,7 +389,6 @@
 			$('.socketchatbox-username-action-wrapper').remove();
 			ui.$msgModalContent.val(chatbox.roomID);
 			ui.$msgModal.modal('show');
-
 		});
 
 
@@ -529,7 +525,7 @@
 		// emoji
 		ui.$inputMessage.emojiPicker({
 			width: '350px',
-			height: '250px',
+			height: '350px',
 			button: false
 		});
 		$('#socketchatbox-emoji-btn').click(function(e) {

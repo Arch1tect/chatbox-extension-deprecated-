@@ -21,11 +21,13 @@
 
         if (options.inbox) {
             // console.log(data.create_time);
-            d = new Date(data.create_time + ' UTC');
-            var _time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
-            var _month_date = (d.getMonth()+1) + '/' + d.getDate();
-            var _post_time = _month_date+' '+_time;
-            msg_post_time = _post_time;
+            if (data.create_time) {
+                d = new Date(data.create_time + ' UTC');
+                var _time = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+                var _month_date = (d.getMonth()+1) + '/' + d.getDate();
+                var _post_time = _month_date+' '+_time;
+                msg_post_time = _post_time; 
+            }
 
         }                  
 

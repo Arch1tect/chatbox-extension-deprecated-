@@ -415,7 +415,9 @@ input.socketchatbox-inputMessage:disabled {
   height: 100%;
   overflow: auto;
   float: left;
+  background: rgba(0, 0, 0, 0.75);
   border-right: 1px solid lightgray;
+  color: white;
 
 }
 
@@ -427,12 +429,12 @@ input.socketchatbox-inputMessage:disabled {
 }
 
 .socketchatbox-friend-list div:hover {
-  background-color: lightgray;
+  background-color: black;
   cursor: pointer;
 }
 
 .socketchatbox-friend-list div.selected {
-  background-color: lightgray;
+  background-color: black;
 }
 
 #socketchatbox-toggle-friend-list {
