@@ -115,6 +115,8 @@
                 $commentBody.text(data.content);
                 var $nameTimeWrapper = $('<div></div>');
                 $nameTimeWrapper.addClass('comment-header');
+                $nameTimeWrapper.addClass('socketchatbox-msg-username');
+                $nameTimeWrapper.data('uid', data.user_id);
                 var $nameSpan = $('<span></span>');
                 var $timeSpan = $('<small></small>');
                 $nameSpan.text(data.name);

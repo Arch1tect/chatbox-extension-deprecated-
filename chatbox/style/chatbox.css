@@ -421,7 +421,6 @@ input.socketchatbox-inputMessage:disabled {
 
 }
 
-
 .socketchatbox-friend-list div {
   padding: 10px;
   width: 100%;
@@ -478,8 +477,9 @@ input.socketchatbox-inputMessage:disabled {
   padding-right: 5px;
 }
 .socketchatbox-msg-username {
-  line-height: 1em;
-  display: table-cell;
+  /*line-height: 1em;*/
+  /*display: table-cell;*/
+  cursor: pointer;
 }
 .history {
   color: gray;

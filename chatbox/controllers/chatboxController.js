@@ -148,7 +148,7 @@
 			ui.renderInboxMessage(clearUI);
 		}
 
-		ui.$chatArea.on("click", ".socketchatbox-msg-username", function(e) {
+		ui.$chatBox.on("click", ".socketchatbox-msg-username", function(e) {
 
 			e.preventDefault();
 			e.stopPropagation();
