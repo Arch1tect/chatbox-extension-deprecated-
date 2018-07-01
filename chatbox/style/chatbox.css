@@ -316,6 +316,7 @@ input.socketchatbox-inputMessage:disabled {
 
 .socketchatbox-commentsArea .comment-body {
   margin-top: 5px;
+  white-space: pre-line;
   display: inline-block;
   margin-bottom: 15px;
   max-width: 85%;
