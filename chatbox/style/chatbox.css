@@ -217,7 +217,8 @@ input.socketchatbox-inputMessage:disabled {
   display: none;
   white-space: nowrap;
   overflow: hidden;
-  max-width: calc(100% - 160px);  
+  /*max-width: calc(100% - 160px);  */
+  max-width: 80px;  
   min-width: 30px;
   text-align: center;
 }
