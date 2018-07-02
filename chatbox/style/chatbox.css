@@ -480,7 +480,7 @@ input.socketchatbox-inputMessage:disabled {
 }
 .socketchatbox-msg-username {
   /*line-height: 1em;*/
-  /*display: table-cell;*/
+  display: table-cell;
   cursor: pointer;
 }
 .history {
