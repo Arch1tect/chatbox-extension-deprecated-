@@ -530,6 +530,7 @@
 				if (dx>10 || dx<-10) {
 					window.parent.postMessage(moveMsg, "*");
 					chatbox.ui.moving = true;
+					chatbox.ui.moved = true;
 				}
 			}
 

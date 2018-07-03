@@ -11,14 +11,16 @@
     } );
 
     $(document).on('click', '.chatbox-image', function(e) {
-
+        // It's broken' when chatbox is moved to the right,
+        // proper fix is to have the popup image modal as a div in the main frame
+        // rather than in the extension frame
+        if (chatbox.ui.moved)
+            return;
         e.preventDefault();
         utils.updateIframeSize('full size');
 
         $('#socketchatbox-imagepopup-src').attr('src', $(this).attr('src')); 
         $('#socketchatbox-imagepopup-modal').modal('show'); 
-
-
     });
 
     $('#socketchatbox-imagepopup-modal').on("hidden.bs.modal", function () {
