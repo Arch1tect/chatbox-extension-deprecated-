@@ -83,6 +83,9 @@
 			$('#socketchatbox-sticker-picker').hide();
 			ui.$inputMessage.emojiPicker('hide'); // hide emoij picker if open
 			$('.socketchatbox-username-action-wrapper').remove();
+			console.log(chatbox.ui.moving);
+			if (chatbox.ui.moving)
+				return
 			if(ui.$chatBody.is(":visible")){
 				minimize();
 
@@ -114,7 +117,7 @@
 					width: '100px'
 				}, 300);
 				$(this).animate({
-					left: '69px'
+					left: '70px'
 				}, 300, function(){
 					$(this).addClass('fa-chevron-left');
 					$(this).removeClass('fa-chevron-right');
@@ -470,6 +473,8 @@
 		var prev_x = -1;
 		var prev_y = -1;
 		var dir = null;
+		// move chatbox
+		var p_x = -1;
 
 		ui.$chatboxResize.mousedown(function(e){
 			prev_x = e.screenX;
@@ -485,28 +490,48 @@
 			$('.socketchatbox-username-action-wrapper').remove();
 		});
 
+
+		ui.$topbar.mousedown(function(e){
+			p_x = e.screenX;
+			chatbox.ui.moving = false;
+			var moveMsg = {};
+			moveMsg.state = 'move start';
+			window.parent.postMessage(moveMsg, "*");
+		});
+
 		$(document).mousemove(function(e){
 
-			if (prev_x == -1) return;
-			var boxW = ui.$chatBody.outerWidth();
-			var boxH = ui.$chatBody.outerHeight();
-			var dx = e.screenX - prev_x;
-			var dy = e.screenY - prev_y;
+			if (prev_x !== -1) {
+				var boxW = ui.$chatBody.outerWidth();
+				var boxH = ui.$chatBody.outerHeight();
+				var dx = e.screenX - prev_x;
+				var dy = e.screenY - prev_y;
 
-			//Check directions
-			if (dir.indexOf('n') > -1)  boxH -= dy;
-			if (dir.indexOf('w') > -1)  boxW -= dx;
-			if (dir.indexOf('e') > -1)  boxW += dx;
+				//Check directions
+				if (dir.indexOf('n') > -1)  boxH -= dy;
+				if (dir.indexOf('w') > -1)  boxW -= dx;
+				if (dir.indexOf('e') > -1)  boxW += dx;
 
-			if(boxW<250)    boxW = 250;
-			if(boxH<120)     boxH = 120;
+				if(boxW<250)    boxW = 250;
+				if(boxH<120)     boxH = 120;
 
-			ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
-			console.log('chatBody width: ' + boxW + ' height: ' + boxH);
-			chatbox.config.width = boxW;
-			chatbox.config.height = boxH;
-			prev_x = e.screenX;
-			prev_y = e.screenY;
+				ui.$chatBody.css({ "width":(boxW)+"px", "height":(boxH)+"px"});
+				console.log('chatBody width: ' + boxW + ' height: ' + boxH);
+				chatbox.config.width = boxW;
+				chatbox.config.height = boxH;
+				prev_x = e.screenX;
+				prev_y = e.screenY;
+			}
+			if (p_x !== -1) {
+				var dx = e.screenX - p_x;
+				var moveMsg = {};
+				moveMsg.state = 'moving';
+				moveMsg.dx = dx;
+				if (dx>10 || dx<-10) {
+					window.parent.postMessage(moveMsg, "*");
+					chatbox.ui.moving = true;
+				}
+			}
 
 		});
 
@@ -518,6 +543,7 @@
 				chrome.storage.local.set({ chatbox_config: chatbox.config });
 
 			}
+			p_x = -1;
 		});
 
 		// TODO: move emoji and sticker code below to a new controller.js
@@ -615,7 +641,7 @@
 		ui.$username.hide();
 		ui.$chatBody.hide();
 		ui.$topbarOptions.hide();
-		ui.$topbar.css('background','none');
+		ui.$topbar.css('background','rgba(255, 255, 255, 0.5)');
 		ui.$chatboxResize.css('z-index', -1); //hide resize cursor
         utils.updateIframeSize('minimize');
 		ui.displayMode = 'min';

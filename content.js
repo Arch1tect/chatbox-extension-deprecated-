@@ -1,6 +1,6 @@
 var chatboxCreated = false;
 var chatboxIFrame;
-
+var chatboxLeft = 0;
 
 function createChatbox() {
 
@@ -39,9 +39,9 @@ function resizeIFrameToFitContent(e) {
 	else if (msg.state === 'minimize') {
 		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = "100px";
-		chatboxIFrame.style.height = "31px";
-		chatboxIFrame.style.minHeight = "31px";
-		console.log('resize iframe to 100 x 31');
+		chatboxIFrame.style.height = "32px";
+		chatboxIFrame.style.minHeight = "32px";
+		console.log('resize iframe to 100 x 32');
 
 	}
 	else if (msg.state === 'close') {	//only hide but still running
@@ -49,13 +49,22 @@ function resizeIFrameToFitContent(e) {
 		console.log('hide iframe');
 
 	}
+	else if (msg.state === 'move start') {
+		chatboxLeft = chatboxIFrame.style.left.replace('px','');
+		if (!chatboxLeft)
+			chatboxLeft = 0;
+		else
+			chatboxLeft = parseInt(chatboxLeft);
+	}
+	else if (msg.state === 'moving') {
+		chatboxIFrame.style.left = chatboxLeft + msg.dx + 'px';
+	}
 	else { // fit - make page same size as chatbox
 		var size = msg.size;
 		chatboxIFrame.style.display  = "block";
 		chatboxIFrame.style.width  = size.width + "px";
 		chatboxIFrame.style.height = size.height + "px";
-		console.log('resize iframe to ' + size.width + ' x ' + size.height);
-
+		// console.log('resize iframe to ' + size.width + ' x ' + size.height);
 	}
 }
 
